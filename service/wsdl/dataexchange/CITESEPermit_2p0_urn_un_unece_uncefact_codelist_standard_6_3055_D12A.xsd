@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:clm63055="urn:un:unece:uncefact:codelist:standard:6:3055:D12A"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="urn:un:unece:uncefact:codelist:standard:6:3055:D12A"
+    elementFormDefault="qualified"
+    version="4.3">
+  <xs:simpleType name="AgencyIdentificationCodeContentType">
+    <xs:restriction base="xs:token">
+      <xs:minLength value="1"/>
+      <xs:maxLength value="3"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

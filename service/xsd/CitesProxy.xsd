@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema 
+	xmlns="http://www.w3.org/2001/XMLSchema" 
+	targetNamespace="urn:CitesPermitProxy" 
+	xmlns:tns="urn:CitesPermitProxy" 
+	xmlns:types="urn:un:unece:uncefact:data:standard:CITESEPermit:2"
+	xmlns:cde="urn:CITESDataExchange:1"	
+	elementFormDefault="qualified">
+	
+	<import schemaLocation="https://service.cites.cz/wsdl/dataexchange/CITESEPermit_2p0.xsd" namespace="urn:un:unece:uncefact:data:standard:CITESEPermit:2"/>
+	<import schemaLocation="https://service.cites.cz/wsdl/dataexchange/CITESDataExchange_V1.xsd" namespace="urn:CITESDataExchange:1"/>
+	
+	<complexType name="QueryPermitType">
+		<sequence>
+			<element name="PermitNo" type="string"/>
+			<element name="Token" type="string"/>
+			<element name="Country" type="string"/>
+			<element name="PermitType" type="string"/>
+		</sequence>
+	</complexType>	
+	<complexType name="GetPermitRequestType">
+		<sequence>
+			<element name="CertificateNumber" type="string"/>
+			<element name="TokenId" type="string"/>
+			<element name="IsoCountryCode" type="string"/>
+		</sequence>
+	</complexType>				
+	<complexType name="GetPermitResponseType">
+		<sequence>
+			<element name="CITESEPermit" type="types:CITESEPermitType"/>
+			<element minOccurs="0" maxOccurs="unbounded" name="Attachments" type="cde:AttachmentType"/>
+			<element name="Composite" type="boolean"/>
+		</sequence>
+	</complexType>	
+	<complexType name="GetPermitV2RequestType">
+		<sequence>
+			<element name="PermitQuery" type="tns:QueryPermitType"/>
+		</sequence>
+	</complexType>	
+	<complexType name="GetPermitV2ResponseType">
+		<sequence>
+			<element name="CertificateNumber" type="string"/>
+			<element name="TokenId" type="string"/>
+			<element name="IsoCountryCode" type="string"/>
+			<element name="CertificateType" type="string"/>
+			<element name="CITESEPermit" type="types:CITESEPermitType"/>
+			<element minOccurs="0" maxOccurs="unbounded" name="Attachments" type="cde:AttachmentType"/>
+			<element name="Composite" type="boolean"/>
+		</sequence>
+	</complexType>	
+	<complexType name="ServiceStateType">
+		<sequence>
+			<element name="ServiceIsAlive" type="boolean"/>
+			<element maxOccurs="unbounded" minOccurs="0" name="ServiceMessage" type="tns:ServiceMessageType"/>
+		</sequence>
+	</complexType>	
+	<complexType name="ServiceMessageType">
+		<sequence>
+			<element name="MessageCode" type="string"/>
+			<element name="MessageValue" type="string"/>
+		</sequence>
+	</complexType>
+	<complexType name="ServiceStateRequestType"/>
+	<complexType name="ServiceStateResponseType">
+		<sequence>
+			<element name="ServiceState" type="tns:ServiceStateType"/>
+		</sequence>
+	</complexType>
+	<complexType name="FaultType">
+		<sequence>
+			<element name="ErrorNumber" type="integer"/>
+			<element name="ErrorMessage" type="string"/>
+		</sequence>
+	</complexType>
+
+	<element name="CitesPermitRequestFault" type="tns:FaultType"/>
+	<element name="CitesPermitV2RequestFault" type="tns:FaultType"/>
+	<element name="GetPermitRequest" type="tns:GetPermitRequestType"/>
+	<element name="GetPermitResponse" type="tns:GetPermitResponseType"/>
+	<element name="GetPermitV2Request" type="tns:GetPermitV2RequestType"/>
+	<element name="GetPermitV2Response" type="tns:GetPermitV2ResponseType"/>
+	<element name="ServiceStateRequest" type="tns:ServiceStateRequestType"/>
+	<element name="ServiceStateResponse" type="tns:ServiceStateResponseType"/>
+
+</schema>

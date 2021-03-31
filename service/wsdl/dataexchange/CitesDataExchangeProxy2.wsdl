@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:types="urn:un:unece:uncefact:data:standard:CITESEPermit:2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:udt="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:13" xmlns:tns="urn:CitesPermitProxy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns="urn:un:unece:uncefact:data:draft:ReusableAggregateBusinessInformationEntity:1" xmlns:ns1="urn:un:unece:uncefact:data:standard:QualifiedDataType:2" xmlns:ns2="urn:un:unece:uncefact:codelist:standard:6:3055:D12A" xmlns:ns3="urn:un:unece:uncefact:codelist:standard:6:Recommendation20:8" xmlns:ns4="urn:un:unece:uncefact:codelist:standard:UNECE:DocumentNameCode:D12A" xmlns:ns5="urn:un:unece:uncefact:codelist:standard:UNECE:GoodsTypeCode:D12A" xmlns:ns6="urn:un:unece:uncefact:codelist:standard:UNECE:GoodsTypeExtensionCode:D12A" xmlns:ns7="urn:un:unece:uncefact:codelist:standard:UNECE:GovernmentActionCode:D12A" xmlns:ns8="urn:un:unece:uncefact:codelist:standard:UNECE:MessageFunctionCode:D12A" xmlns:ns9="urn:un:unece:uncefact:identifierlist:standard:5:ISO316612A:SecondEdition2006VI-13" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" targetNamespace="urn:CitesPermitProxy">
+	<wsdl:types>
+		<xsd:schema elementFormDefault="unqualified" targetNamespace="urn:CitesPermitProxy" xmlns="http://www.w3.org/2001/XMLSchema">
+			<xsd:import namespace="urn:un:unece:uncefact:data:standard:CITESEPermit:2" schemaLocation="CITESEPermit_2p0.xsd"/>
+			<xsd:import namespace="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:13" schemaLocation="CITESEPermit_2p0_urn_un_unece_uncefact_data_standard_UnqualifiedDataType_13.xsd"/>
+			<xsd:complexType name="GetPermitRequestType">
+				<xsd:sequence>
+					<xsd:element name="CertificateNumber" type="xsd:string"/>
+					<xsd:element name="TokenId" type="xsd:string"/>
+					<xsd:element name="IsoCountryCode" type="xsd:string"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="GetPermitResponseType">
+				<xsd:sequence>
+					<xsd:element name="CITESEPermit" type="types:CITESEPermitType"/>
+					<xsd:element maxOccurs="unbounded" minOccurs="0" name="Attachments" type="tns:AttachmentType">
+					</xsd:element>
+					<xsd:element name="Composite" type="xsd:boolean"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="GetPermitV2RequestType">
+				<xsd:sequence>
+					<xsd:element name="CertificateNumber" type="xsd:string"/>
+					<xsd:element name="TokenId" type="xsd:string"/>
+					<xsd:element name="IsoCountryCode" type="xsd:string"/>
+					<xsd:element name="CertificateType" type="xsd:string"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="GetPermitV2ResponseType">
+				<xsd:sequence>
+					<xsd:element name="CertificateNumber" type="xsd:string"/>
+					<xsd:element name="TokenId" type="xsd:string"/>
+					<xsd:element name="IsoCountryCode" type="xsd:string"/>
+					<xsd:element name="CertificateType" type="xsd:string"/>
+					<xsd:element name="CITESEPermit" type="types:CITESEPermitType"/>
+					<xsd:element maxOccurs="unbounded" minOccurs="0" name="Attachments" type="tns:AttachmentType">
+					</xsd:element>
+					<xsd:element name="Composite" type="xsd:boolean"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="ServiceStateRequestType"/>
+			<xsd:complexType name="ServiceStateResponseType">
+				<xsd:sequence>
+					<xsd:element name="ServiceState" type="tns:ServiceStateType"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="CitesPositions">
+				<xsd:sequence>
+					<xsd:element maxOccurs="unbounded" minOccurs="1" name="CitesPosition" type="tns:CitesPositionType"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="CitesPositionType">
+				<xsd:sequence>
+					<xsd:element name="ID" type="udt:IDType"/>
+					<xsd:element name="InspectedUnitQuantity" type="udt:QuantityType"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="ServiceStateType">
+				<xsd:sequence>
+					<xsd:element name="ServiceIsAlive" type="xsd:boolean"/>
+					<xsd:element maxOccurs="unbounded" minOccurs="0" name="ServiceMessage" type="tns:ServiceMessageType"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="ServiceMessageType">
+				<xsd:sequence>
+					<xsd:element name="MessageCode" type="xsd:string"/>
+					<xsd:element name="MessageValue" type="xsd:string"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="AttachmentType">
+				<xsd:sequence>
+					<xsd:element name="AttachmentName" type="xsd:string"/>
+					<xsd:element name="AttachmentContent" type="xsd:base64Binary"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="RequestFaultType">
+				<xsd:sequence>
+					<xsd:element name="ErrorNumber" type="xsd:integer"/>
+					<xsd:element name="ErrorMessage" type="xsd:string"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:element name="CitesPermitRequestFault" type="tns:RequestFaultType"/>
+			<xsd:element name="CitesPermitV2RequestFault" type="tns:RequestFaultType"/>
+			<xsd:element name="GetPermitRequest" type="tns:GetPermitRequestType"/>
+			<xsd:element name="GetPermitResponse" type="tns:GetPermitResponseType"/>
+			<xsd:element name="GetPermitV2Request" type="tns:GetPermitV2RequestType"/>
+			<xsd:element name="GetPermitV2Response" type="tns:GetPermitV2ResponseType"/>
+			<xsd:element name="ServiceStateRequest" type="tns:ServiceStateRequestType"/>
+			<xsd:element name="ServiceStateResponse" type="tns:ServiceStateResponseType"/>
+		</xsd:schema>
+	</wsdl:types>
+	<wsdl:message name="GetPermitRequest">
+		<wsdl:part name="parameters" element="tns:GetPermitRequest">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="GetPermitResponse">
+		<wsdl:part name="parameters" element="tns:GetPermitResponse">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ServiceStateResponse">
+		<wsdl:part name="parameters" element="tns:ServiceStateResponse">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="CitesPermitRequestFault">
+		<wsdl:part name="parameters" element="tns:CitesPermitRequestFault">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ServiceStateRequest">
+		<wsdl:part name="parameters" element="tns:ServiceStateRequest">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="GetPermitV2Request">
+		<wsdl:part name="parameter" element="tns:GetPermitV2Request"/>
+	</wsdl:message>
+	<wsdl:message name="GetPermitV2Response">
+		<wsdl:part name="parameter" element="tns:GetPermitV2Response"/>
+	</wsdl:message>
+	<wsdl:message name="CitesPermitV2RequestFault">
+		<wsdl:part name="parameter" element="tns:CitesPermitV2RequestFault"/>
+	</wsdl:message>
+	<wsdl:portType name="CitesPermitProxy">
+		<wsdl:operation name="GetPermit">
+			<wsdl:input name="input" message="tns:GetPermitRequest">
+    </wsdl:input>
+			<wsdl:output name="output" message="tns:GetPermitResponse">
+    </wsdl:output>
+			<wsdl:fault name="CitesPermitProxyFault" message="tns:CitesPermitRequestFault">
+    </wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="ServiceState">
+			<wsdl:input name="request" message="tns:ServiceStateRequest">
+    </wsdl:input>
+			<wsdl:output name="response" message="tns:ServiceStateResponse">
+    </wsdl:output>
+			<wsdl:fault name="CitesDataExchangeFault" message="tns:CitesPermitRequestFault">
+    </wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetPermitV2">
+			<wsdl:input name="input2" message="tns:GetPermitV2Request"/>
+			<wsdl:output name="output2" message="tns:GetPermitV2Response"/>
+			<wsdl:fault name="CitesPermitV2ProxyFault" message="tns:CitesPermitV2RequestFault"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="CitesPermitProxySoapBinding" type="tns:CitesPermitProxy">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="GetPermit">
+			<soap:operation soapAction="urn:GetPermit"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="CitesPermitProxyFault">
+				<soap:fault name="CitesPermitProxyFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="ServiceState">
+			<soap:operation soapAction="urn:ServiceState"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="CitesDataExchangeFault">
+				<soap:fault name="CitesDataExchangeFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetPermitV2">
+			<soap:operation soapAction="urn:GetPermitV2"/>
+			<wsdl:input name="input2">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="output2">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="CitesPermitV2ProxyFault">
+				<soap:fault name="CitesPermitV2ProxyFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="CitesPermitProxyService">
+		<wsdl:port name="CitesPermitProxy" binding="tns:CitesPermitProxySoapBinding">
+			<soap:address location="http://localhost:8080/wsProxy/services"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:qdt="urn:un:unece:uncefact:data:standard:QualifiedDataType:2"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:clm63055="urn:un:unece:uncefact:codelist:standard:6:3055:D12A"
+    xmlns:clm6Recommendation20="urn:un:unece:uncefact:codelist:standard:6:Recommendation20:8"
+    xmlns:clm61001="urn:un:unece:uncefact:codelist:standard:UNECE:DocumentNameCode:D12A"
+    xmlns:clm6TDED7357="urn:un:unece:uncefact:codelist:standard:UNECE:GoodsTypeCode:D12A"
+    xmlns:clm6TDED7361="urn:un:unece:uncefact:codelist:standard:UNECE:GoodsTypeExtensionCode:D12A"
+    xmlns:clm69417="urn:un:unece:uncefact:codelist:standard:UNECE:GovernmentActionCode:D12A"
+    xmlns:clm61225MessageFunctionTypeCode="urn:un:unece:uncefact:codelist:standard:UNECE:MessageFunctionCode:D12A"
+    xmlns:udt="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:13"
+    xmlns:ids5ISO316612A="urn:un:unece:uncefact:identifierlist:standard:5:ISO316612A:SecondEdition2006VI-13"
+    targetNamespace="urn:un:unece:uncefact:data:standard:QualifiedDataType:2"
+    elementFormDefault="qualified"
+    version="2.0">
+  <xs:import namespace="urn:un:unece:uncefact:codelist:standard:6:3055:D12A" schemaLocation="CITESEPermit_2p0_urn_un_unece_uncefact_codelist_standard_6_3055_D12A.xsd"/>
+  <xs:import namespace="urn:un:unece:uncefact:codelist:standard:6:Recommendation20:8" schemaLocation="CITESEPermit_2p0_urn_un_unece_uncefact_codelist_standard_6_Recommendation20_8.xsd"/>
+  <xs:import namespace="urn:un:unece:uncefact:codelist:standard:UNECE:DocumentNameCode:D12A" schemaLocation="CITESEPermit_2p0_urn_un_unece_uncefact_codelist_standard_UNECE_DocumentNameCode_D12A.xsd"/>
+  <xs:import namespace="urn:un:unece:uncefact:codelist:standard:UNECE:GoodsTypeCode:D12A" schemaLocation="CITESEPermit_2p0_urn_un_unece_uncefact_codelist_standard_UNECE_GoodsTypeCode_D12A.xsd"/>
+  <xs:import namespace="urn:un:unece:uncefact:codelist:standard:UNECE:GoodsTypeExtensionCode:D12A" schemaLocation="CITESEPermit_2p0_urn_un_unece_uncefact_codelist_standard_UNECE_GoodsTypeExtensionCode_D12A.xsd"/>
+  <xs:import namespace="urn:un:unece:uncefact:codelist:standard:UNECE:GovernmentActionCode:D12A" schemaLocation="CITESEPermit_2p0_urn_un_unece_uncefact_codelist_standard_UNECE_GovernmentActionCode_D12A.xsd"/>
+  <xs:import namespace="urn:un:unece:uncefact:codelist:standard:UNECE:MessageFunctionCode:D12A" schemaLocation="CITESEPermit_2p0_urn_un_unece_uncefact_codelist_standard_UNECE_MessageFunctionCode_D12A.xsd"/>
+  <xs:import namespace="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:13" schemaLocation="CITESEPermit_2p0_urn_un_unece_uncefact_data_standard_UnqualifiedDataType_13.xsd"/>
+  <xs:import namespace="urn:un:unece:uncefact:identifierlist:standard:5:ISO316612A:SecondEdition2006VI-13" schemaLocation="CITESEPermit_2p0_urn_un_unece_uncefact_identifierlist_standard_5_ISO316612A_SecondEdition2006VI-13.xsd"/>
+  <xs:complexType name="CountryIDType">
+    <xs:simpleContent>
+      <xs:extension base="ids5ISO316612A:ISOTwoletterCountryCodeIdentifierContentType">
+        <xs:attribute name="schemeID" type="xs:token"/>
+        <xs:attribute name="schemeAgencyID" type="clm63055:AgencyIdentificationCodeContentType"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="DocumentCodeType">
+    <xs:simpleContent>
+      <xs:extension base="clm61001:DocumentNameCodeContentType">
+        <xs:attribute name="listID" type="xs:token" fixed="1001"/>
+        <xs:attribute name="listAgencyID" type="clm63055:AgencyIdentificationCodeContentType" fixed="6"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:simpleType name="FormattedDateTimeType">
+    <xs:restriction base="xs:dateTime"/>
+  </xs:simpleType>
+  <xs:complexType name="GoodsTypeCodeType">
+    <xs:simpleContent>
+      <xs:extension base="clm6TDED7357:GoodsTypeCodeContentType"/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="GoodsTypeExtensionCodeType">
+    <xs:simpleContent>
+      <xs:extension base="clm6TDED7361:GoodsTypeExtensionCodeContentType"/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="GovernmentActionCodeType">
+    <xs:simpleContent>
+      <xs:extension base="clm69417:GovernmentActionCodeContentType"/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="MessageFunctionCodeType">
+    <xs:simpleContent>
+      <xs:extension base="clm61225MessageFunctionTypeCode:MessageFunctionCodeContentType"/>
+    </xs:simpleContent>
+  </xs:complexType>
+</xs:schema>

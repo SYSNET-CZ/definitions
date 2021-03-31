@@ -1,0 +1,267 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="urn:CitesDataExchange/v1/" xmlns:tns="urn:CitesDataExchange/v1/"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:types="urn:un:unece:uncefact:data:standard:CITESEPermit:2"
+	xmlns:udt="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:13"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<wsdl:types>
+		<xsd:schema elementFormDefault="unqualified" targetNamespace="urn:CitesDataExchange/v1/"
+			xmlns="http://www.w3.org/2001/XMLSchema">
+			<xsd:import namespace="urn:un:unece:uncefact:data:standard:CITESEPermit:2"
+				schemaLocation="CITESEPermit_2p0.xsd" />
+			<xsd:import namespace="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:13"
+				schemaLocation="CITESEPermit_2p0_urn_un_unece_uncefact_data_standard_UnqualifiedDataType_13.xsd"/>
+			<xsd:complexType name="GetFinalCitesCertificateRequestType">
+				<xsd:sequence>
+					<xsd:element name="CertificateNumber" type="xsd:string" />
+					<xsd:element name="TokenId" type="xsd:string" />
+					<xsd:element name="IsoCountryCode" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="GetFinalCitesCertificateResponseType">
+				<xsd:sequence>
+					<xsd:element name="CITESEPermit"
+						type="types:CITESEPermitType" />
+					<xsd:element name="Attachments"
+						type="tns:AttachmentType" minOccurs="0" maxOccurs="unbounded">
+					</xsd:element>
+					<xsd:element name="Composite" type="boolean"></xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="GetNonFinalCitesCertificateRequestType">
+				<xsd:sequence>
+					<xsd:element name="CertificateNumber" type="xsd:string" />
+					<xsd:element name="TokenId" type="xsd:string" />
+					<xsd:element name="IsoCountryCode" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="GetNonFinalCitesCertificateResponseType">
+				<xsd:sequence>
+					<xsd:element name="CITESEPermit"
+						type="types:CITESEPermitType" />
+					<xsd:element name="Attachments"
+						type="tns:AttachmentType" minOccurs="0" maxOccurs="unbounded">
+					</xsd:element>
+					<xsd:element name="Composite" type="boolean"></xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="ConfirmQuantitiesRequestType">
+				<xsd:sequence>
+					<xsd:element name="CertificateNumber" type="xsd:string" />
+					<xsd:element name="TokenId" type="xsd:string" />
+					<xsd:element name="IsoCountryCode" type="xsd:string" />
+					<xsd:element name="ConfirmedQuantities" type="tns:CitesPositions" minOccurs="1"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="ConfirmQuantitiesResponseType">
+				<xsd:sequence>
+					
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="ServiceStateRequestType">
+
+			</xsd:complexType>
+			<xsd:complexType name="ServiceStateResponseType">
+				<xsd:sequence>
+					<xsd:element name="ServiceState" type="tns:ServiceStateType" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="CitesPositions">
+				<xsd:sequence>
+					<xsd:element name="CitesPosition" type="tns:CitesPositionType" minOccurs="1" maxOccurs="unbounded"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="CitesPositionType">
+				<xsd:sequence>
+					<xsd:element name="ID" type="udt:IDType"/>
+					<xsd:element name="InspectedUnitQuantity" type="udt:QuantityType"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<xsd:complexType name="ServiceStateType">
+				<xsd:sequence>
+					<xsd:element name="ServiceIsAlive" type="xsd:boolean"/>
+					<xsd:element name="ServiceMessage" type="tns:ServiceMessageType" minOccurs="0" maxOccurs="unbounded"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<xsd:complexType name="ServiceMessageType">
+				<xsd:sequence>
+					<xsd:element name="MessageCode" type="xsd:string"/>
+					<xsd:element name="MessageValue" type="xsd:string"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<xsd:complexType name="AttachmentType">
+            	<xsd:sequence>
+            		<xsd:element name="AttachmentName" type="xsd:string"/>	
+            		<xsd:element name="AttachmentContent" type="base64Binary"/>
+            	</xsd:sequence>	
+            </xsd:complexType>
+            
+            
+            <xsd:element name="CitesDataExchangeFault">
+            	<xsd:complexType>
+            		<xsd:sequence>
+            			<xsd:element name="ErrorNumber" type="xsd:integer" />
+						<xsd:element name="ErrorMessage" type="xsd:string" />
+            		</xsd:sequence>
+            	</xsd:complexType>
+            </xsd:element>
+			
+			<xsd:element name="GetFinalCitesCertificateRequest" type="tns:GetFinalCitesCertificateRequestType"/>
+			<xsd:element name="GetFinalCitesCertificateResponse" type="tns:GetFinalCitesCertificateResponseType"/>
+			<xsd:element name="GetNonFinalCitesCertificateRequest" type="tns:GetNonFinalCitesCertificateRequestType"/>
+			<xsd:element name="GetNonFinalCitesCertificateResponse" type="tns:GetNonFinalCitesCertificateResponseType"/>
+			<xsd:element name="ConfirmQuantitiesRequest" type="tns:ConfirmQuantitiesRequestType"/>
+			<xsd:element name="ConfirmQuantitiesResponse" type="tns:ConfirmQuantitiesResponseType"/>
+			<xsd:element name="ServiceStateRequest" type="tns:ServiceStateRequestType"/>
+			<xsd:element name="ServiceStateResponse" type="tns:ServiceStateResponseType"/>
+		
+		</xsd:schema>
+	</wsdl:types>
+	
+	<wsdl:message name="GetFinalCitesCertificateRequest">
+		<wsdl:part name="parameters" element="tns:GetFinalCitesCertificateRequest"/>
+	</wsdl:message>
+
+	<wsdl:message name="GetFinalCitesCertificateResponse">
+		<wsdl:part name="parameters" element="tns:GetFinalCitesCertificateResponse"/>
+	</wsdl:message>
+
+	<wsdl:message name="GetNonFinalCitesCertificateRequest">
+		<wsdl:part name="parameters" element="tns:GetNonFinalCitesCertificateRequest"/>
+	</wsdl:message>
+
+	<wsdl:message name="GetNonFinalCitesCertificateResponse">
+		<wsdl:part name="parameters" element="tns:GetNonFinalCitesCertificateResponse"/>
+	</wsdl:message>
+	
+	<wsdl:message name="ConfirmQuantitiesResponse">
+		<wsdl:part name="parameters" element="tns:ConfirmQuantitiesResponse"/>
+	</wsdl:message>
+
+	<wsdl:message name="ConfirmQuantitiesRequest">
+		<wsdl:part name="parameters" element="tns:ConfirmQuantitiesRequest"/>
+	</wsdl:message>
+	
+	<wsdl:message name="ServiceStateRequest">
+		<wsdl:part name="parameters" element="tns:ServiceStateRequest"/>
+	</wsdl:message>
+	
+	<wsdl:message name="ServiceStateResponse">
+		<wsdl:part name="parameters" element="tns:ServiceStateResponse"/>
+	</wsdl:message>
+
+
+	<wsdl:message name="CitesDataExchangeFault">
+		<wsdl:part name="parameters" element="tns:CitesDataExchangeFault"></wsdl:part>
+	</wsdl:message>
+	<wsdl:portType name="CitesDataExchange">
+		<wsdl:operation name="GetFinalCitesCertificate">
+			<wsdl:input message="tns:GetFinalCitesCertificateRequest"/>
+			<wsdl:output message="tns:GetFinalCitesCertificateResponse"/>
+            <wsdl:fault name="CitesDataExchangeFault" message="tns:CitesDataExchangeFault"></wsdl:fault>
+        </wsdl:operation>
+		<wsdl:operation name="GetNonFinalCitesCertificate">
+			<wsdl:input message="tns:GetNonFinalCitesCertificateRequest"/>
+			<wsdl:output message="tns:GetNonFinalCitesCertificateResponse"/>
+			<wsdl:fault name="CitesDataExchangeFault" message="tns:CitesDataExchangeFault"></wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="ConfirmQuantities">
+			<wsdl:input message="tns:ConfirmQuantitiesRequest"/>
+			<wsdl:output message="tns:ConfirmQuantitiesResponse"/>
+			<wsdl:fault name="CitesDataExchangeFault" message="tns:CitesDataExchangeFault"></wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="ServiceState">
+			<wsdl:input message="tns:ServiceStateRequest"/>
+			<wsdl:output message="tns:ServiceStateResponse"/>
+			<wsdl:fault name="CitesDataExchangeFault" message="tns:CitesDataExchangeFault"></wsdl:fault>
+		</wsdl:operation>
+	</wsdl:portType>
+	
+	<wsdl:binding name="CitesDataExchangeSoapBinding" type="tns:CitesDataExchange">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="GetFinalCitesCertificate">
+			<soap:operation soapAction="urn:GetFinalCitesCertificate"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="CitesDataExchangeFault">
+				<soap:fault name="CitesDataExchangeFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="GetNonFinalCitesCertificate">
+			<soap:operation soapAction="urn:GetNonFinalCitesCertificate"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="CitesDataExchangeFault">
+				<soap:fault name="CitesDataExchangeFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="ConfirmQuantities">
+			<soap:operation soapAction="urn:ConfirmQuantities"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="CitesDataExchangeFault">
+				<soap:fault name="CitesDataExchangeFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="ServiceState">
+			<soap:operation soapAction="urn:ServiceState"/>
+			<wsdl:input>
+			    <soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="CitesDataExchangeFault">
+				<soap:fault name="CitesDataExchangeFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+
+	<wsdl:service name="CitesDataExchangeService">
+		<wsdl:port name="CitesDataExchange" binding="tns:CitesDataExchangeSoapBinding">
+			<!-- <soap:address location="https://ws-in.wbf.admin.ch/SpeciesProtection/CitesDataExchange/1"/> -->
+			<!-- <soap:address location="https://ws.wbf.admin.ch/SpeciesProtection/CitesDataExchange/1"/> -->
+			<soap:address location="https://ws-vp.wbf.admin.ch/SpeciesProtection/CitesDataExchange/2" />
+		</wsdl:port>
+	</wsdl:service>
+	
+	
+	<!-- 
+	test-System 		(https://ws-in.wbf.admin.ch/SpeciesProtection/CitesDataExchange/1)
+	production System	(https://ws.wbf.admin.ch/SpeciesProtection/CitesDataExchange/1)
+	-->
+	
+	<!-- Policy for Username Token with plaintext password, sent from client 
+		 to server only 
+	<wsp:Policy xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy"
+		xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+		wsu:Id="UsernameToken">
+		<wsp:ExactlyOne>
+			<wsp:All>
+				<sp:SupportingTokens
+					xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+					<wsp:Policy>
+						<sp:UsernameToken
+							sp:IncludeToken="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702/IncludeToken/AlwaysToRecipient" />
+					</wsp:Policy>
+				</sp:SupportingTokens>
+			</wsp:All>
+		</wsp:ExactlyOne>
+	</wsp:Policy>-->
+
+</wsdl:definitions>

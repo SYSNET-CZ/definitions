@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema 
+	xmlns="http://www.w3.org/2001/XMLSchema" 
+	targetNamespace="http://service.cites.cz/LicRealizaceReqResult"
+	xmlns:tns="http://service.cites.cz/LicRealizaceReqResult" 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	elementFormDefault="qualified">
+	
+	<xsd:annotation>
+		<xsd:documentation>Odpověď na reportovanou realizaci licencí</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:element name="LicRealizaceReqResult" type="tns:CitesType_LicRealizaceReqResult">
+		<xsd:annotation>
+			<xsd:documentation>Odpověď systému na požadavek zpracování realizované licence</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+
+	<xsd:complexType name="CitesType_LicRealizaceReqResult">
+		<xsd:sequence>
+			<xsd:element name="version" type="string" fixed="2.1">
+				<xsd:annotation>
+					<xsd:documentation>Verze zprávy č. 2.1</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="requestId" type="string" minOccurs="1" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>ID předaného reportu (vrací se číslo podaného reportu)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="change" type="nonNegativeInteger" minOccurs="0" maxOccurs="1">
+				<xsd:annotation><xsd:documentation>Počet identifikovaných pohybů</xsd:documentation></xsd:annotation>
+			</xsd:element>
+			<xsd:element name="timeStampReceived" type="dateTime" minOccurs="1" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>časová značka přijetí reportu </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="status" type="tns:CitesType_ReceivingStatus" minOccurs="1" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>Stav přijetí reportu</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="note" type="string" minOccurs="0" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>Poznámka ke přijetí reportu</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:simpleType name="CitesType_ReceivingStatus">
+		<xsd:restriction base="string">
+			<xsd:enumeration value="SUCCESS" />
+			<xsd:enumeration value="FAILURE" />
+			<xsd:enumeration value="WARNING" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+</schema>

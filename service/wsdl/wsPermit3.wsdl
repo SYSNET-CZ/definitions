@@ -1,0 +1,256 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<definitions 
+	xmlns="http://schemas.xmlsoap.org/wsdl/" 
+	xmlns:apachesoap="http://xml.apache.org/xml-soap" 
+	xmlns:impl="urn:permit.ws.cites.cz" 
+	xmlns:intf="urn:permit.ws.cites.cz" 
+	xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" 
+	xmlns:tns2="urn:model.permit.ws.cites.cz" 
+	xmlns:tns3="urn:reusable.permit.ws.cites.cz" 
+	xmlns:tns4="urn:unqualified.permit.ws.cites.cz" 
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+	xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	targetNamespace="urn:permit.ws.cites.cz">
+  <wsdl:types>
+    <schema 
+    	xmlns="http://www.w3.org/2001/XMLSchema" 
+    	targetNamespace="urn:permit.ws.cites.cz">
+    	<import namespace="urn:model.permit.ws.cites.cz"/>
+    	<import namespace="urn:reusable.permit.ws.cites.cz"/>
+    	<import namespace="urn:unqualified.permit.ws.cites.cz"/>
+      <element name="getPermit">
+        <complexType>
+          <sequence>
+            <element name="id" type="xsd:string"/>
+          </sequence>
+        </complexType>
+      </element>
+      <element name="getPermitResponse">
+        <complexType>
+          <sequence>
+            <element name="getPermitReturn" type="tns2:CBFShipType"/>
+          </sequence>
+        </complexType>
+      </element>
+    </schema>
+    <schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:reusable.permit.ws.cites.cz">
+      	<import namespace="urn:model.permit.ws.cites.cz"/>
+    	<import namespace="urn:unqualified.permit.ws.cites.cz"/>
+      <complexType name="DocumentVersionType">
+        <sequence>
+          <element name="ID" nillable="true" type="xsd:string"/>
+          <element name="issueDateTime" nillable="true" type="xsd:dateTime"/>
+        </sequence>
+      </complexType>
+      <complexType name="DocumentContextParameterType">
+        <sequence>
+          <element name="ID" nillable="true" type="xsd:string"/>
+          <element name="value" nillable="true" type="xsd:string"/>
+          <element name="specifiedDocumentVersion" nillable="true" type="tns3:DocumentVersionType"/>
+        </sequence>
+      </complexType>
+      <complexType name="ExchangedDocumentContextType">
+        <sequence>
+          <element maxOccurs="unbounded" minOccurs="0" name="businessProcessSpecifiedDocumentContextParameter" nillable="true" type="tns3:DocumentContextParameterType"/>
+          <element maxOccurs="unbounded" minOccurs="0" name="BIMSpecifiedDocumentContextParameter" nillable="true" type="tns3:DocumentContextParameterType"/>
+        </sequence>
+      </complexType>
+      <complexType name="SpecifiedPeriodType">
+        <sequence>
+          <element name="startDateTime" nillable="true" type="xsd:dateTime"/>
+          <element name="endDateTime" nillable="true" type="xsd:dateTime"/>
+        </sequence>
+      </complexType>
+      <complexType name="ReferencedDocumentType">
+        <sequence>
+          <element name="issueDateTime" nillable="true" type="xsd:dateTime"/>
+          <element name="typeCode" nillable="true" type="xsd:string"/>
+          <element maxOccurs="unbounded" minOccurs="0" name="ID" nillable="true" type="xsd:string"/>
+          <element maxOccurs="unbounded" minOccurs="0" name="name" nillable="true" type="xsd:string"/>
+          <element name="effectiveSpecifiedPeriod" nillable="true" type="tns3:SpecifiedPeriodType"/>
+        </sequence>
+      </complexType>
+      <complexType name="LogisticsLocationType">
+        <sequence>
+          <element maxOccurs="unbounded" minOccurs="0" name="ID" nillable="true" type="xsd:string"/>
+          <element maxOccurs="unbounded" minOccurs="0" name="name" nillable="true" type="xsd:string"/>
+        </sequence>
+      </complexType>
+      <complexType name="TradeCountryType">
+        <sequence>
+          <element maxOccurs="unbounded" minOccurs="0" name="ID" nillable="true" type="xsd:string"/>
+          <element maxOccurs="unbounded" minOccurs="0" name="name" nillable="true" type="xsd:string"/>
+          <element name="subordinateTradeCountrySubDivision" nillable="true" type="tns2:ArrayOfString"/>
+        </sequence>
+      </complexType>
+      <complexType name="TradeAddressType">
+        <sequence>
+          <element maxOccurs="unbounded" minOccurs="0" name="postcodeCode" nillable="true" type="xsd:string"/>
+          <element name="postOfficeBox" nillable="true" type="xsd:string"/>
+          <element maxOccurs="unbounded" minOccurs="0" name="streetName" nillable="true" type="xsd:string"/>
+          <element name="cityName" nillable="true" type="xsd:string"/>
+          <element name="countryIdentificationTradeCountry" nillable="true" type="tns3:TradeCountryType"/>
+        </sequence>
+      </complexType>
+      <complexType name="RepresentativePersonType">
+        <sequence>
+          <element name="name" nillable="true" type="xsd:string"/>
+        </sequence>
+      </complexType>
+      <complexType name="AuthoritativeSignatoryPersonType">
+        <sequence>
+          <element name="name" nillable="true" type="xsd:string"/>
+        </sequence>
+      </complexType>
+      <complexType name="TradePartyType">
+        <sequence>
+          <element maxOccurs="unbounded" minOccurs="0" name="ID" nillable="true" type="xsd:string"/>
+          <element name="name" nillable="true" type="xsd:string"/>
+          <element name="postalTradeAddress" nillable="true" type="tns3:TradeAddressType"/>
+          <element name="specifiedRepresentativePerson" nillable="true" type="tns3:RepresentativePersonType"/>
+          <element maxOccurs="unbounded" minOccurs="0" name="specifiedAuthoritativeSignatoryPerson" nillable="true" type="tns3:AuthoritativeSignatoryPersonType"/>
+        </sequence>
+      </complexType>
+      <complexType name="DocumentAuthenticationType">
+        <sequence>
+          <element name="typeCode" nillable="true" type="xsd:string"/>
+          <element maxOccurs="unbounded" minOccurs="0" name="ID" nillable="true" type="xsd:string"/>
+          <element name="statement" nillable="true" type="xsd:string"/>
+          <element name="providerTradeParty" nillable="true" type="tns3:TradePartyType"/>
+        </sequence>
+      </complexType>
+      <complexType name="ExchangedDocumentType">
+        <sequence>
+          <element name="ID" nillable="true" type="xsd:string"/>
+          <element maxOccurs="unbounded" minOccurs="0" name="name" nillable="true" type="xsd:string"/>
+          <element name="typeCode" nillable="true" type="xsd:string"/>
+          <element name="issueDateTime" nillable="true" type="xsd:dateTime"/>
+          <element name="copyIndicator" nillable="true" type="xsd:boolean"/>
+          <element name="purpose" nillable="true" type="xsd:string"/>
+          <element maxOccurs="unbounded" minOccurs="0" name="purposeCode" nillable="true" type="xsd:string"/>
+          <element maxOccurs="unbounded" minOccurs="0" name="information" nillable="true" type="xsd:string"/>
+          <element maxOccurs="unbounded" minOccurs="0" name="referenceReferencedDocument" nillable="true" type="tns3:ReferencedDocumentType"/>
+          <element name="effectiveSpecifiedPeriod" nillable="true" type="tns3:SpecifiedPeriodType"/>
+          <element name="issueLogisticsLocation" nillable="true" type="tns3:LogisticsLocationType"/>
+          <element name="firstSignatoryDocumentAuthentication" nillable="true" type="tns3:DocumentAuthenticationType"/>
+          <element name="secondSignatoryDocumentAuthentication" nillable="true" type="tns3:DocumentAuthenticationType"/>
+          <element name="thirdSignatoryDocumentAuthentication" nillable="true" type="tns3:DocumentAuthenticationType"/>
+          <element name="fourthSignatoryDocumentAuthentication" nillable="true" type="tns3:DocumentAuthenticationType"/>
+        </sequence>
+      </complexType>
+      <complexType name="TransportEventType">
+        <sequence>
+          <element name="actualOccurrenceDateTime" nillable="true" type="xsd:dateTime"/>
+          <element name="inspectedUnitQuantity" nillable="true" type="tns4:QuantityType"/>
+          <element name="occurrenceLogisticsLocation" nillable="true" type="tns3:LogisticsLocationType"/>
+          <element maxOccurs="unbounded" minOccurs="0" name="certifyingTradeParty" nillable="true" type="tns3:TradePartyType"/>
+        </sequence>
+      </complexType>
+      <complexType name="LogisticsPackageType">
+        <sequence>
+          <element name="itemQuantity" nillable="true" type="tns4:QuantityType"/>
+        </sequence>
+      </complexType>
+      <complexType name="TradeProductType">
+        <sequence>
+          <element name="sellerAssignedID" nillable="true" type="xsd:string"/>
+          <element maxOccurs="unbounded" minOccurs="0" name="description" nillable="true" type="xsd:string"/>
+          <element maxOccurs="unbounded" minOccurs="0" name="typeCode" nillable="true" type="xsd:string"/>
+          <element maxOccurs="unbounded" minOccurs="0" name="commonName" nillable="true" type="xsd:string"/>
+          <element maxOccurs="unbounded" minOccurs="0" name="scientificName" nillable="true" type="xsd:string"/>
+        </sequence>
+      </complexType>
+      <complexType name="SupplyChainTradeLineItemType">
+        <sequence>
+          <element name="typeCode" nillable="true" type="xsd:string"/>
+          <element name="typeExtensionCode" nillable="true" type="xsd:string"/>
+          <element name="specifiedTradeProduct" nillable="true" type="tns3:TradeProductType"/>
+        </sequence>
+      </complexType>
+      <complexType name="CrossBorderGovernmentProcedureType">
+        <sequence>
+          <element name="usedToDateQuotaQuantity" nillable="true" type="tns4:QuantityType"/>
+          <element name="annualQuotaQuantity" nillable="true" type="tns4:QuantityType"/>
+          <element name="acquisitionDateTime" nillable="true" type="xsd:dateTime"/>
+          <element maxOccurs="unbounded" minOccurs="0" name="previousReferencedDocument" nillable="true" type="tns3:ReferencedDocumentType"/>
+        </sequence>
+      </complexType>
+      <complexType name="SupplyChainConsignmentItemType">
+        <sequence>
+          <element maxOccurs="unbounded" minOccurs="0" name="ID" nillable="true" type="xsd:string"/>
+          <element name="originTradeCountry" nillable="true" type="tns3:TradeCountryType"/>
+          <element name="exportTradeCountry" nillable="true" type="tns3:TradeCountryType"/>
+          <element maxOccurs="unbounded" minOccurs="0" name="associatedReferencedDocument" nillable="true" type="tns3:ReferencedDocumentType"/>
+          <element maxOccurs="unbounded" minOccurs="0" name="transportLogisticsPackage" nillable="true" type="tns3:LogisticsPackageType"/>
+          <element maxOccurs="unbounded" minOccurs="0" name="includedSupplyChainTradeLineItem" nillable="true" type="tns3:SupplyChainTradeLineItemType"/>
+          <element maxOccurs="unbounded" minOccurs="0" name="examinationTransportEvent" nillable="true" type="tns3:TransportEventType"/>
+          <element name="applicableCrossBorderGovernmentProcedure" nillable="true" type="tns3:CrossBorderGovernmentProcedureType"/>
+        </sequence>
+      </complexType>
+      <complexType name="SupplyChainConsignmentType">
+        <sequence>
+          <element name="consignorTradeParty" nillable="true" type="tns3:TradePartyType"/>
+          <element name="consigneeTradeParty" nillable="true" type="tns3:TradePartyType"/>
+          <element name="transportContractReferencedDocument" nillable="true" type="tns3:ReferencedDocumentType"/>
+          <element maxOccurs="unbounded" minOccurs="0" name="examinationTransportEvent" nillable="true" type="tns3:TransportEventType"/>
+          <element maxOccurs="unbounded" minOccurs="0" name="includedSupplyChainConsignmentItem" nillable="true" type="tns3:SupplyChainConsignmentItemType"/>
+          <element name="importTradeCountry" nillable="true" type="tns3:TradeCountryType"/>
+        </sequence>
+      </complexType>
+    </schema>
+    <schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:model.permit.ws.cites.cz">
+    	<import namespace="urn:reusable.permit.ws.cites.cz"/>
+    	<import namespace="urn:unqualified.permit.ws.cites.cz"/>
+      <complexType name="ArrayOfString">
+        <sequence>
+          <element maxOccurs="unbounded" minOccurs="0" name="item" nillable="true" type="xsd:string"/>
+        </sequence>
+      </complexType>
+      <complexType name="CBFShipType">
+        <sequence>
+          <element name="specifiedExchangedDocumentContext" nillable="true" type="tns3:ExchangedDocumentContextType"/>
+          <element name="headerExchangedDocument" nillable="true" type="tns3:ExchangedDocumentType"/>
+          <element name="specifiedSupplyChainConsignment" nillable="true" type="tns3:SupplyChainConsignmentType"/>
+        </sequence>
+      </complexType>
+    </schema>
+    <schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:unqualified.permit.ws.cites.cz">
+      <complexType name="QuantityType">
+        <sequence>
+          <element name="value" nillable="true" type="xsd:decimal"/>
+          <element name="unitCode" nillable="true" type="xsd:string"/>
+        </sequence>
+      </complexType>
+    </schema>
+  </wsdl:types>
+  <message name="getPermitRequest">
+    <part element="impl:getPermit" name="parameters"/>
+  </message>
+  <message name="getPermitResponse">
+    <part element="impl:getPermitResponse" name="parameters"/>
+  </message>
+  <portType name="PermitExchange">
+    <operation name="getPermit">
+      <input message="impl:getPermitRequest" name="getPermitRequest"/>
+      <output message="impl:getPermitResponse" name="getPermitResponse"/>
+    </operation>
+  </portType>
+  <binding name="CITESSoapBinding" type="impl:PermitExchange">
+    <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="getPermit">
+      <wsdlsoap:operation soapAction=""/>
+      <input name="getPermitRequest">
+        <wsdlsoap:body use="literal"/>
+      </input>
+      <output name="getPermitResponse">
+        <wsdlsoap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+  <service name="PermitExchangeService">
+    <port binding="impl:CITESSoapBinding" name="CITES">
+      <wsdlsoap:address location="https://cites.mzp.cz:443/Cites/cites-ws.nsf/wsPermit3?OpenWebService"/>
+    </port>
+  </service>
+</definitions>

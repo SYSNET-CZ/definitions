@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema 
+	xmlns="http://www.w3.org/2001/XMLSchema" 
+	targetNamespace="http://service.cites.cz/LicRealizaceRequest/"  
+	xmlns:tns="http://service.cites.cz/LicRealizaceRequest/"
+	xmlns:cds="http://www.cs.mfcr.cz/Schemas/CDS/Template"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	elementFormDefault="qualified">
+	
+	<xsd:annotation>
+    <xsd:documentation>Report realizací licencí jejich vydavateli</xsd:documentation>
+	</xsd:annotation>
+	
+	<xsd:element name="LicRealizaceReq" type="tns:SinWin_LicRealizaceReq_t">
+		<xsd:annotation>
+			<xsd:documentation>Report realizací licencí jejich vydavateli</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+
+	<xsd:complexType name="SinWin_LicRealizaceReq_t">
+		<xsd:sequence>
+      <xsd:element name="verze" type="xsd:string" fixed="2.1">
+        <xsd:annotation>
+          <xsd:documentation>Verze zprávy č. 2.1</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+			<xsd:element name="REQ" type="tns:SinWin_LicRealizaceReq_REQ_t" minOccurs="1" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>Záhlaví reportu</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Realizace" type="tns:SinWin_LicRealizaceReq_Realizace_t" minOccurs="1" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>Seznam pohybů při realizacích licencí za dané období</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="SinWin_LicRealizaceReq_REQ_t">
+    <xsd:sequence>
+      <xsd:element name="ReqId" type="tns:SinWin_LicRealizaceReq_REQ_ReqId_t" minOccurs="1" maxOccurs="1">
+        <xsd:annotation>
+          <xsd:documentation>ID reportu</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="DatumCasReportu" type="tns:SinWin_LicRealizaceReq_REQ_DatumCasReportu_t" minOccurs="1" maxOccurs="1">
+        <xsd:annotation>
+          <xsd:documentation>Datum a čas odeslání reportu</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="SinWin_LicRealizaceReq_Realizace_t">
+    <xsd:sequence>
+      <xsd:element name="Pohyb" type="tns:SinWin_LicRealizaceReq_Pohyb_t" minOccurs="0" maxOccurs="unbounded">
+        <xsd:annotation>
+          <xsd:documentation>Jednotlivý pohyb na konkrétní licenci</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <xsd:complexType name="SinWin_LicRealizaceReq_Pohyb_t">
+    <xsd:sequence>
+      <xsd:element name="ID" type="tns:SinWin_LicRealizaceReq_Pohyb_ID_t" minOccurs="1" maxOccurs="1">
+        <xsd:annotation>
+          <xsd:documentation>Jednoznačný identifikátor pohybu</xsd:documentation>
+          <xsd:appinfo>
+            <cds:Info cds:SystemMetatype="Integer"/>
+          </xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="MRN" type="tns:SinWin_LicRealizaceReq_Pohyb_MRN_t" minOccurs="1" maxOccurs="1">
+        <xsd:annotation>
+          <xsd:documentation>Číslo JSD dokladu, v rámci kterého byl pohyb na odpisovém listě proveden</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="CisPolozkyJSD" type="tns:SinWin_LicRealizaceReq_Pohyb_CisPolozkyJSD_t" minOccurs="1" maxOccurs="1">
+        <xsd:annotation>
+          <xsd:documentation>Pořadové číslo položky JSD, které se pohyb na odpisovém listě týká</xsd:documentation>
+          <xsd:appinfo>
+            <cds:Info cds:SystemMetatype="String"/>
+          </xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="DruhLicence" type="tns:SinWin_LicRealizaceReq_Pohyb_DruhLicence_t" minOccurs="1" maxOccurs="1">
+        <xsd:annotation>
+          <xsd:documentation>Druh licence</xsd:documentation>
+          <xsd:appinfo>
+            <cds:Info cds:SystemMetatype="String"/>
+          </xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="CisloLicence" type="tns:SinWin_LicRealizaceReq_Pohyb_CisloLicence_t" minOccurs="1" maxOccurs="1">
+        <xsd:annotation>
+          <xsd:documentation>Číslo licence</xsd:documentation>
+          <xsd:appinfo>
+            <cds:Info cds:SystemMetatype="String"/>
+          </xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="CisPolozkyLic" type="tns:SinWin_LicRealizaceReq_Pohyb_CisPolozkyLic_t" minOccurs="0" maxOccurs="1">
+        <xsd:annotation>
+          <xsd:documentation>Označení položky licence</xsd:documentation>
+          <xsd:appinfo>
+            <cds:Info cds:SystemMetatype="String"/>
+          </xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="TypPohybu" type="tns:SinWin_LicRealizaceReq_Pohyb_TypPohybu_t" minOccurs="1" maxOccurs="1">
+        <xsd:annotation>
+          <xsd:documentation>Typ pohybu - možné hodnoty: Odpis, Oprava, Storno</xsd:documentation>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="DatumCasPohybu" type="tns:SinWin_LicRealizaceReq_Pohyb_DatumCasPohybu_t" minOccurs="1" maxOccurs="1">
+        <xsd:annotation>
+          <xsd:documentation>Datum a čas, ke kterému byl pohyb proveden</xsd:documentation>
+          <xsd:appinfo>
+            <cds:Info cds:SystemMetatype="String"/>
+          </xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="DatumCasEvidence" type="tns:SinWin_LicRealizaceReq_Pohyb_DatumCasEvidence_t" minOccurs="1" maxOccurs="1">
+        <xsd:annotation>
+          <xsd:documentation>Datum a čas, ke kterému byl pohyb zaevidován v Single Window IC - zajišťuje historizaci pohybů</xsd:documentation>
+          <xsd:appinfo>
+            <cds:Info cds:SystemMetatype="DateTime"/>
+          </xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="ZbozKod" type="tns:SinWin_LicRealizaceReq_Pohyb_ZbozKod_t" minOccurs="0" maxOccurs="1">
+        <xsd:annotation>
+          <xsd:documentation>Zbožový kód</xsd:documentation>
+          <xsd:appinfo>
+            <cds:Info cds:SystemMetatype="String"/>
+          </xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="Mnozstvi" type="tns:SinWin_LicRealizaceReq_Pohyb_Mnozstvi_t" minOccurs="0" maxOccurs="1">
+        <xsd:annotation>
+          <xsd:documentation>Množství zboží v MJ</xsd:documentation>
+          <xsd:appinfo>
+            <cds:Info cds:SystemMetatype="Float"/>
+          </xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="MJ" type="tns:SinWin_LicRealizaceReq_Pohyb_MJ_t" minOccurs="0" maxOccurs="1">
+        <xsd:annotation>
+          <xsd:documentation>Měrná jednotka</xsd:documentation>
+          <xsd:appinfo>
+            <cds:Info cds:SystemMetatype="String"/>
+          </xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="DoplnujiciZaznam" type="tns:SinWin_LicRealizaceReq_Pohyb_DoplnujiciZaznam_t" minOccurs="0" maxOccurs="1">
+        <xsd:annotation>
+          <xsd:documentation>Doplňující záznamy k dokladu</xsd:documentation>
+          <xsd:appinfo>
+            <cds:Info cds:SystemMetatype="String"/>
+          </xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="VysledekValidace" type="tns:SinWin_LicRealizaceReq_Pohyb_VysledekValidace_t" minOccurs="1" maxOccurs="1">
+        <xsd:annotation>
+          <xsd:documentation>Výsledek validací prováděných na straně Single Window IC - v případě úspěchu "OK", jinak kód chyby.</xsd:documentation>
+          <xsd:appinfo>
+            <cds:Info cds:SystemMetatype="String"/>
+          </xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+      <xsd:element name="LicenceOverenaCU" type="tns:SinWin_LicRealizaceReq_Pohyb_LicenceOverenaCU_t" minOccurs="1" maxOccurs="1">
+        <xsd:annotation>
+          <xsd:documentation>Byla licence ověřena v papírové podobě pracovníkem CÚ?</xsd:documentation>
+          <xsd:appinfo>
+            <cds:Info cds:SystemMetatype="String"/>
+          </xsd:appinfo>
+        </xsd:annotation>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+  
+  <xsd:simpleType name="SinWin_LicRealizaceReq_REQ_ReqId_t">
+    <xsd:restriction base="xsd:string">
+      <xsd:maxLength value="50"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="SinWin_LicRealizaceReq_REQ_DatumCasReportu_t">
+  <xsd:annotation><xsd:documentation>Datum a čas ve formátu: "YYYYMMDD HHmmss"</xsd:documentation></xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="[0-9]{8} [0-9]{6}"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="SinWin_LicRealizaceReq_Pohyb_ID_t">
+    <xsd:restriction base="xsd:integer" />
+  </xsd:simpleType>
+  <xsd:simpleType name="SinWin_LicRealizaceReq_Pohyb_MRN_t">
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="[0-9]{2}[A-Z]{2}[A-Z0-9]{13}[0-9F]"/>
+      <xsd:minLength value="18"/>
+      <xsd:maxLength value="18"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="SinWin_LicRealizaceReq_Pohyb_CisPolozkyJSD_t">
+    <xsd:restriction base="xsd:unsignedShort">
+      <xsd:maxInclusive value="999"/>
+      <xsd:minInclusive value="1"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="SinWin_LicRealizaceReq_Pohyb_DruhLicence_t">
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="[A-Za-z0-9]"/>
+      <xsd:maxLength value="1"/>
+      <xsd:minLength value="1"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="SinWin_LicRealizaceReq_Pohyb_CisloLicence_t">
+    <xsd:restriction base="xsd:string">
+      <xsd:maxLength value="50"/>
+      <xsd:pattern value="[A-Za-z0-9]"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="SinWin_LicRealizaceReq_Pohyb_CisPolozkyLic_t">
+    <xsd:restriction base="xsd:string">
+      <xsd:maxLength value="4"/>
+      <xsd:pattern value="[A-Za-z0-9]"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="SinWin_LicRealizaceReq_Pohyb_TypPohybu_t">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Odpis"/>
+      <xsd:enumeration value="Oprava"/>
+      <xsd:enumeration value="Storno"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="SinWin_LicRealizaceReq_Pohyb_DatumCasPohybu_t">
+  <xsd:annotation><xsd:documentation>Datum a čas ve formátu: "YYYYMMDD HHmmss"</xsd:documentation></xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="[0-9]{8} [0-9]{6}"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="SinWin_LicRealizaceReq_Pohyb_DatumCasEvidence_t">
+  <xsd:annotation><xsd:documentation>Datum a čas ve formátu: "YYYYMMDD HHmmss"</xsd:documentation></xsd:annotation>
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="[0-9]{8} [0-9]{6}"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="SinWin_LicRealizaceReq_Pohyb_ZbozKod_t">
+    <xsd:restriction base="xsd:string">
+      <xsd:maxLength value="10"/>
+      <xsd:pattern value="[A-Za-z0-9á-žÁ-Ž]"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="SinWin_LicRealizaceReq_Pohyb_Mnozstvi_t">
+    <xsd:restriction base="xsd:float">
+      <xsd:minInclusive value="0"/>
+      <xsd:maxInclusive value="999999999999"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="SinWin_LicRealizaceReq_Pohyb_MJ_t">
+    <xsd:restriction base="xsd:string">
+      <xsd:maxLength value="10"/>
+      <xsd:pattern value="[A-Za-z0-9á-žÁ-Ž]"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="SinWin_LicRealizaceReq_Pohyb_DoplnujiciZaznam_t">
+    <xsd:restriction base="xsd:string">
+      <xsd:maxLength value="35"/>
+      <xsd:pattern value="[A-Za-z0-9á-žÁ-Ž]"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="SinWin_LicRealizaceReq_Pohyb_VysledekValidace_t">
+    <xsd:restriction base="xsd:string">
+      <xsd:maxLength value="250"/>
+      <xsd:minLength value="1"/>
+      <xsd:pattern value="[A-Za-z0-9á-žÁ-Ž]"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="SinWin_LicRealizaceReq_Pohyb_LicenceOverenaCU_t">
+    <xsd:restriction base="xsd:string">
+      <xsd:maxLength value="1"/>
+      <xsd:pattern value="[A-Za-z0-9]"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+</xsd:schema>
+

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema 
+	xmlns="http://www.w3.org/2001/XMLSchema" 
+	targetNamespace="http://service.cites.cz/LicRealizaceRespRequest"
+	xmlns:tns="http://service.cites.cz/LicRealizaceRespRequest" 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	elementFormDefault="qualified">
+
+	<xsd:annotation>
+		<xsd:documentation>Požadavek na vydání zprávy LicRealizaceResp </xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:element name="LicRealizaceRespRequest" type="tns:CitesType_ChangeProcessingRequest">
+		<xsd:annotation>
+			<xsd:documentation>Strukturovaný požadavek na vydání zprávy LicRealizaceResp</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+
+	<xsd:complexType name="CitesType_ChangeProcessingRequest">
+		<xsd:sequence>
+			<xsd:element name="fromDate" type="date" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>Datum nejdříve zpracované změny ve výstupní frontě</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="toDate" type="date" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>Datum nejpozději zpracované změny ve výstupní frontě</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="count" type="nonNegativeInteger" minOccurs="0" maxOccurs="1">
+				<xsd:annotation>
+					<xsd:documentation>Počet vrácených položek</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+</schema>

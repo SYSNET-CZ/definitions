@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema 
+	xmlns="http://www.w3.org/2001/XMLSchema" 
+	targetNamespace="urn:CITESDataExchange:1" 
+	xmlns:tns="urn:CITESDataExchange:1" 
+	xmlns:udt="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:13"
+	elementFormDefault="qualified">
+	<import schemaLocation="CITESEPermit_2p0_urn_un_unece_uncefact_data_standard_UnqualifiedDataType_13.xsd" namespace="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:13"/>
+	<complexType name="AttachmentType">
+		<sequence>
+			<element name="AttachmentName" type="string"/>
+			<element name="AttachmentContent" type="base64Binary"/>
+		</sequence>
+	</complexType>	
+	
+	<complexType name="CitesPositions">
+		<sequence>
+			<element minOccurs="1" maxOccurs="unbounded" name="CitesPosition" type="tns:CitesPositionType"/>
+		</sequence>
+	</complexType>
+	<complexType name="CitesPositionType">
+		<sequence>
+			<element name="ID" type="udt:IDType"/>
+			<element name="InspectedUnitQuantity" type="udt:QuantityType"/>
+		</sequence>
+	</complexType>	
+</schema>

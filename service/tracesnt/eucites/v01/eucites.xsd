@@ -1,0 +1,479 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
+           xmlns:epermit="urn:un:unece:uncefact:data:standard:CITESEPermit:2"
+           xmlns:base="http://ec.europa.eu/sanco/tracesnt/base/v4"
+           xmlns:eucites="http://ec.europa.eu/tracesnt/eucites/v01"
+           targetNamespace="http://ec.europa.eu/tracesnt/eucites/v01"
+           elementFormDefault="qualified">
+
+    <xs:import schemaLocation="../CITESEPermit/CITESEPermit_2p0.xsd" namespace="urn:un:unece:uncefact:data:standard:CITESEPermit:2"/>
+    <xs:import schemaLocation="../../base/v4/base.xsd" namespace="http://ec.europa.eu/sanco/tracesnt/base/v4"/>
+
+    <!--  WSDL Messages element definitions -->
+    <xs:element name="SendPermitRequestMessage" type="eucites:SendPermitRequestMessage"/>
+    <xs:element name="GetPermitRequestMessage" type="eucites:GetPermitRequestMessage"/>
+    <xs:element name="GetPermitResponseMessage" type="eucites:GetPermitResponseMessage"/>
+    <xs:element name="GetPermitStatusRequestMessage" type="eucites:GetPermitStatusRequestMessage"/>
+    <xs:element name="GetPermitStatusResponseMessage" type="eucites:GetPermitStatusResponseMessage"/>
+    <xs:element name="SendClearedQuantitiesRequestMessage" type="eucites:SendClearedQuantitiesRequestRequestMessage" />
+    <xs:element name="GetClearedQuantitiesRequestMessage" type="eucites:GetClearedQuantitiesRequestMessage" />
+    <xs:element name="GetClearedQuantitiesResponseMessage" type="eucites:GetClearedQuantitiesResponseMessage" />
+    <xs:element name="EUCITESWebServiceFault" type="eucites:EUCITESWebServiceFault" />
+    <xs:element name="EUCITESResponseMessage" type="eucites:EUCITESResponseMessage" />
+
+    <xs:element name="GetServerStatusRequestRequestMessage" type="eucites:GetServerStatusRequestRequestMessage" />
+    <xs:element name="SendTestMessageRequestRequestMessage" type="eucites:SendTestMessageRequestRequestMessage" />
+
+    <!-- TYPE DEFINITIONS -->
+
+    <xs:complexType name="GetServerStatusRequestRequestMessage">
+
+    </xs:complexType>
+
+    <xs:complexType name="SendTestMessageRequestRequestMessage">
+        <xs:sequence>
+            <xs:element name="message" type="xs:string" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="EUCITESResponseMessage">
+        <xs:sequence>
+            <xs:element name="response" type="eucites:StatusCode"/>
+            <xs:element name="info" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="warning" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="SendPermitRequestMessage">
+        <xs:sequence>
+            <xs:element name="action" type="eucites:PermitActionType" minOccurs="1" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>
+                        SUBMIT, CANCEL EUCITES permit
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+
+            <xs:element name="rejectionReason" type="eucites:EUCitesRejectionReasonType" minOccurs="0" maxOccurs="1"> </xs:element>
+
+            <xs:element name="euCitesPermitDocumentType" type="eucites:EUCitesPermitDocumentType" minOccurs="1" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>
+                        EUCites permit type (Import, Export, ReExport, Other).
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+
+            <xs:element name="permitNumber" type="xs:string" minOccurs="0" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>
+                        Required for Link and Paper Based Permit
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+
+            <xs:element name="token" type="eucites:TokenType" minOccurs="0" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>
+                        Token value.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+
+            <xs:element name="onBehalfOfCountry" type="base:CountryType" minOccurs="0" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>
+                        When creating a permit on behalf of a third non-Eu country
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+
+            <xs:element name="structuredEUCitesPermit" type="epermit:CITESEPermitType" minOccurs="0" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>
+                        EUCites permit. Structured using UN/CEFACT Cites Model.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+
+            <xs:element name="euCitesPermitFile" minOccurs="0" maxOccurs="1" type="xs:base64Binary">
+                <xs:annotation>
+                    <xs:documentation>
+                        EUCites permit. Structured using UN/CEFACT Cites Model.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+
+            <xs:element name="euCitesPermitExternalLink" minOccurs="0" maxOccurs="1" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>
+                       EUCites permit in a external system.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="GetPermitRequestMessage">
+        <xs:sequence>
+            <xs:element name="euCitesPermitIdentifier" type="eucites:EUCitesPermitIdentifier" minOccurs="1" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="GetPermitResponseMessage">
+        <xs:sequence>
+            <xs:element name="euCitesPermit" type="epermit:CITESEPermitType">
+                <xs:annotation>
+                    <xs:documentation>
+                        Requested EUCites permit. UN/CEFACT Cites Model.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="euCitesPermitStatus" type="eucites:EUCitesPermitStatusType">
+                <xs:annotation>
+                    <xs:documentation>
+                        Requested EUCites permit statuses.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="GetPermitStatusRequestMessage">
+        <xs:sequence>
+            <xs:element name="euCitesPermitIdentifier" type="eucites:EUCitesPermitIdentifier" minOccurs="1" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="GetPermitStatusResponseMessage">
+        <xs:sequence>
+            <xs:element name="euCitesPermitStatus" type="eucites:EUCitesPermitStatusType">
+                <xs:annotation>
+                    <xs:documentation>
+                        Requested EUCites permit status.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="SendClearedQuantitiesRequestRequestMessage">
+        <xs:sequence>
+            <xs:element name="action" type="eucites:ClearanceActionType" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="euCitesPermitIdentifier" type="eucites:EUCitesPermitIdentifier" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="clearances" type="eucites:EUCitesClearancePerDeclarationType" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="GetClearedQuantitiesRequestMessage">
+        <xs:sequence>
+            <xs:element name="euCitesPermitIdentifier" type="eucites:EUCitesPermitIdentifier" minOccurs="1" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="GetClearedQuantitiesResponseMessage">
+        <xs:sequence>
+            <xs:element name="euCitesClearedQuantities" type="eucites:EUCitesClearancePerDeclarationType" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- COMMON TYPES DEFINITIONS -->
+
+    <xs:complexType name="EUCitesPermitIdentifier">
+        <xs:sequence>
+            <xs:element name="euCitesPermitNumber" type="xs:string" minOccurs="1" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>
+                        EUCites permit number.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+
+            <xs:element name="euCitesPermitDocumentType" type="eucites:EUCitesPermitDocumentType" minOccurs="0" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>
+                        EUCites permit type (Import, Export, ReExport, Other).
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+
+            <xs:element name="euCitesPermitCountry" type="base:CountryType" minOccurs="1" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>
+                        EUCites permit country.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+
+            <xs:element name="token" type="eucites:TokenType" minOccurs="0" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>
+                        Token value. Required when permit type is Export or Re-Export.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="EUCitesPermitStatusType">
+        <xs:sequence>
+            <xs:element name="validity" type="eucites:PermitStatusValidityType" minOccurs="1" />
+            <xs:element name="availability" type="eucites:PermitStatusAvailabilityType" minOccurs="0" />
+            <xs:element name="clearance" type="eucites:PermitStatusClearanceType" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="PermitStatusValidityType">
+        <xs:sequence>
+            <xs:element name="status" type="eucites:ValidityStatusType" />
+            <xs:element name="date" type="xs:dateTime" />
+            <xs:element name="version" type="xs:string" />
+            <xs:element name="reason" type="xs:string" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="ValidityStatusType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="APPROVED"/>
+            <xs:enumeration value="REJECTED"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="PermitStatusClearanceType">
+        <xs:sequence>
+            <xs:element name="date" type="xs:dateTime" />
+            <xs:element name="identification" type="xs:string" />
+            <xs:element name="decision" type="eucites:ClearanceStateType" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="PermitStatusAvailabilityType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="AVAILABLE"/>
+            <xs:enumeration value="NOT_AVAILABLE"/>
+            <xs:enumeration value="NOT_APPLICABLE"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="EUCitesClearancePerDeclarationType">
+        <xs:sequence>
+            <xs:element name="customsOfficeReferenceNumber" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>
+                        A customs office reference number as defined in :
+                        http://ec.europa.eu/taxation_customs/dds2/col/col_home.jsp?Lang=en
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+
+            <xs:element name="declarationReferenceNumber" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>
+                        The identification number of the Single Administrative Document associated with this clearance action.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+
+            <xs:element name="clearedGoods" type="eucites:ClearedGoodsType" />
+
+            <xs:element name="declarationClearanceState" type="eucites:ClearanceStateType" />
+
+            <xs:element name="clearanceComment" type="eucites:EditorialComment" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="EditorialComment">
+        <xs:annotation>
+            <xs:documentation>
+                A version of a licence may have an editorial comment associated to it, explaining the reason for an update for example.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1" />
+            <xs:maxLength value="512" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="ClearedGoodsType">
+        <xs:sequence>
+            <xs:element name="specieScientificName" type="xs:string" />
+            <xs:element name="unit" type="eucites:EUCitesUnityCode" />
+            <xs:element name="quantity" type="xs:string" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="ClearanceStateType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="CLEARED">
+                <xs:annotation>
+                    <xs:documentation>
+                        The customs office has cleared the goods for free circulation.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+
+            <xs:enumeration value="DISPOSED">
+                <xs:annotation>
+                    <xs:documentation>
+                        The customs office has disposed (by any means) the goods
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="TokenType">
+        <xs:sequence>
+            <xs:element name="value" type="xs:string" minOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>
+                        The TOKEN string (to be introduced by the Importer to prove ownership of the certificate)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="EUCITESWebServiceFault">
+        <xs:annotation>
+            <xs:documentation>
+                Default EUCites Response. Status Code and Erro Messaage
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="statusCode" type="eucites:StatusCode">
+                <xs:annotation>
+                    <xs:documentation>
+                        Result Status Code, if it's an error, errorMessage will be included.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="errorMessage" type="xs:string" minOccurs="0" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>
+                        Generated error message during process.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="EUCitesUnityCode">
+        <xs:annotation>
+            <xs:documentation>Unity Code</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[a-zA-Z]{3}" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="PermitActionType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="SUBMIT">
+                <xs:annotation>
+                    <xs:documentation>
+                        Create / Update a permit
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+
+            <xs:enumeration value="CANCEL">
+                <xs:annotation>
+                    <xs:documentation>
+                        Cancel existent permit [if not consumed].
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="ClearanceActionType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="SUBMIT">
+                <xs:annotation>
+                    <xs:documentation>
+                        Create / Update clearance
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+
+            <xs:enumeration value="DELETE">
+                <xs:annotation>
+                    <xs:documentation>
+                        Delete existent clearance.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+
+
+    <xs:simpleType name="EUCitesPermitDocumentType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="IMPORT">
+                <xs:annotation>
+                    <xs:documentation>
+                        Import Permit Type
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+
+            <xs:enumeration value="EXPORT">
+                <xs:annotation>
+                    <xs:documentation>
+                        Export permit Type.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+
+            <xs:enumeration value="RE_EXPORT">
+                <xs:annotation>
+                    <xs:documentation>
+                        RE-Export permit Type.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+
+            <xs:enumeration value="OTHER">
+                <xs:annotation>
+                    <xs:documentation>
+                        Other permit Type.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="StatusCode">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="TNT_EUCITES_100"> <xs:annotation> <xs:documentation> Ok </xs:documentation> </xs:annotation> </xs:enumeration>
+            <xs:enumeration value="TNT_EUCITES_101"> <xs:annotation> <xs:documentation> Accepted with Warnings </xs:documentation> </xs:annotation> </xs:enumeration>
+            <xs:enumeration value="TNT_EUCITES_201"> <xs:annotation> <xs:documentation> Permit Already Created. The permit Will be amended.</xs:documentation> </xs:annotation> </xs:enumeration>
+            <xs:enumeration value="TNT_EUCITES_202"> <xs:annotation> <xs:documentation> Previous Version not found.</xs:documentation> </xs:annotation> </xs:enumeration>
+            <xs:enumeration value="TNT_EUCITES_203"> <xs:annotation> <xs:documentation> Export Permit has been cancelled.</xs:documentation> </xs:annotation> </xs:enumeration>
+            <xs:enumeration value="TNT_EUCITES_204"> <xs:annotation> <xs:documentation> There are clearance(s) previously created for this permit.</xs:documentation> </xs:annotation> </xs:enumeration>
+            <xs:enumeration value="TNT_EUCITES_300"> <xs:annotation> <xs:documentation> Invalid Export Permit.</xs:documentation> </xs:annotation> </xs:enumeration>
+            <xs:enumeration value="TNT_EUCITES_301"> <xs:annotation> <xs:documentation> Permit Not Found.</xs:documentation> </xs:annotation> </xs:enumeration>
+            <xs:enumeration value="TNT_EUCITES_302"> <xs:annotation> <xs:documentation> Permit Already Cleared.</xs:documentation> </xs:annotation> </xs:enumeration>
+            <xs:enumeration value="TNT_EUCITES_303"> <xs:annotation> <xs:documentation> Quantity to be cleared exceed the maximum amount.</xs:documentation> </xs:annotation> </xs:enumeration>
+            <xs:enumeration value="TNT_EUCITES_304"> <xs:annotation> <xs:documentation> Export Permit Already Consumed.</xs:documentation> </xs:annotation> </xs:enumeration>
+            <xs:enumeration value="TNT_EUCITES_305"> <xs:annotation> <xs:documentation> Export Permit is Cancelled.</xs:documentation> </xs:annotation> </xs:enumeration>
+            <xs:enumeration value="TNT_EUCITES_306"> <xs:annotation> <xs:documentation> Permit Issued by another Authority.</xs:documentation> </xs:annotation> </xs:enumeration>
+            <xs:enumeration value="TNT_EUCITES_307"> <xs:annotation> <xs:documentation> Permit Number must be informed for External Link/Paper Permit.</xs:documentation> </xs:annotation> </xs:enumeration>
+            <xs:enumeration value="TNT_EUCITES_308"> <xs:annotation> <xs:documentation> Invalid Token.</xs:documentation> </xs:annotation> </xs:enumeration>
+            <xs:enumeration value="TNT_EUCITES_399"> <xs:annotation> <xs:documentation> Internal Exception.</xs:documentation> </xs:annotation> </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EUCitesRejectionReasonType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="001"> <xs:annotation> <xs:documentation> Invalid Specie </xs:documentation> </xs:annotation> </xs:enumeration>
+            <xs:enumeration value="002"> <xs:annotation> <xs:documentation> Expired </xs:documentation> </xs:annotation> </xs:enumeration>
+            <xs:enumeration value="003"> <xs:annotation> <xs:documentation> Other</xs:documentation> </xs:annotation> </xs:enumeration>
+            <!-- ... -->
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

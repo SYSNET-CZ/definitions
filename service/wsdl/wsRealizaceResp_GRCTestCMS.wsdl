@@ -1,0 +1,281 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="wsRealizaceCallback"
+	targetNamespace="urn:wsRealizaceCallback" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:sim="urn:wsRealizaceCallback">
+	<wsdl:types>
+		<xsd:schema 
+			xmlns:cds="http://www.cs.mfcr.cz/Schemas/CDS/Template"
+			elementFormDefault="qualified">
+			<xsd:annotation>
+				<xsd:documentation>Odpověď na zprávu LicRealizaceResp</xsd:documentation>
+			</xsd:annotation>
+			
+			<xsd:element name="LicRealizaceResp" type="SinWin_LicRealizaceResp_t">
+				<xsd:annotation>
+					<xsd:documentation>Odpověď na zprávu LicRealizaceResp</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+			<xsd:complexType name="SinWin_LicRealizaceResp_t">
+				<xsd:sequence>
+					<xsd:element name="verze" type="xsd:string" fixed="2.1">
+						<xsd:annotation>
+							<xsd:documentation>Verze zprávy č. 2.1</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="REQ" type="SinWin_LicRealizaceResp_REQ_t"
+						minOccurs="1" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>Záhlaví reportu</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="Realizace" type="SinWin_LicRealizaceResp_Realizace_t"
+						minOccurs="1" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>Seznam pohybů při realizacích licencí za dané období</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+
+			<xsd:complexType name="SinWin_LicRealizaceResp_REQ_t">
+				<xsd:sequence>
+					<xsd:element name="ReqId" type="SinWin_LicRealizaceResp_ReqId_t"
+						minOccurs="1" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>ID odpovědi</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="DatumCasOdpovedi"
+						type="SinWin_LicRealizaceResp_DatumCasOdpovedi_t" minOccurs="1"
+						maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>Datum a čas odeslání odpovědi
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+
+			<xsd:complexType name="SinWin_LicRealizaceResp_Realizace_t">
+				<xsd:sequence>
+					<xsd:element name="Pohyb" type="SinWin_LicRealizaceResp_Pohyb_t"
+						minOccurs="0" maxOccurs="unbounded">
+						<xsd:annotation>
+							<xsd:documentation>Jednotlivý pohyb na konkrétní licenci
+							</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+
+			<xsd:complexType name="SinWin_LicRealizaceResp_Pohyb_t">
+				<xsd:sequence>
+					<xsd:element name="ID" type="SinWin_LicRealizaceResp_Pohyb_ID_t"
+						minOccurs="1" maxOccurs="1">
+						<xsd:annotation>
+							<xsd:documentation>Jednoznačný identifikátor pohybu
+							</xsd:documentation>
+							<xsd:appinfo>
+								<cds:Info cds:SystemMetatype="Integer" />
+							</xsd:appinfo>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element minOccurs="0" maxOccurs="1" name="Errors"
+						type="ECS_LicRealizaceResp_Pohyb_Errors_t">
+						<xsd:annotation>
+							<xsd:documentation>Seznam chyb vzniklých při validaci a následném
+								zápisu do odpisového listu. Seznam obsahuje jak chyby
+								systémového
+								charakteru (např. nedostupnost zdroje), tak chyby
+								vyplývající z
+								obchodní logiky (např. překročení množství na
+								licenci).
+							</xsd:documentation>
+							<xsd:appinfo>
+								<cds:Info cds:IsGroup="1" cds:EN_Name="" cds:NA_Name="Seznam chyb"
+									cds:MinOccurs="0" cds:MaxOccurs="1" cds:Cond="O" />
+							</xsd:appinfo>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+
+			<xsd:complexType name="ECS_LicRealizaceResp_Pohyb_Errors_t">
+				<xsd:sequence>
+					<xsd:element minOccurs="1" maxOccurs="99" name="Error"
+						type="ECS_LicRealizaceResp_Pohyb_Error_t">
+						<xsd:annotation>
+							<xsd:documentation>Jednotlivá chyba</xsd:documentation>
+							<xsd:appinfo>
+								<cds:Info cds:IsGroup="1" cds:Cond="O" cds:NA_Name="Chyba"
+									cds:EN_Name="" cds:MinOccurs="1" cds:MaxOccurs="99" />
+							</xsd:appinfo>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+
+			<xsd:complexType name="ECS_LicRealizaceResp_Pohyb_Error_t">
+				<xsd:sequence>
+					<xsd:element minOccurs="1" maxOccurs="1" name="ErrCislo"
+						type="ErrCislo_t">
+						<xsd:annotation>
+							<xsd:documentation>Kód chyby</xsd:documentation>
+							<xsd:appinfo>
+								<cds:Info cds:Format="a14" cds:IsGroup="0" cds:Cond="R"
+									cds:SystemMetatype="String" cds:NA_Name="Kód chyby"
+									cds:EN_Name="" />
+							</xsd:appinfo>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element minOccurs="1" maxOccurs="1" name="ErrTypChyby"
+						type="ErrTypChyby_t">
+						<xsd:annotation>
+							<xsd:documentation>Typ chyby</xsd:documentation>
+							<xsd:appinfo>
+								<cds:Info cds:Format="a1" cds:IsGroup="0" cds:Cond="R"
+									cds:SystemMetatype="String" cds:NA_Name="Typ chyby"
+									cds:EN_Name="" />
+							</xsd:appinfo>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element minOccurs="0" maxOccurs="1" name="ErrTextZkr"
+						type="ErrTextZkr_t">
+						<xsd:annotation>
+							<xsd:documentation>Zkrácený text chyby</xsd:documentation>
+							<xsd:appinfo>
+								<cds:Info cds:Format="a250" cds:IsGroup="0" cds:Cond="R"
+									cds:SystemMetatype="String" cds:NA_Name="Zkrácený text chyby"
+									cds:EN_Name="" />
+							</xsd:appinfo>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+
+			<xsd:simpleType name="SinWin_LicRealizaceResp_ReqId_t">
+				<xsd:restriction base="xsd:string">
+					<xsd:maxLength value="50" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			
+			<xsd:simpleType name="SinWin_LicRealizaceResp_DatumCasReportu_t">
+				<xsd:restriction base="xsd:string">
+					<xsd:annotation>
+						<xsd:documentation>Datum a čas ve formátu: "YYYYMMDD HHmmss"
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:pattern value="[0-9]{8} [0-9]{6}" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			
+			<xsd:simpleType name="SinWin_LicRealizaceResp_DatumCasOdpovedi_t">
+				<xsd:restriction base="xsd:string">
+					<xsd:annotation>
+						<xsd:documentation>Datum a čas ve formátu: "YYYYMMDD HHmmss"
+						</xsd:documentation>
+					</xsd:annotation>
+					<xsd:pattern value="[0-9]{8} [0-9]{6}" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			
+			<xsd:simpleType name="SinWin_LicRealizaceResp_Pohyb_ID_t">
+				<xsd:restriction base="xsd:integer" />
+			</xsd:simpleType>
+			
+			<xsd:simpleType name="ErrCislo_t">
+				<xsd:restriction base="xsd:string">
+					<xsd:minLength value="1" />
+					<xsd:maxLength value="13" />
+					<xsd:pattern value="[A-Za-z]{1,8}[-]{1}[0-9]{4}" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			
+			<xsd:simpleType name="ErrTypChyby_t">
+				<xsd:restriction base="xsd:string">
+					<xsd:length value="1" />
+					<xsd:enumeration value="E">
+						<xsd:annotation>
+							<xsd:documentation>Error - nepropustná chyba, pohyb nebyl zaevidován</xsd:documentation>
+						</xsd:annotation>
+					</xsd:enumeration>
+					<xsd:enumeration value="W">
+						<xsd:annotation>
+							<xsd:documentation>Warning - propustná chyba, pohyb byl zaevidován, ale stojí za ruční kontrolu</xsd:documentation>
+						</xsd:annotation>
+					</xsd:enumeration>
+					<xsd:enumeration value="H">
+						<xsd:annotation>
+							<xsd:documentation>Hint - informativní hlášení, pohyb byl zaevidován</xsd:documentation>
+						</xsd:annotation>
+					</xsd:enumeration>
+				</xsd:restriction>
+			</xsd:simpleType>
+			
+			<xsd:simpleType name="ErrTextZkr_t">
+				<xsd:restriction base="xsd:string">
+					<xsd:minLength value="0" />
+					<xsd:maxLength value="250" />
+				</xsd:restriction>
+			</xsd:simpleType>
+			
+		</xsd:schema>
+		
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:wsRealizaceCallback">
+        	<xsd:element name="wsRealizaceCallbackResponse">
+        		<xsd:complexType>
+        			<xsd:sequence>
+        				<xsd:element name="out" type="xsd:string"></xsd:element>
+        			</xsd:sequence>
+        		</xsd:complexType>
+        	</xsd:element>
+        	<xsd:element name="wsRealizaceCallbackFault">
+        		<xsd:complexType>
+        			<xsd:sequence>
+        				<xsd:element name="wsRealizaceCallbackFault"  type="xsd:string">
+        				</xsd:element>
+        			</xsd:sequence>
+        		</xsd:complexType>
+        	</xsd:element></xsd:schema>
+    </wsdl:types>
+
+	<wsdl:message name="wsRealizaceCallbackRequest">
+		<wsdl:part name="parameters" element="LicRealizaceResp" />
+	</wsdl:message>
+
+	<wsdl:message name="wsRealizaceCallbackResponse">
+		<wsdl:part name="reply" element="sim:wsRealizaceCallbackResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="wsRealizaceCallbackFault">
+		<wsdl:part name="fault" element="sim:wsRealizaceCallbackFault"></wsdl:part>
+	</wsdl:message>
+	<wsdl:portType name="wsRealizaceCallbackSOAP">
+		<wsdl:operation name="wsRealizaceCallback">
+			<wsdl:input message="sim:wsRealizaceCallbackRequest" />
+			<wsdl:output message="sim:wsRealizaceCallbackResponse"></wsdl:output>
+            <wsdl:fault name="fault" message="sim:wsRealizaceCallbackFault"></wsdl:fault>
+        </wsdl:operation>
+	</wsdl:portType>
+
+	<wsdl:binding name="wsRealizaceCallbackSOAP" type="sim:wsRealizaceCallbackSOAP">
+		<soap:binding transport="http://schemas.xmlsoap.org/soap/http"
+			style="document" />
+		<wsdl:operation name="wsRealizaceCallback">
+			<soap:operation soapAction="" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+
+	<wsdl:service name="wsRealizaceCallback">
+		<wsdl:port name="wsRealizaceCallbackSOAP" binding="sim:wsRealizaceCallbackSOAP">
+			<soap:address location="http://10.253.129.94:3988/swcites-ms/" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

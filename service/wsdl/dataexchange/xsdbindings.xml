@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<jaxb:bindings xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" version="1.0">
+	<jaxb:globalBindings underscoreBinding="asCharInWord" />
+	<jaxb:bindings schemaLocation="CITESEPermit_2p0.xsd"
+		node="//xsd:schema[@targetNamespace='urn:un:unece:uncefact:data:standard:CITESEPermit:2']">
+		<jaxb:schemaBindings>
+			<jaxb:package name="ch.admin.ecites.webservice.dataexchange.generated.citesepermit.V2" />
+		</jaxb:schemaBindings>
+	</jaxb:bindings>
+	<jaxb:bindings schemaLocation="CITESEPermit_2p0_urn_un_unece_uncefact_data_standard_QualifiedDataType_2.xsd"
+		node="//xsd:schema[@targetNamespace='urn:un:unece:uncefact:data:standard:QualifiedDataType:2']">
+		<jaxb:schemaBindings>
+			<jaxb:package name="ch.admin.ecites.webservice.dataexchange.generated.qualifieddatatype.v2" />
+		</jaxb:schemaBindings>
+	</jaxb:bindings>
+	<jaxb:bindings schemaLocation="CITESEPermit_2p0_urn_un_unece_uncefact_data_standard_UnqualifiedDataType_13.xsd"
+		node="//xsd:schema[@targetNamespace='urn:un:unece:uncefact:data:standard:UnqualifiedDataType:13']">
+		<jaxb:schemaBindings>
+			<jaxb:package name="ch.admin.ecites.webservice.dataexchange.generated.unqualifieddatatype.v13" />
+		</jaxb:schemaBindings>
+	</jaxb:bindings>
+	<jaxb:bindings schemaLocation="CITESEPermit_2p0_urn_un_unece_uncefact_data_draft_ReusableAggregateBusinessInformationEntity_1.xsd"
+		node="//xsd:schema[@targetNamespace='urn:un:unece:uncefact:data:draft:ReusableAggregateBusinessInformationEntity:1']">
+		<jaxb:schemaBindings>
+			<jaxb:package name="ch.admin.ecites.webservice.dataexchange.generated.reusableaggregatebusinessinformationentity.v1" />
+		</jaxb:schemaBindings>
+	</jaxb:bindings>		
+</jaxb:bindings>

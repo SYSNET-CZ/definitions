@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<jaxws:bindings xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+	xmlns:jaxws="http://java.sun.com/xml/ns/jaxws" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	wsdlLocation="CitesDataExchange_v_0_3.wsdl">
+	<jaxws:package name="ch.admin.ecites.webservice.dataexchange.generated.service.v1" />
+	<!-- jaxws:enableAsyncMapping>true</jaxws:enableAsyncMapping -->
+	<jaxb:bindings schemaLocation="CitesDataExchange_v_0_3.wsdl"
+		node="//xsd:schema[@targetNamespace='urn:CitesDataExchange/v1/']">
+		<jaxb:schemaBindings>
+			<jaxb:package name="ch.admin.ecites.webservice.dataexchange.generated.dataexchange.v1" />
+		</jaxb:schemaBindings>
+	</jaxb:bindings>		
+</jaxws:bindings>

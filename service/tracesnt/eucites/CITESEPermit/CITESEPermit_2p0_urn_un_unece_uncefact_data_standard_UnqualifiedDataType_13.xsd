@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:udt="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:13"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:clm63055="urn:un:unece:uncefact:codelist:standard:6:3055:D12A"
+    xmlns:clm6Recommendation20="urn:un:unece:uncefact:codelist:standard:6:Recommendation20:8"
+    xmlns:ids5ISO316612A="urn:un:unece:uncefact:identifierlist:standard:5:ISO316612A:SecondEdition2006VI-13"
+    targetNamespace="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:13"
+    elementFormDefault="qualified"
+    version="13.0">
+  <xs:import namespace="urn:un:unece:uncefact:codelist:standard:6:3055:D12A" schemaLocation="CITESEPermit_2p0_urn_un_unece_uncefact_codelist_standard_6_3055_D12A.xsd"/>
+  <xs:import namespace="urn:un:unece:uncefact:codelist:standard:6:Recommendation20:8" schemaLocation="CITESEPermit_2p0_urn_un_unece_uncefact_codelist_standard_6_Recommendation20_8.xsd"/>
+  <xs:import namespace="urn:un:unece:uncefact:identifierlist:standard:5:ISO316612A:SecondEdition2006VI-13" schemaLocation="CITESEPermit_2p0_urn_un_unece_uncefact_identifierlist_standard_5_ISO316612A_SecondEdition2006VI-13.xsd"/>
+  <xs:complexType name="CodeType">
+    <xs:simpleContent>
+      <xs:extension base="xs:token">
+        <xs:attribute name="listID" type="xs:token" use="optional"/>
+        <xs:attribute name="listAgencyID" type="clm63055:AgencyIdentificationCodeContentType" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:simpleType name="DateTimeType">
+    <xs:restriction base="xs:dateTime"/>
+  </xs:simpleType>
+  <xs:complexType name="IDType">
+    <xs:simpleContent>
+      <xs:extension base="xs:token">
+        <xs:attribute name="schemeID" type="xs:token" use="optional"/>
+        <xs:attribute name="schemeAgencyID" type="clm63055:AgencyIdentificationCodeContentType" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:simpleType name="IndicatorType">
+    <xs:restriction base="xs:boolean">
+      <xs:pattern value="false"/>
+      <xs:pattern value="true"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="QuantityType">
+    <xs:simpleContent>
+      <xs:extension base="xs:decimal">
+        <xs:attribute name="unitCode" type="clm6Recommendation20:MeasurementUnitCommonCodeContentType" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="TextType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="languageID" type="xs:language" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+</xs:schema>

@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="urn:PermitProxyCh"
+	xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="urn:PermitProxyCh"
+	xmlns:intf="urn:PermitProxyCh" xmlns:tns1="urn:un:unece:uncefact:data:draft:CBFShip:1"
+	xmlns:tns2="urn:un:unece:uncefact:data:draft:ReusableAggregateBusinessInformationEntity:1"
+	xmlns:tns3="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:7"
+	xmlns:tns4="urn:un:unece:uncefact:data:draft:QualifiedDataType:1"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+	<wsdl:types>
+		<schema elementFormDefault="qualified" targetNamespace="urn:PermitProxyCh"
+			xmlns="http://www.w3.org/2001/XMLSchema">
+			<import namespace="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:7" />
+			<import
+				namespace="urn:un:unece:uncefact:data:draft:ReusableAggregateBusinessInformationEntity:1" />
+			<import namespace="urn:un:unece:uncefact:data:draft:CBFShip:1" />
+			<import namespace="urn:un:unece:uncefact:data:draft:QualifiedDataType:1" />
+			<element name="GetPermit">
+				<complexType>
+					<sequence>
+						<element name="ID" type="xsd:string" />
+						<element name="Token" type="xsd:string" />
+					</sequence>
+				</complexType>
+			</element>
+			<element name="GetPermitResponse">
+				<complexType>
+					<sequence>
+						<element name="CBFShip" type="tns1:CBFShipType" />
+					</sequence>
+				</complexType>
+			</element>
+			<complexType name="ArrayOf_tns3_TextType">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="item"
+						type="tns3:TextType" />
+				</sequence>
+			</complexType>
+		</schema>
+		<schema elementFormDefault="qualified"
+			targetNamespace="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:7"
+			xmlns="http://www.w3.org/2001/XMLSchema">
+			<import
+				namespace="urn:un:unece:uncefact:data:draft:ReusableAggregateBusinessInformationEntity:1" />
+			<import namespace="urn:PermitProxyCh" />
+			<import namespace="urn:un:unece:uncefact:data:draft:CBFShip:1" />
+			<import namespace="urn:un:unece:uncefact:data:draft:QualifiedDataType:1" />
+			<complexType name="IDType">
+				<simpleContent>
+					<extension base="xsd:token">
+						<attribute name="_value" type="xsd:token" />
+					</extension>
+				</simpleContent>
+			</complexType>
+			<complexType name="TextType">
+				<simpleContent>
+					<extension base="xsd:string">
+						<attribute name="_value" type="xsd:string" />
+					</extension>
+				</simpleContent>
+			</complexType>
+			<complexType name="CodeType">
+				<simpleContent>
+					<extension base="xsd:token">
+						<attribute name="_value" type="xsd:token" />
+					</extension>
+				</simpleContent>
+			</complexType>
+			<complexType name="QuantityType">
+				<simpleContent>
+					<extension base="xsd:decimal">
+						<attribute name="_value" type="xsd:decimal" />
+					</extension>
+				</simpleContent>
+			</complexType>
+		</schema>
+		<schema elementFormDefault="qualified"
+			targetNamespace="urn:un:unece:uncefact:data:draft:ReusableAggregateBusinessInformationEntity:1"
+			xmlns="http://www.w3.org/2001/XMLSchema">
+			<import namespace="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:7" />
+			<import namespace="urn:PermitProxyCh" />
+			<import namespace="urn:un:unece:uncefact:data:draft:CBFShip:1" />
+			<import namespace="urn:un:unece:uncefact:data:draft:QualifiedDataType:1" />
+			<complexType name="DocumentVersionType">
+				<sequence>
+					<element maxOccurs="1" minOccurs="0" name="ID" type="tns3:IDType" />
+					<element maxOccurs="1" minOccurs="0" name="IssueDateTime"
+						nillable="true" type="xsd:dateTime" />
+				</sequence>
+			</complexType>
+			<complexType name="DocumentContextParameterType">
+				<sequence>
+					<element maxOccurs="1" minOccurs="0" name="ID" type="tns3:IDType" />
+					<element maxOccurs="1" minOccurs="0" name="Value" nillable="true"
+						type="tns3:TextType" />
+					<element maxOccurs="1" minOccurs="0" name="SpecifiedDocumentVersion"
+						nillable="true" type="tns2:DocumentVersionType" />
+				</sequence>
+			</complexType>
+			<complexType name="ExchangedDocumentContextType">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0"
+						name="BusinessProcessSpecifiedDocumentContextParameter" nillable="true"
+						type="tns2:DocumentContextParameterType" />
+					<element maxOccurs="unbounded" minOccurs="0"
+						name="BIMSpecifiedDocumentContextParameter" type="tns2:DocumentContextParameterType" />
+				</sequence>
+			</complexType>
+			<complexType name="SpecifiedPeriodType">
+				<sequence>
+					<element maxOccurs="1" minOccurs="0" name="StartDateTime"
+						nillable="true" type="xsd:dateTime" />
+					<element maxOccurs="1" minOccurs="0" name="EndDateTime"
+						nillable="true" type="xsd:dateTime" />
+				</sequence>
+			</complexType>
+			<complexType name="ReferencedDocumentType">
+				<sequence>
+					<element maxOccurs="1" minOccurs="0" name="IssueDateTime"
+						nillable="true" type="xsd:dateTime" />
+					<element maxOccurs="1" minOccurs="0" name="TypeCode"
+						nillable="true" type="tns4:DocumentCodeType" />
+					<element maxOccurs="unbounded" minOccurs="0" name="ID"
+						type="tns3:IDType" />
+					<element maxOccurs="unbounded" minOccurs="0" name="Name"
+						nillable="true" type="tns3:TextType" />
+					<element maxOccurs="1" minOccurs="0" name="EffectiveSpecifiedPeriod"
+						nillable="true" type="tns2:SpecifiedPeriodType" />
+				</sequence>
+			</complexType>
+			<complexType name="LogisticsLocationType">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ID"
+						type="tns3:IDType" />
+					<element maxOccurs="unbounded" minOccurs="0" name="Name"
+						nillable="true" type="tns3:TextType" />
+				</sequence>
+			</complexType>
+			<complexType name="TradeCountryType">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ID"
+						type="tns3:IDType" />
+					<element maxOccurs="unbounded" minOccurs="0" name="Name"
+						nillable="true" type="tns3:TextType" />
+					<element maxOccurs="1" minOccurs="0"
+						name="SubordinateTradeCountrySubDivision" nillable="true"
+						type="impl:ArrayOf_tns3_TextType" />
+				</sequence>
+			</complexType>
+			<complexType name="TradeAddressType">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="PostcodeCode"
+						nillable="true" type="tns3:CodeType" />
+					<element maxOccurs="1" minOccurs="0" name="PostOfficeBox"
+						nillable="true" type="tns3:TextType" />
+					<element maxOccurs="unbounded" minOccurs="0" name="StreetName"
+						nillable="true" type="tns3:TextType" />
+					<element maxOccurs="1" minOccurs="0" name="CityName"
+						nillable="true" type="tns3:TextType" />
+					<element maxOccurs="1" minOccurs="0"
+						name="CountryIdentificationTradeCountry" nillable="true"
+						type="tns2:TradeCountryType" />
+				</sequence>
+			</complexType>
+			<complexType name="RepresentativePersonType">
+				<sequence>
+					<element maxOccurs="1" minOccurs="0" name="Name" nillable="true"
+						type="tns3:TextType" />
+				</sequence>
+			</complexType>
+			<complexType name="AuthoritativeSignatoryPersonType">
+				<sequence>
+					<element maxOccurs="1" minOccurs="0" name="Name" nillable="true"
+						type="tns3:TextType" />
+				</sequence>
+			</complexType>
+			<complexType name="TradePartyType">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ID"
+						type="tns3:IDType" />
+					<element maxOccurs="1" minOccurs="0" name="Name" nillable="true"
+						type="tns3:TextType" />
+					<element maxOccurs="1" minOccurs="0" name="PostalTradeAddress"
+						nillable="true" type="tns2:TradeAddressType" />
+					<element maxOccurs="1" minOccurs="0"
+						name="SpecifiedRepresentativePerson" nillable="true"
+						type="tns2:RepresentativePersonType" />
+					<element maxOccurs="unbounded" minOccurs="0"
+						name="SpecifiedAuthoritativeSignatoryPerson" nillable="true"
+						type="tns2:AuthoritativeSignatoryPersonType" />
+				</sequence>
+			</complexType>
+			<complexType name="DocumentAuthenticationType">
+				<sequence>
+					<element maxOccurs="1" minOccurs="0" name="TypeCode"
+						nillable="true" type="tns4:GovernmentActionCodeType" />
+					<element maxOccurs="unbounded" minOccurs="0" name="ID"
+						type="tns3:IDType" />
+					<element maxOccurs="1" minOccurs="0" name="Statement"
+						nillable="true" type="tns3:TextType" />
+					<element maxOccurs="1" minOccurs="0" name="ProviderTradeParty"
+						nillable="true" type="tns2:TradePartyType" />
+				</sequence>
+			</complexType>
+			<complexType name="ExchangedDocumentType">
+				<sequence>
+					<element maxOccurs="1" minOccurs="0" name="ID" type="tns3:IDType" />
+					<element maxOccurs="unbounded" minOccurs="0" name="Name"
+						nillable="true" type="tns3:TextType" />
+					<element maxOccurs="1" minOccurs="0" name="TypeCode"
+						nillable="true" type="tns4:DocumentCodeType" />
+					<element maxOccurs="1" minOccurs="0" name="IssueDateTime"
+						nillable="true" type="xsd:dateTime" />
+					<element maxOccurs="1" minOccurs="0" name="CopyIndicator"
+						nillable="true" type="xsd:boolean" />
+					<element maxOccurs="1" minOccurs="0" name="Purpose"
+						nillable="true" type="tns3:TextType" />
+					<element maxOccurs="unbounded" minOccurs="0" name="PurposeCode"
+						nillable="true" type="tns3:CodeType" />
+					<element maxOccurs="unbounded" minOccurs="0" name="Information"
+						nillable="true" type="tns3:TextType" />
+					<element maxOccurs="unbounded" minOccurs="0"
+						name="ReferenceReferencedDocument" nillable="true"
+						type="tns2:ReferencedDocumentType" />
+					<element maxOccurs="1" minOccurs="0" name="EffectiveSpecifiedPeriod"
+						nillable="true" type="tns2:SpecifiedPeriodType" />
+					<element maxOccurs="1" minOccurs="0" name="IssueLogisticsLocation"
+						nillable="true" type="tns2:LogisticsLocationType" />
+					<element maxOccurs="1" minOccurs="0"
+						name="FirstSignatoryDocumentAuthentication" nillable="true"
+						type="tns2:DocumentAuthenticationType" />
+					<element maxOccurs="1" minOccurs="0"
+						name="SecondSignatoryDocumentAuthentication" nillable="true"
+						type="tns2:DocumentAuthenticationType" />
+					<element maxOccurs="1" minOccurs="0"
+						name="ThirdSignatoryDocumentAuthentication" nillable="true"
+						type="tns2:DocumentAuthenticationType" />
+					<element maxOccurs="1" minOccurs="0"
+						name="FourthSignatoryDocumentAuthentication" nillable="true"
+						type="tns2:DocumentAuthenticationType" />
+				</sequence>
+			</complexType>
+			<complexType name="TransportEventType">
+				<sequence>
+					<element maxOccurs="1" minOccurs="0" name="ActualOccurrenceDateTime"
+						nillable="true" type="xsd:dateTime" />
+					<element maxOccurs="1" minOccurs="0" name="InspectedUnitQuantity"
+						nillable="true" type="tns3:QuantityType" />
+					<element maxOccurs="1" minOccurs="0"
+						name="OccurrenceLogisticsLocation" nillable="true"
+						type="tns2:LogisticsLocationType" />
+					<element maxOccurs="unbounded" minOccurs="0"
+						name="CertifyingTradeParty" nillable="true" type="tns2:TradePartyType" />
+				</sequence>
+			</complexType>
+			<complexType name="LogisticsPackageType">
+				<sequence>
+					<element maxOccurs="1" minOccurs="0" name="ItemQuantity"
+						nillable="true" type="tns3:QuantityType" />
+				</sequence>
+			</complexType>
+			<complexType name="TradeProductType">
+				<sequence>
+					<element maxOccurs="1" minOccurs="0" name="SellerAssignedID"
+						nillable="true" type="tns3:IDType" />
+					<element maxOccurs="unbounded" minOccurs="0" name="Description"
+						nillable="true" type="tns3:TextType" />
+					<element maxOccurs="unbounded" minOccurs="0" name="TypeCode"
+						nillable="true" type="tns3:CodeType" />
+					<element maxOccurs="unbounded" minOccurs="0" name="CommonName"
+						nillable="true" type="tns3:TextType" />
+					<element maxOccurs="unbounded" minOccurs="0" name="ScientificName"
+						nillable="true" type="tns3:TextType" />
+				</sequence>
+			</complexType>
+			<complexType name="SupplyChainTradeLineItemType">
+				<sequence>
+					<element maxOccurs="1" minOccurs="0" name="TypeCode"
+						nillable="true" type="tns4:GoodsTypeCodeType" />
+					<element maxOccurs="1" minOccurs="0" name="TypeExtensionCode"
+						nillable="true" type="tns4:GoodsTypeExtensionCodeType" />
+					<element maxOccurs="1" minOccurs="0" name="SpecifiedTradeProduct"
+						nillable="true" type="tns2:TradeProductType" />
+				</sequence>
+			</complexType>
+			<complexType name="CrossBorderGovernmentProcedureType">
+				<sequence>
+					<element maxOccurs="1" minOccurs="0" name="UsedToDateQuotaQuantity"
+						nillable="true" type="tns3:QuantityType" />
+					<element maxOccurs="1" minOccurs="0" name="AnnualQuotaQuantity"
+						nillable="true" type="tns3:QuantityType" />
+					<element maxOccurs="1" minOccurs="0" name="AcquisitionDateTime"
+						nillable="true" type="xsd:dateTime" />
+					<element maxOccurs="unbounded" minOccurs="0"
+						name="PreviousReferencedDocument" nillable="true"
+						type="tns2:ReferencedDocumentType" />
+				</sequence>
+			</complexType>
+			<complexType name="SupplyChainConsignmentItemType">
+				<sequence>
+					<element maxOccurs="unbounded" minOccurs="0" name="ID"
+						type="tns3:IDType" />
+					<element maxOccurs="1" minOccurs="0" name="OriginTradeCountry"
+						nillable="true" type="tns2:TradeCountryType" />
+					<element maxOccurs="1" minOccurs="0" name="ExportTradeCountry"
+						nillable="true" type="tns2:TradeCountryType" />
+					<element maxOccurs="unbounded" minOccurs="0"
+						name="AssociatedReferencedDocument" nillable="true"
+						type="tns2:ReferencedDocumentType" />
+					<element maxOccurs="unbounded" minOccurs="0"
+						name="TransportLogisticsPackage" nillable="true"
+						type="tns2:LogisticsPackageType" />
+					<element maxOccurs="unbounded" minOccurs="0"
+						name="IncludedSupplyChainTradeLineItem" nillable="true"
+						type="tns2:SupplyChainTradeLineItemType" />
+					<element maxOccurs="unbounded" minOccurs="0"
+						name="ExaminationTransportEvent" nillable="true"
+						type="tns2:TransportEventType" />
+					<element maxOccurs="1" minOccurs="0"
+						name="ApplicableCrossBorderGovernmentProcedure" nillable="true"
+						type="tns2:CrossBorderGovernmentProcedureType" />
+				</sequence>
+			</complexType>
+			<complexType name="SupplyChainConsignmentType">
+				<sequence>
+					<element maxOccurs="1" minOccurs="0" name="ConsignorTradeParty"
+						nillable="true" type="tns2:TradePartyType" />
+					<element maxOccurs="1" minOccurs="0" name="ConsigneeTradeParty"
+						nillable="true" type="tns2:TradePartyType" />
+					<element maxOccurs="1" minOccurs="0"
+						name="TransportContractReferencedDocument" nillable="true"
+						type="tns2:ReferencedDocumentType" />
+					<element maxOccurs="unbounded" minOccurs="0"
+						name="ExaminationTransportEvent" nillable="true"
+						type="tns2:TransportEventType" />
+					<element maxOccurs="unbounded" minOccurs="0"
+						name="IncludedSupplyChainConsignmentItem" nillable="true"
+						type="tns2:SupplyChainConsignmentItemType" />
+					<element maxOccurs="1" minOccurs="0" name="ImportTradeCountry"
+						nillable="true" type="tns2:TradeCountryType" />
+				</sequence>
+			</complexType>
+		</schema>
+		<schema elementFormDefault="qualified"
+			targetNamespace="urn:un:unece:uncefact:data:draft:QualifiedDataType:1"
+			xmlns="http://www.w3.org/2001/XMLSchema">
+			<import namespace="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:7" />
+			<import
+				namespace="urn:un:unece:uncefact:data:draft:ReusableAggregateBusinessInformationEntity:1" />
+			<import namespace="urn:PermitProxyCh" />
+			<import namespace="urn:un:unece:uncefact:data:draft:CBFShip:1" />
+			<complexType name="DocumentCodeType">
+				<simpleContent>
+					<extension base="xsd:string">
+						<attribute name="_value" type="xsd:string" />
+					</extension>
+				</simpleContent>
+			</complexType>
+			<complexType name="GovernmentActionCodeType">
+				<simpleContent>
+					<extension base="xsd:string">
+						<attribute name="_value" type="xsd:string" />
+					</extension>
+				</simpleContent>
+			</complexType>
+			<complexType name="GoodsTypeCodeType">
+				<simpleContent>
+					<extension base="xsd:string">
+						<attribute name="_value" type="xsd:string" />
+					</extension>
+				</simpleContent>
+			</complexType>
+			<complexType name="GoodsTypeExtensionCodeType">
+				<simpleContent>
+					<extension base="xsd:string">
+						<attribute name="_value" type="xsd:string" />
+					</extension>
+				</simpleContent>
+			</complexType>
+		</schema>
+		<schema elementFormDefault="qualified"
+			targetNamespace="urn:un:unece:uncefact:data:draft:CBFShip:1" xmlns="http://www.w3.org/2001/XMLSchema">
+			<import namespace="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:7" />
+			<import
+				namespace="urn:un:unece:uncefact:data:draft:ReusableAggregateBusinessInformationEntity:1" />
+			<import namespace="urn:PermitProxyCh" />
+			<import namespace="urn:un:unece:uncefact:data:draft:QualifiedDataType:1" />
+			<complexType name="CBFShipType">
+				<sequence>
+					<element name="SpecifiedExchangedDocumentContext" nillable="true"
+						type="tns2:ExchangedDocumentContextType" />
+					<element name="HeaderExchangedDocument" nillable="true"
+						type="tns2:ExchangedDocumentType" />
+					<element name="SpecifiedSupplyChainConsignment" nillable="true"
+						type="tns2:SupplyChainConsignmentType" />
+				</sequence>
+			</complexType>
+		</schema>
+	</wsdl:types>
+
+	<wsdl:message name="GetPermitRequest">
+		<wsdl:part element="impl:GetPermit" name="parameters"></wsdl:part>
+	</wsdl:message>
+
+	<wsdl:message name="GetPermitResponse">
+		<wsdl:part element="impl:GetPermitResponse" name="parameters">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:portType name="PermitProxyCh">
+		<wsdl:operation name="GetPermit">
+			<wsdl:input message="intf:GetPermitRequest" name="GetPermitRequest">
+			</wsdl:input>
+			<wsdl:output message="intf:GetPermitResponse" name="GetPermitResponse">
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:portType>
+
+	<wsdl:binding name="PermitProxyChSoapBinding" type="intf:PermitProxyCh">
+		<wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="GetPermit">
+			<wsdlsoap:operation soapAction="urn:PermitProxyCh" />
+			<wsdl:input name="GetPermitRequest">
+				<wsdlsoap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="GetPermitResponse">
+				<wsdlsoap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+
+	<wsdl:service name="PermitProxyChService">
+		<wsdl:port binding="intf:PermitProxyChSoapBinding" name="PermitProxyCh">
+			<wsdlsoap:address location="http://service.cites.cz/proxy-ch/services/permit" />
+		</wsdl:port>
+	</wsdl:service>
+
+</wsdl:definitions>

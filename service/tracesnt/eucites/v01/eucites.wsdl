@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                  xmlns:base="http://ec.europa.eu/sanco/tracesnt/base/v4"
+                  xmlns:eucites="http://ec.europa.eu/tracesnt/eucites/v01"
+                  targetNamespace="http://ec.europa.eu/tracesnt/eucites/v01">
+
+    <wsdl:import location="../../base/v4/base.wsdl" namespace="http://ec.europa.eu/sanco/tracesnt/base/v4"/>
+
+    <wsdl:types>
+        <xs:schema>
+            <xs:import schemaLocation="eucites.xsd" namespace="http://ec.europa.eu/tracesnt/eucites/v01"/>
+        </xs:schema>
+    </wsdl:types>
+
+    <wsdl:service name="EUCITESWebServiceV01">
+        <wsdl:port name="EUCITESWebServiceV01Endpoint" binding="eucites:EUCITESWebServiceSoapBinding">
+            <soap:address location="https://webgate.acceptance.ec.europa.eu/tracesnt/ws/EUCITESWebServiceV01"/>
+        </wsdl:port>
+    </wsdl:service>
+
+    <!--  SendPermit  -->
+    <wsdl:message name="SendPermitRequest">
+        <wsdl:part name="input" element="eucites:SendPermitRequestMessage" />
+    </wsdl:message>
+
+    <wsdl:message name="SendPermitResponse">
+        <wsdl:part name="outcome" element="eucites:EUCITESResponseMessage" />
+    </wsdl:message>
+
+    <!--  SendClearedQuantities  -->
+    <wsdl:message name="SendClearedQuantitiesRequest">
+        <wsdl:part name="input" element="eucites:SendClearedQuantitiesRequestMessage" />
+    </wsdl:message>
+
+    <wsdl:message name="SendClearedQuantitiesResponse">
+        <wsdl:part name="outcome" element="eucites:EUCITESResponseMessage" />
+    </wsdl:message>
+
+    <!--  GetPermit  -->
+    <wsdl:message name="GetPermitRequest">
+        <wsdl:part name="input" element="eucites:GetPermitRequestMessage" />
+    </wsdl:message>
+
+    <wsdl:message name="GetPermitResponse">
+        <wsdl:part name="outcome" element="eucites:GetPermitResponseMessage" />
+    </wsdl:message>
+
+    <!--  GetPermitStatus  -->
+    <wsdl:message name="GetPermitStatusRequest">
+        <wsdl:part name="input" element="eucites:GetPermitStatusRequestMessage" />
+    </wsdl:message>
+
+    <wsdl:message name="GetPermitStatusResponse">
+        <wsdl:part name="outcome" element="eucites:GetPermitStatusResponseMessage" />
+    </wsdl:message>
+
+    <!--  GetClearedQuantities  -->
+    <wsdl:message name="GetClearedQuantitiesRequest">
+        <wsdl:part name="input" element="eucites:GetClearedQuantitiesRequestMessage" />
+    </wsdl:message>
+
+    <wsdl:message name="GetClearedQuantitiesResponse">
+        <wsdl:part name="outcome" element="eucites:GetClearedQuantitiesResponseMessage" />
+    </wsdl:message>
+
+
+    <!--  Test Messages  -->
+    <wsdl:message name="GetServerStatusRequest">
+        <wsdl:part name="input" element="eucites:GetServerStatusRequestRequestMessage" />
+    </wsdl:message>
+
+    <wsdl:message name="GetServerStatusResponse">
+        <wsdl:part name="outcome" element="eucites:EUCITESResponseMessage" />
+    </wsdl:message>
+
+    <wsdl:message name="SendTestMessageRequest">
+        <wsdl:part name="input" element="eucites:SendTestMessageRequestRequestMessage" />
+    </wsdl:message>
+
+    <wsdl:message name="SendTestMessageResponse">
+        <wsdl:part name="outcome" element="eucites:EUCITESResponseMessage" />
+    </wsdl:message>
+
+
+    <!--  CitesWebServiceFault  -->
+    <wsdl:message name="EUCITESWebServiceFault">
+        <wsdl:part name="fault" element="eucites:EUCITESWebServiceFault" />
+    </wsdl:message>
+
+    <wsdl:portType name="EUCITESWebServicePort">
+
+        <wsdl:operation name="getServerStatus">
+            <wsdl:documentation>
+                Consume Export informed export permit. [Required for Create]
+                Create/Amend/Cancel a permit data set.
+            </wsdl:documentation>
+            <wsdl:input message="eucites:GetServerStatusRequest" name="GetServerStatusRequest" >
+                <wsdl:documentation>
+                    <ul>
+                        <li>Server Status</li>
+                    </ul>
+                </wsdl:documentation>
+            </wsdl:input>
+            <wsdl:output message="eucites:GetServerStatusResponse" name="GetServerStatusResponse" >
+                <wsdl:documentation>
+                    <ul>
+                        <li>Response</li>
+                    </ul>
+                </wsdl:documentation>
+            </wsdl:output>
+            <wsdl:fault message="eucites:EUCITESWebServiceFault" name="EUCITESWebServiceFault">
+                <wsdl:documentation>
+                    If the operation is not executed correctly
+                </wsdl:documentation>
+            </wsdl:fault>
+        </wsdl:operation>
+
+        <wsdl:operation name="sendTestMessage">
+            <wsdl:documentation>
+                Service to test connection.
+            </wsdl:documentation>
+            <wsdl:input message="eucites:SendTestMessageRequest" name="SendTestMessageRequest" >
+                <wsdl:documentation>
+                    <ul>
+                        <li>Test Message</li>
+                    </ul>
+                </wsdl:documentation>
+            </wsdl:input>
+            <wsdl:output message="eucites:SendTestMessageResponse" name="SendTestMessageResponse" >
+                <wsdl:documentation>
+                    <ul>
+                        <li>Response</li>
+                    </ul>
+                </wsdl:documentation>
+            </wsdl:output>
+            <wsdl:fault message="eucites:EUCITESWebServiceFault" name="EUCITESWebServiceFault">
+                <wsdl:documentation>
+                    If the message is empty, for test reason, it will throw and exception.
+                </wsdl:documentation>
+            </wsdl:fault>
+        </wsdl:operation>
+
+        <wsdl:operation name="sendPermit">
+            <wsdl:documentation>
+                Consume Export informed export permit. [Required for Create]
+                Create/Amend/Cancel a permit data set.
+            </wsdl:documentation>
+            <wsdl:input message="eucites:SendPermitRequest" name="SendImportPermitRequest" >
+                <wsdl:documentation>
+                    <ul>
+                        <li>Import Permit Information</li>
+                    </ul>
+                </wsdl:documentation>
+            </wsdl:input>
+            <wsdl:output message="eucites:SendPermitResponse" name="SendImportPermitResponse" >
+                <wsdl:documentation>
+                    <ul>
+                        <li>Operation Outcome</li>
+                    </ul>
+                </wsdl:documentation>
+            </wsdl:output>
+            <wsdl:fault message="eucites:EUCITESWebServiceFault" name="EUCITESWebServiceFault">
+                <wsdl:documentation>
+                    If the operation is not executed correctly
+                </wsdl:documentation>
+            </wsdl:fault>
+        </wsdl:operation>
+
+        <wsdl:operation name="getPermit">
+            <wsdl:documentation>
+                Get Non Final Permit, if provided information is incorrect produces an error.
+            </wsdl:documentation>
+            <wsdl:input message="eucites:GetPermitRequest" name="GetPermitRequest" >
+                <wsdl:documentation>
+                    <ul>
+                        <li>Permit Information</li>
+                    </ul>
+                </wsdl:documentation>
+            </wsdl:input>
+            <wsdl:output message="eucites:GetPermitResponse" name="GetPermitResponse" >
+                <wsdl:documentation>
+                    <ul>
+                        <li>Operation Outcome</li>
+                    </ul>
+                </wsdl:documentation>
+            </wsdl:output>
+            <wsdl:fault message="eucites:EUCITESWebServiceFault" name="EUCITESWebServiceFault">
+                <wsdl:documentation>
+                    If the operation is not executed correctly
+                </wsdl:documentation>
+            </wsdl:fault>
+        </wsdl:operation>
+
+        <wsdl:operation name="getPermitStatus">
+            <wsdl:documentation>
+                Get Permit Status, if provided information is incorrect produces an error.
+            </wsdl:documentation>
+            <wsdl:input message="eucites:GetPermitStatusRequest" name="GetPermitStatusRequest" >
+                <wsdl:documentation>
+                    <ul>
+                        <li>Permit Information</li>
+                    </ul>
+                </wsdl:documentation>
+            </wsdl:input>
+            <wsdl:output message="eucites:GetPermitStatusResponse" name="GetPermissionStatusResponse" >
+                <wsdl:documentation>
+                    <ul>
+                        <li>Operation Outcome</li>
+                    </ul>
+                </wsdl:documentation>
+            </wsdl:output>
+            <wsdl:fault message="eucites:EUCITESWebServiceFault" name="EUCITESWebServiceFault">
+                <wsdl:documentation>
+                    If the operation is not executed correctly
+                </wsdl:documentation>
+            </wsdl:fault>
+        </wsdl:operation>
+
+        <wsdl:operation name="sendClearedQuantities">
+            <wsdl:documentation>
+                Creates/Amend/Cancel permit clearance data set.
+            </wsdl:documentation>
+            <wsdl:input message="eucites:SendClearedQuantitiesRequest" name="SendClearedQuantitiesRequest" >
+                <wsdl:documentation>
+                    <ul>
+                        <li>Clearance Information</li>
+                    </ul>
+                </wsdl:documentation>
+            </wsdl:input>
+            <wsdl:output message="eucites:SendClearedQuantitiesResponse" name="SendClearedQuantitiesResponse" >
+                <wsdl:documentation>
+                    <ul>
+                        <li>Operation Outcome</li>
+                    </ul>
+                </wsdl:documentation>
+            </wsdl:output>
+            <wsdl:fault message="eucites:EUCITESWebServiceFault" name="EUCITESWebServiceFault">
+                <wsdl:documentation>
+                    If the operation is not executed correctly
+                </wsdl:documentation>
+            </wsdl:fault>
+        </wsdl:operation>
+
+        <wsdl:operation name="getClearedQuantities">
+            <wsdl:documentation>
+                Get permit clearance data set.
+            </wsdl:documentation>
+            <wsdl:input message="eucites:GetClearedQuantitiesRequest" name="GetClearedQuantitiesRequest" >
+                <wsdl:documentation>
+                    <ul>
+                        <li>Clearance Information</li>
+                    </ul>
+                </wsdl:documentation>
+            </wsdl:input>
+            <wsdl:output message="eucites:GetClearedQuantitiesResponse" name="GetClearedQuantitiesResponse" >
+                <wsdl:documentation>
+                    <ul>
+                        <li>Operation Outcome</li>
+                    </ul>
+                </wsdl:documentation>
+            </wsdl:output>
+            <wsdl:fault message="eucites:EUCITESWebServiceFault" name="EUCITESWebServiceFault">
+                <wsdl:documentation>
+                    If the operation is not executed correctly
+                </wsdl:documentation>
+            </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:portType>
+
+    <wsdl:binding name="EUCITESWebServiceSoapBinding" type="eucites:EUCITESWebServicePort">
+
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+        <wsdl:operation name="getServerStatus">
+            <soap:operation soapAction="http://ec.europa.eu/env/cites/getServerStatus"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+                <soap:header use="literal" part="webServiceClientId" message="base:WebServiceClientIdHeader"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="EUCITESWebServiceFault">
+                <soap:fault name="EUCITESWebServiceFault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+
+        <wsdl:operation name="sendTestMessage">
+            <soap:operation soapAction="http://ec.europa.eu/env/cites/sendTestMessage"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+                <soap:header use="literal" part="webServiceClientId" message="base:WebServiceClientIdHeader"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="EUCITESWebServiceFault">
+                <soap:fault name="EUCITESWebServiceFault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+
+        <wsdl:operation name="sendPermit">
+            <soap:operation soapAction="http://ec.europa.eu/env/cites/sendImportPermit"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+                <soap:header use="literal" part="webServiceClientId" message="base:WebServiceClientIdHeader"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="EUCITESWebServiceFault">
+                <soap:fault name="EUCITESWebServiceFault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+
+        <wsdl:operation name="getPermit">
+            <soap:operation soapAction="http://ec.europa.eu/env/cites/getPermit"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+                <soap:header use="literal" part="webServiceClientId" message="base:WebServiceClientIdHeader"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="EUCITESWebServiceFault">
+                <soap:fault name="EUCITESWebServiceFault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+
+        <wsdl:operation name="getPermitStatus">
+            <soap:operation soapAction="http://ec.europa.eu/env/cites/getPermitStatus"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+                <soap:header use="literal" part="webServiceClientId" message="base:WebServiceClientIdHeader"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="EUCITESWebServiceFault">
+                <soap:fault name="EUCITESWebServiceFault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+
+        <wsdl:operation name="getClearedQuantities">
+            <soap:operation soapAction="http://ec.europa.eu/env/cites/getClearedQuantities"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+                <soap:header use="literal" part="webServiceClientId" message="base:WebServiceClientIdHeader"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="EUCITESWebServiceFault">
+                <soap:fault name="EUCITESWebServiceFault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+
+        <wsdl:operation name="sendClearedQuantities">
+            <soap:operation soapAction="http://ec.europa.eu/env/cites/sendClearedQuantities"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+                <soap:header use="literal" part="webServiceClientId" message="base:WebServiceClientIdHeader"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="EUCITESWebServiceFault">
+                <soap:fault name="EUCITESWebServiceFault" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+
+    </wsdl:binding>
+
+    <wsp:Policy xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy"
+                xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+        <sp:TransportBinding>
+            <wsp:Policy>
+                <sp:TransportToken>
+                    <wsp:Policy>
+                        <sp:HttpsToken />
+                    </wsp:Policy>
+                </sp:TransportToken>
+                <sp:AlgorithmSuite>
+                    <wsp:Policy>
+                        <sp:Basic256 />
+                    </wsp:Policy>
+                </sp:AlgorithmSuite>
+                <sp:Layout>
+                    <wsp:Policy>
+                        <sp:Lax />
+                    </wsp:Policy>
+                </sp:Layout>
+                <sp:IncludeTimestamp />
+            </wsp:Policy>
+        </sp:TransportBinding>
+        <sp:SupportingTokens>
+            <wsp:Policy>
+                <sp:UsernameToken
+                        sp:IncludeToken="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702/IncludeToken/AlwaysToRecipient">
+                    <wsp:Policy>
+                        <sp:HashPassword />
+                        <sp:WssUsernameToken10 />
+                    </wsp:Policy>
+                </sp:UsernameToken>
+            </wsp:Policy>
+        </sp:SupportingTokens>
+    </wsp:Policy>
+
+</wsdl:definitions>

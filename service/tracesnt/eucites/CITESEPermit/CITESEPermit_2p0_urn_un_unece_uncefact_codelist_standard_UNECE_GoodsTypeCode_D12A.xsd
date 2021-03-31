@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:clm6TDED7357="urn:un:unece:uncefact:codelist:standard:UNECE:GoodsTypeCode:D12A"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="urn:un:unece:uncefact:codelist:standard:UNECE:GoodsTypeCode:D12A"
+    elementFormDefault="qualified"
+    version="1.0">
+  <xs:simpleType name="GoodsTypeCodeContentType">
+    <xs:restriction base="xs:token"/>
+  </xs:simpleType>
+</xs:schema>
