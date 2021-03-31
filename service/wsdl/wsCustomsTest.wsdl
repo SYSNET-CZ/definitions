@@ -1,91 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<wsdl:definitions 
-    name="wsCustoms" 
-    targetNamespace="http://service.cites.cz/wsCustoms/" 
-    xmlns:responseRequest="http://service.cites.cz/LicRealizaceRespRequest" 
-    xmlns:request="http://service.cites.cz/LicRealizaceRequest/" 
-    xmlns:requestResult="http://service.cites.cz/LicRealizaceReqResult" 
-    xmlns:response="http://service.cites.cz/LicRealizaceResponse/" 
-    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
-    xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
-    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
-    xmlns:cit="http://service.cites.cz/wsCustoms/">
-    <wsdl:types>
-	<xsd:schema targetNamespace="http://service.cites.cz/wsCustoms/">
-	    <xsd:import namespace="http://service.cites.cz/LicRealizaceRequest/" schemaLocation="https://service.cites.cz/xsd/LicRealizaceReq.xsd"/>
-    	    <xsd:import namespace="http://service.cites.cz/LicRealizaceReqResult" schemaLocation="https://service.cites.cz/xsd/LicRealizaceReqResult.xsd"/>
-	    <xsd:import namespace="http://service.cites.cz/LicRealizaceResponse/" schemaLocation="https://service.cites.cz/xsd/LicRealizaceResp.xsd"/>
-	    <xsd:import namespace="http://service.cites.cz/LicRealizaceRespRequest" schemaLocation="https://service.cites.cz/xsd/LicRealizaceRespRequest.xsd"/>
-	 
-	    <xsd:element name="LicRealizaceReqResult" type="requestResult:CitesType_LicRealizaceReqResult">
-		<xsd:annotation>
-		    <xsd:documentation>Vraceny vysledek uploadu dat</xsd:documentation>
-		</xsd:annotation>
-	    </xsd:element>
-			
-	    <xsd:element name="LicRealizaceRespRequest" type="responseRequest:CitesType_ChangeProcessingRequest">
-		<xsd:annotation>
-		    <xsd:documentation>Vraceny seznam provedenych zmen</xsd:documentation>
-		</xsd:annotation>
-	    </xsd:element>
-	
-	</xsd:schema>
-    </wsdl:types>
-    <wsdl:message name="LicRealizaceResp">
-	<wsdl:part name="parameters" element="response:LicRealizaceResp" />
-    </wsdl:message>
-    <wsdl:message name="LicRealizaceReq">
-	<wsdl:part name="parameters" element="request:LicRealizaceReq" />
-    </wsdl:message>
-    <wsdl:message name="LicRealizaceReqResponse">
-	<wsdl:part name="parameters" element="cit:LicRealizaceReqResult" />
-    </wsdl:message>
-    <wsdl:message name="ClearCustomsRecordRequest">
-	<wsdl:part name="parameters" element="request:LicRealizaceReq" />
-    </wsdl:message>
-    <wsdl:message name="LicRealizaceRespRequest">
-	<wsdl:part name="parameters" element="cit:LicRealizaceRespRequest" />
-    </wsdl:message>
-    <wsdl:message name="ClearCustomsRecordResponse">
-	<wsdl:part name="parameters" element="response:LicRealizaceResp" />
-    </wsdl:message>
-    <wsdl:portType name="wsCustoms">
-	<wsdl:operation name="ReportChanges">
-    	    <wsdl:input message="cit:LicRealizaceReq" />
-    	    <wsdl:output message="cit:LicRealizaceReqResponse" />
-	</wsdl:operation>
-	<wsdl:operation name="GetResults">
-    	    <wsdl:input message="cit:LicRealizaceRespRequest" />
-    	    <wsdl:output message="cit:LicRealizaceResp" />
-	</wsdl:operation>
-    </wsdl:portType>
-    <wsdl:binding name="wsCustomsSOAP" type="cit:wsCustoms">
-	<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
-	<wsdl:operation name="ReportChanges">
-    	    <soap:operation soapAction="http://service.cites.cz/wsCustoms/ReportChanges"/>
-    	    <wsdl:input>
-    		<soap:body use="literal"/>
-    	    </wsdl:input>
-    	    <wsdl:output>
-    		<soap:body use="literal"/>
-    	    </wsdl:output>
-	</wsdl:operation>
-	<wsdl:operation name="GetResults">
-    	    <soap:operation soapAction="http://service.cites.cz/wsCustoms/GetResults"/>
-    	    <wsdl:input>
-    		<soap:body use="literal"/>
-    	    </wsdl:input>
-    	    <wsdl:output>
-    		<soap:body use="literal"/>
-    	    </wsdl:output>
-	</wsdl:operation>
-    </wsdl:binding>
-    <wsdl:service name="wsCustoms">
-	<wsdl:port name="wsCustomsSOAP" binding="cit:wsCustomsSOAP">
-    	    <soap:address location="https://service.cites.cz/wsCustomsTest/services/wsCustomsSOAP"/>
-	</wsdl:port>
-    </wsdl:service>
-    <!-- Policy for Username Token with plaintext password, sent from client to server only
+<wsdl:definitions xmlns:responseRequest="http://service.cites.cz/LicRealizaceRespRequest" xmlns:request="http://service.cites.cz/LicRealizaceRequest/" xmlns:requestResult="http://service.cites.cz/LicRealizaceReqResult" xmlns:response="http://service.cites.cz/LicRealizaceResponse/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:cit="http://service.cites.cz/wsCustoms/" name="wsCustoms" targetNamespace="http://service.cites.cz/wsCustoms/">
+	<wsdl:types>
+		<xsd:schema targetNamespace="http://service.cites.cz/wsCustoms/">
+			<xsd:import namespace="http://service.cites.cz/LicRealizaceRequest/" schemaLocation="https://service.cites.cz/xsd/LicRealizaceReq.xsd"/>
+			<xsd:import namespace="http://service.cites.cz/LicRealizaceReqResult" schemaLocation="https://service.cites.cz/xsd/LicRealizaceReqResult.xsd"/>
+			<xsd:import namespace="http://service.cites.cz/LicRealizaceResponse/" schemaLocation="https://service.cites.cz/xsd/LicRealizaceResp.xsd"/>
+			<xsd:import namespace="http://service.cites.cz/LicRealizaceRespRequest" schemaLocation="https://service.cites.cz/xsd/LicRealizaceRespRequest.xsd"/>
+			<xsd:element name="LicRealizaceReqResult" type="requestResult:CitesType_LicRealizaceReqResult">
+				<xsd:annotation>
+					<xsd:documentation>Vraceny vysledek uploadu dat</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="LicRealizaceRespRequest" type="responseRequest:CitesType_ChangeProcessingRequest">
+				<xsd:annotation>
+					<xsd:documentation>Vraceny seznam provedenych zmen</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:schema>
+	</wsdl:types>
+	<wsdl:message name="LicRealizaceResp">
+		<wsdl:part name="parameters" element="response:LicRealizaceResp"/>
+	</wsdl:message>
+	<wsdl:message name="LicRealizaceReq">
+		<wsdl:part name="parameters" element="request:LicRealizaceReq"/>
+	</wsdl:message>
+	<wsdl:message name="LicRealizaceReqResponse">
+		<wsdl:part name="parameters" element="cit:LicRealizaceReqResult"/>
+	</wsdl:message>
+	<wsdl:message name="ClearCustomsRecordRequest">
+		<wsdl:part name="parameters" element="request:LicRealizaceReq"/>
+	</wsdl:message>
+	<wsdl:message name="LicRealizaceRespRequest">
+		<wsdl:part name="parameters" element="cit:LicRealizaceRespRequest"/>
+	</wsdl:message>
+	<wsdl:message name="ClearCustomsRecordResponse">
+		<wsdl:part name="parameters" element="response:LicRealizaceResp"/>
+	</wsdl:message>
+	<wsdl:portType name="wsCustoms">
+		<wsdl:operation name="ReportChanges">
+			<wsdl:input message="cit:LicRealizaceReq"/>
+			<wsdl:output message="cit:LicRealizaceReqResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="GetResults">
+			<wsdl:input message="cit:LicRealizaceRespRequest"/>
+			<wsdl:output message="cit:LicRealizaceResp"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="wsCustomsSOAP" type="cit:wsCustoms">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="ReportChanges">
+			<soap:operation soapAction="http://service.cites.cz/wsCustoms/ReportChanges"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetResults">
+			<soap:operation soapAction="http://service.cites.cz/wsCustoms/GetResults"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="wsCustoms">
+		<wsdl:port name="wsCustomsSOAP" binding="cit:wsCustomsSOAP">
+			<soap:address location="https://service-test.cites.cz/wsCustoms/services/wsCustomsSOAP"/>
+		</wsdl:port>
+	</wsdl:service>
+	<!-- Policy for Username Token with plaintext password, sent from client to server only
     <wsp:Policy xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy"
 	xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
 	wsu:Id="UsernameToken">
