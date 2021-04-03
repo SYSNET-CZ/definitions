@@ -277,7 +277,8 @@
 		<wsdl:port name="wsRealizaceCallbackSOAP" binding="sim:wsRealizaceCallbackSOAP">
 			<!-- <soap:address location="http://10.253.129.94:3988/swcites-ms/" /> -->
 			<!-- <soap:address location="http://localhost:3988/swcites-ms/" /> -->
-			<soap:address location="http://ext2.env.cz:13988/swcites-ms/" /> 
+			<!-- <soap:address location="http://ext2.env.cz:13988/swcites-ms/" /> --> 
+			<soap:address location="https://swin-test.cites.cz/swcites-ms/" /> 			
 		</wsdl:port>
 	</wsdl:service>
 </wsdl:definitions>
