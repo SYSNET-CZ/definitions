@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sch="https://crzp.inqool.cz/ws/hnvo/v1" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:tns="https://crzp.inqool.cz/ws/hnvo/v1" targetNamespace="https://crzp.inqool.cz/ws/hnvo/v1">
+	<wsdl:types>
+		<xs:schema xmlns:common="https://crzp.inqool.cz/ws/common/v1" xmlns:hnvo="https://crzp.inqool.cz/ws/hnvo/v1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="https://crzp.inqool.cz/ws/hnvo/v1" version="1.0">
+			<xs:import namespace="https://crzp.inqool.cz/ws/common/v1" schemaLocation="common_v1e.xsd"/>
+			<xs:element name="InvalidateUserRoleInstanceRequest" type="hnvo:InvalidateUserRoleInstanceRequest"/>
+			<xs:element name="InvalidateUserRoleInstanceResponse" type="hnvo:InvalidateUserRoleInstanceResponse"/>
+			<xs:complexType name="InvalidateUserRoleInstanceRequest">
+				<xs:complexContent>
+					<xs:extension base="common:TransactionalRequest">
+						<xs:sequence>
+							<xs:element name="user" type="common:Ref">
+								<xs:annotation>
+									<xs:documentation>
+                Uživatel
+              </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="subject" type="common:Ref">
+								<xs:annotation>
+									<xs:documentation>
+                Subjekt
+              </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="InvalidateUserRoleInstanceResponse">
+				<xs:complexContent>
+					<xs:extension base="common:DeactivateResponse">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="InvalidateUserRoleInstanceRequest">
+		<wsdl:part name="InvalidateUserRoleInstanceRequest" element="tns:InvalidateUserRoleInstanceRequest">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="InvalidateUserRoleInstanceResponse">
+		<wsdl:part name="InvalidateUserRoleInstanceResponse" element="tns:InvalidateUserRoleInstanceResponse">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:portType name="Hnvo">
+		<wsdl:operation name="InvalidateUserRoleInstance">
+			<wsdl:input name="InvalidateUserRoleInstanceRequest" message="sch:InvalidateUserRoleInstanceRequest">
+    </wsdl:input>
+			<wsdl:output name="InvalidateUserRoleInstanceResponse" message="sch:InvalidateUserRoleInstanceResponse">
+    </wsdl:output>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="HnvoSoap12" type="tns:Hnvo">
+		<soap12:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="InvalidateUserRoleInstance">
+			<soap12:operation soapAction="https://crzp.inqool.cz/ws/hnvo/v1"/>
+			<wsdl:input name="InvalidateUserRoleInstanceRequest">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="InvalidateUserRoleInstanceResponse">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="HnvoService">
+		<wsdl:port name="HnvoSoap12" binding="tns:HnvoSoap12">
+			<soap12:address location="https://ext.crzp-dev.mzp.cz/ws/hnvo/"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

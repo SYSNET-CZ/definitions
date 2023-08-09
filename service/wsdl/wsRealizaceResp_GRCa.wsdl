@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2021 (x64) (http://www.altova.com) by Radim Jäger (SYSNET s.r.o.) -->
 <wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:sim="urn:wsRealizaceCallback" name="wsRealizaceCallback" targetNamespace="urn:wsRealizaceCallback">
 	<wsdl:types>
 		<xsd:schema xmlns:cds="http://www.cs.mfcr.cz/Schemas/CDS/Template" elementFormDefault="qualified">
@@ -226,6 +227,9 @@
 			<wsdl:output>
 				<soap:body use="literal"/>
 			</wsdl:output>
+			<wsdl:fault name="fault">
+				<soap:fault name="fault" use="literal"/>
+			</wsdl:fault>
 		</wsdl:operation>
 	</wsdl:binding>
 	<wsdl:service name="wsRealizaceCallback">

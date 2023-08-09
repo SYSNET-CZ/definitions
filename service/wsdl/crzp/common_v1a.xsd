@@ -1,0 +1,1944 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- edited with XMLSpy v2021 (x64) (http://www.altova.com) by Radim Jäger (SYSNET s.r.o.) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:common="https://crzp.inqool.cz/ws/common/v1" targetNamespace="https://crzp.inqool.cz/ws/common/v1" version="1.0">
+	<xs:element name="Params" type="common:Params"/>
+	<xs:complexType name="RuianObject" abstract="true">
+		<xs:complexContent>
+			<xs:extension base="common:DatedObject">
+				<xs:sequence>
+					<xs:element name="name" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation><![CDATA[Název]]></xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="isuiCode" type="xs:long" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation><![CDATA[Kód v ISÚI (Informační systém územní identifikace)]]></xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="active" type="xs:boolean" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation><![CDATA[Příznak platnosti]]></xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="validFrom" type="xs:dateTime" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation><![CDATA[Platnost: od]]></xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="validTo" type="xs:dateTime" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation><![CDATA[Platnost: do]]></xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="DatedObject" abstract="true">
+		<xs:complexContent>
+			<xs:extension base="common:DomainObject">
+				<xs:sequence>
+					<xs:element name="created" type="xs:dateTime">
+						<xs:annotation>
+							<xs:documentation><![CDATA[Datum vytvoření]]></xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="updated" type="xs:dateTime" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation><![CDATA[Datum posledné úpravy]]></xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="deleted" type="xs:dateTime" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation><![CDATA[Datum smazání]]></xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="DomainObject" abstract="true">
+		<xs:sequence>
+			<xs:element name="id" type="common:UUID">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Identifikátor]]></xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RuianReference">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Odkaz na hodnotu RÚIAN]]></xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="id" type="common:UUID">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Identifikátor]]></xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="name" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Název]]></xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="isuiCode" type="xs:long" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Kód v ISÚI (Informační systém územní identifikace)]]></xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="UUID">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Univerzální unikátní identifikátor (UUID), verze 4]]></xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="JtskCoordinates">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Souřadnice JTSK (Jednotná trigonometrická síť katastrální)]]></xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="x" type="xs:decimal">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Souřadnice 'x']]></xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="y" type="xs:decimal">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Souřadnice 'y']]></xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Wgs84Coordinates">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Souřadnice WGS-84 (World Geodetic System 1984)]]></xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="lat" type="xs:decimal">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Zeměpisná šířka (souřadnice 'x')]]></xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="lon" type="xs:decimal">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Zeměpisná délka (souřadnice 'y')]]></xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetRequest" abstract="true">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Požadavek na získání detailu záznamu entity]]></xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="id" type="common:UUID">
+				<xs:annotation>
+					<xs:documentation><![CDATA[ID entity]]></xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetResponse" abstract="true">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Odpověď na požadavek na získání detailu záznamu entity]]></xs:documentation>
+		</xs:annotation>
+		<xs:all/>
+	</xs:complexType>
+	<xs:complexType name="ListRequest" abstract="true">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Požadavek na získání seznamu záznamů entity]]></xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="params" type="common:Params" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Specifikace filtrování, řazení a stránkování]]></xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FiltersType">
+		<xs:sequence>
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element name="and" type="common:AndFilter"/>
+				<xs:element name="contains" type="common:ContainsFilter"/>
+				<xs:element name="endWith" type="common:EndWithFilter"/>
+				<xs:element name="eq" type="common:EqFilter"/>
+				<xs:element name="ftx" type="common:FulltextFilter"/>
+				<xs:element name="geoBoundingBox" type="common:GeoBoundingBoxFilter"/>
+				<xs:element name="geoDistance" type="common:GeoDistanceFilter"/>
+				<xs:element name="geoPolygon" type="common:GeoPolygonFilter"/>
+				<xs:element name="gt" type="common:GtFilter"/>
+				<xs:element name="gte" type="common:GteFilter"/>
+				<xs:element name="ids" type="common:IdsFilter"/>
+				<xs:element name="in" type="common:InFilter"/>
+				<xs:element name="lt" type="common:LtFilter"/>
+				<xs:element name="lte" type="common:LteFilter"/>
+				<xs:element name="not" type="common:NotFilter"/>
+				<xs:element name="notNull" type="common:NotNullFilter"/>
+				<xs:element name="isNull" type="common:NullFilter"/>
+				<xs:element name="or" type="common:OrFilter"/>
+				<xs:element name="startWith" type="common:StartWithFilter"/>
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SortType">
+		<xs:sequence>
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element name="fieldSort" type="common:FieldSort"/>
+				<xs:element name="geoDistanceSort" type="common:GeoDistanceSort"/>
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Params">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Parametry vyhledávání a řazení]]></xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="filters" type="common:FiltersType" minOccurs="0"/>
+			<xs:element name="sort" type="common:SortType" minOccurs="0"/>
+			<xs:element name="size" type="xs:int" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Maximální počet vrácených záznamů. Hodnota "-1" značí vrácení všech záznamů.]]></xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="searchAfter" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Pro podporu mechanizmu "infinite scroll". Hodnota pro tento atribut je vrácena v předošlém (n-1) dotazu.]]></xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="flipDirection" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Pro podporu mechanizmu "infinite scroll". Obrátí směr skrolování.]]></xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="include" type="common:Include" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Zahrne další záznamy do výsledku dotazu]]></xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AndFilter">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Logický součin]]></xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="common:LogicalFilter">
+				<xs:all/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="LogicalFilter" abstract="true">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Logický filter]]></xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="common:Filter">
+				<xs:sequence>
+					<xs:element name="filters">
+						<xs:annotation>
+							<xs:documentation><![CDATA[Vnořené filtry]]></xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:choice minOccurs="0" maxOccurs="unbounded">
+									<xs:element name="and" type="common:AndFilter"/>
+									<xs:element name="contains" type="common:ContainsFilter"/>
+									<xs:element name="endWith" type="common:EndWithFilter"/>
+									<xs:element name="eq" type="common:EqFilter"/>
+									<xs:element name="ftx" type="common:FulltextFilter"/>
+									<xs:element name="geoBoundingBox" type="common:GeoBoundingBoxFilter"/>
+									<xs:element name="geoDistance" type="common:GeoDistanceFilter"/>
+									<xs:element name="geoPolygon" type="common:GeoPolygonFilter"/>
+									<xs:element name="gt" type="common:GtFilter"/>
+									<xs:element name="gte" type="common:GteFilter"/>
+									<xs:element name="ids" type="common:IdsFilter"/>
+									<xs:element name="in" type="common:InFilter"/>
+									<xs:element name="lt" type="common:LtFilter"/>
+									<xs:element name="lte" type="common:LteFilter"/>
+									<xs:element name="not" type="common:NotFilter"/>
+									<xs:element name="notNull" type="common:NotNullFilter"/>
+									<xs:element name="isNull" type="common:NullFilter"/>
+									<xs:element name="or" type="common:OrFilter"/>
+									<xs:element name="startWith" type="common:StartWithFilter"/>
+								</xs:choice>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Filter" abstract="true">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Filtrování]]></xs:documentation>
+		</xs:annotation>
+		<xs:all/>
+	</xs:complexType>
+	<xs:complexType name="ContainsFilter">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Vyhledáváni dle podřetězce]]></xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="common:TextFilter">
+				<xs:all/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="TextFilter" abstract="true">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Filter nad textovým atributem a jeho hodnotou]]></xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="common:FieldValueFilter">
+				<xs:all/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="FieldValueFilter" abstract="true">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Vyhledávání nad atributem dle hodnoty]]></xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="common:FieldFilter">
+				<xs:sequence>
+					<xs:element name="value" type="xs:string">
+						<xs:annotation>
+							<xs:documentation><![CDATA[Hodnota dle které vyhledávat]]></xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="FieldFilter" abstract="true">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Vyhledávání nad atributem]]></xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="common:Filter">
+				<xs:sequence/>
+				<xs:attribute name="field" type="xs:string" use="required">
+					<xs:annotation>
+						<xs:documentation><![CDATA[Název atributu, dle kterého vyhledávat]]></xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ComparisonFilter" abstract="true">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Filtrování podle porovnání s hodnotu]]></xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="common:FieldValueFilter">
+				<xs:sequence/>
+				<xs:attribute name="relation" type="common:ShapeRelation">
+					<xs:annotation>
+						<xs:documentation><![CDATA[Specifikuje jak rozsahový dotaz porovná hodnoty pro rozsahové atributy. Výchozí hodnota je "INTERSECT".]]></xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GtFilter">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Vyhledávaní podle podmínky: větší než]]></xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="common:ComparisonFilter">
+				<xs:all/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GteFilter">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Vyhledávaní podle podmínky: větší nebo rovné než]]></xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="common:ComparisonFilter">
+				<xs:all/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="LtFilter">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Vyhledávaní podle podmínky: menší než]]></xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="common:ComparisonFilter">
+				<xs:all/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="LteFilter">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Vyhledávaní podle podmínky: menší nebo rovné než]]></xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="common:ComparisonFilter">
+				<xs:all/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="EndWithFilter">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Vyhledávání hodnot končících na]]></xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="common:TextFilter">
+				<xs:all/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="EqFilter">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Filtrování na rovnost]]></xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="common:FieldValueFilter">
+				<xs:all/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="FulltextFilter">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Fulltextové vyhledávání]]></xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="common:ValueFilter">
+				<xs:all/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ValueFilter" abstract="true">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Vyhledávání dle hodnoty]]></xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="common:Filter">
+				<xs:sequence>
+					<xs:element name="value" type="xs:string">
+						<xs:annotation>
+							<xs:documentation><![CDATA[Hodnota použita při vyhledávání]]></xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GeoBoundingBoxFilter">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Vyhledávaní dle ohraničujícího obdélníka]]></xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="common:GeoFilter">
+				<xs:sequence>
+					<xs:element name="topLeft" type="common:GeoPoint">
+						<xs:annotation>
+							<xs:documentation><![CDATA[Levý horní roh]]></xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="bottomRight" type="common:GeoPoint">
+						<xs:annotation>
+							<xs:documentation><![CDATA[Pravý dolní roh]]></xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GeoFilter" abstract="true">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Vyhledávání dle souřadnic]]></xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="common:FieldFilter">
+				<xs:all/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GeoPoint">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Geografický bod]]></xs:documentation>
+		</xs:annotation>
+		<xs:sequence/>
+		<xs:attribute name="lat" type="xs:double" use="required">
+			<xs:annotation>
+				<xs:documentation><![CDATA[Zeměpisná šířka]]></xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="lon" type="xs:double" use="required">
+			<xs:annotation>
+				<xs:documentation><![CDATA[Zeměpisná délka]]></xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="GeoDistanceFilter">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Vyhledávání dle vzdálenosti od bodu]]></xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="common:GeoFilter">
+				<xs:sequence>
+					<xs:element name="point" type="common:GeoPoint">
+						<xs:annotation>
+							<xs:documentation><![CDATA[Geografický bod]]></xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="distance" type="xs:double" use="required">
+					<xs:annotation>
+						<xs:documentation><![CDATA[Vzdálenost]]></xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="unit" type="common:DistanceUnit">
+					<xs:annotation>
+						<xs:documentation><![CDATA[Jednotka vzdálenosti]]></xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GeoPolygonFilter">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Vyhledávaní dle ohraničujícího mnohoúhelníka]]></xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="common:GeoFilter">
+				<xs:sequence>
+					<xs:element name="points" type="common:GeoPoint" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation><![CDATA[Body mnohoúhelníka]]></xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="IdsFilter">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Vyhledávaní dle identifikátorů záznamů]]></xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="common:Filter">
+				<xs:sequence>
+					<xs:element name="id" type="xs:string" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation><![CDATA[Seznam identifikátorů]]></xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="InFilter">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Vyhledávaní dle hodnot atributu obsažených v seznamu]]></xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="common:FieldFilter">
+				<xs:sequence>
+					<xs:element name="values">
+						<xs:annotation>
+							<xs:documentation><![CDATA[Seznam hodnot]]></xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="value" type="xs:string" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="NotFilter">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Negace]]></xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="common:LogicalFilter">
+				<xs:all/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="NotNullFilter">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Vyhledávání dle neprázdné hodnoty atributu]]></xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="common:FieldFilter">
+				<xs:all/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="NullFilter">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Vyhledávání dle prázdné hodnoty atributu]]></xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="common:FieldFilter">
+				<xs:all/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="OrFilter">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Logický součet]]></xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="common:LogicalFilter">
+				<xs:all/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="StartWithFilter">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Vyhledávání hodnot začínajících na]]></xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="common:TextFilter">
+				<xs:all/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="FieldSort">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Řazení dle atributu]]></xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="common:Sort">
+				<xs:sequence>
+					<xs:element name="field" type="xs:string">
+						<xs:annotation>
+							<xs:documentation><![CDATA[Název atributu, dle kterého vést řazení]]></xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="missing" type="common:MissingValues">
+					<xs:annotation>
+						<xs:documentation><![CDATA[Definuje, jak zacházet se záznamy, kterým chybí hodnota pro atribut zadaný vo "field". Výchozí hodnota je "LAST"]]></xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Sort" abstract="true">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Řazení]]></xs:documentation>
+		</xs:annotation>
+		<xs:sequence/>
+		<xs:attribute name="order" type="common:SortOrder" use="required">
+			<xs:annotation>
+				<xs:documentation><![CDATA[Způsob řazení]]></xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="GeoDistanceSort">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Řazení dle vzdálenosti od bodů]]></xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="common:Sort">
+				<xs:sequence>
+					<xs:element name="field" type="xs:string">
+						<xs:annotation>
+							<xs:documentation><![CDATA[Název atributu, dle kterého vést řazení]]></xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="points">
+						<xs:annotation>
+							<xs:documentation><![CDATA[Geografické body]]></xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="point" type="common:GeoPoint" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="geoDistance" type="common:GeoDistance">
+					<xs:annotation>
+						<xs:documentation><![CDATA[Specifikuje, jak počítat vzdálenost. Může být jeden z "ARC" (výchozí), nebo "PLANE" (rýchlejší, ale méně přesné pre velké vzdálenosti a blíže polům)]]></xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="unit" type="common:DistanceUnit">
+					<xs:annotation>
+						<xs:documentation><![CDATA[Jednotka vzádlenosti použita při výpočtech hodnot řazení. Výchozí hodnota: "METERS"]]></xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ListResponse" abstract="true">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Odpověď na požadavek na získání seznamu záznamů entity]]></xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="count" type="xs:long" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Počet všech záznamů splňujících dané filtrační kriteria (bez ohledu na počet vrácených záznamů)]]></xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="searchAfter" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Pro podporu mechanizmu "infinite scroll". Hodnotu lze použít v následných požadavcích ako hodnotu elementu "params.searchAfter" pro získání další stránky záznamů.]]></xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DictionaryObject" abstract="true">
+		<xs:complexContent>
+			<xs:extension base="common:AuthoredObject">
+				<xs:sequence>
+					<xs:element name="name" type="xs:string">
+						<xs:annotation>
+							<xs:documentation><![CDATA[Název]]></xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="multiName" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation><![CDATA[Název - cizojazyčné překlady]]></xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="entry" type="common:MultiStringEntry" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="active" type="xs:boolean" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation><![CDATA[Příznak platnosti]]></xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="validFrom" type="xs:dateTime" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation><![CDATA[Datum platnosti: od]]></xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="validTo" type="xs:dateTime" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation><![CDATA[Datum platnosti: do]]></xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="order" type="xs:int" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation><![CDATA[Pořadí]]></xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="code" type="xs:string">
+						<xs:annotation>
+							<xs:documentation><![CDATA[Kód]]></xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="AuthoredObject" abstract="true">
+		<xs:complexContent>
+			<xs:extension base="common:DatedObject">
+				<xs:sequence>
+					<xs:element name="createdBy" type="common:UserReference">
+						<xs:annotation>
+							<xs:documentation><![CDATA[Uživatel, který záznam vytvořil]]></xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="updatedBy" type="common:UserReference" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation><![CDATA[Uživatel, který provedl poslední úpravu záznamu]]></xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="deletedBy" type="common:UserReference" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation><![CDATA[Uživatel, který záznam smazal]]></xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="MultiStringEntry">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Překlad]]></xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="language" type="common:Language" use="required">
+					<xs:annotation>
+						<xs:documentation><![CDATA[Jazyk]]></xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="UserReference">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Odkaz na uživatele]]></xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="id" type="common:UUID">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Identifikátor]]></xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="name" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Název]]></xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SystemReference">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Systém (AIS)]]></xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="id" type="common:UUID">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Identifikátor]]></xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="name" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Název]]></xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="code" type="xs:string">
+			<xs:annotation>
+				<xs:documentation><![CDATA[Kód]]></xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="Address">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Adresa]]></xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="common:DomainObject">
+				<xs:sequence>
+					<xs:element name="country" type="common:DictionaryReference" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation><![CDATA[Stát]]></xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="regionRuian" type="common:RuianReference" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation><![CDATA[Kraj (RÚIAN)]]></xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="region" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation><![CDATA[Kraj (vlastní)]]></xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="districtRuian" type="common:RuianReference" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation><![CDATA[Okres (RÚIAN)]]></xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="district" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation><![CDATA[Okres (vlastní)]]></xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="municipalityRuian" type="common:RuianReference" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation><![CDATA[Obec (RÚIAN)]]></xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="municipality" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation><![CDATA[Obec (vlastní)]]></xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="cityDistrictRuian" type="common:RuianReference" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation><![CDATA[Městský obvod/městská část územně členěného statutárního města (MOMC) (RÚIAN)]]></xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="cityDistrict" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation><![CDATA[Městská část (vlastní)]]></xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="municipalityPartRuian" type="common:RuianReference" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation><![CDATA[Část obce (RÚIAN)]]></xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="municipalityPart" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation><![CDATA[Část obce (vlastní)]]></xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="streetRuian" type="common:RuianReference" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation><![CDATA[Ulice (RÚIAN)]]></xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="street" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation><![CDATA[Ulice (vlastní)]]></xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="houseNumber" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation><![CDATA[Číslo popisné]]></xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="houseNumberType" type="common:HouseNumberType" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation><![CDATA[Typ stavebního objektu]]></xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="orientationNumber" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation><![CDATA[Číslo orientační]]></xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="orientationNumberMark" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation><![CDATA[Znak čísla orientačního, uveden v případě, že je znak k orientačnímu číslu přidělen]]></xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="addressPlaceRuian" type="common:RuianReference" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation><![CDATA[Adresní místo (RÚIAN)]]></xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="zip" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation><![CDATA[PSČ]]></xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="DictionaryReference">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Odkaz na hodnotu číselníku]]></xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="id" type="common:UUID">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Identifikátor]]></xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="name" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Název]]></xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="code" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Kód]]></xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AgendaReference">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Agenda]]></xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="id" type="common:UUID">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Identifikátor agendy]]></xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="name" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Název agendy]]></xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="type" type="common:AgendaType" use="required">
+			<xs:annotation>
+				<xs:documentation><![CDATA[Typ agendy]]></xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="LongRef">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Odkaz na hodnotu pomoci číselného kódu]]></xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="code" type="xs:long">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Kód]]></xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="NamedReference">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Odkaz na entitu]]></xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="id" type="common:UUID">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Identifikátor]]></xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="name" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Název]]></xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Ref">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Odkaz na hodnotu]]></xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="id" type="common:UUID">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Identifikátor]]></xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="StringRef">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Odkaz na hodnotu pomoci textového kódu]]></xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="code" type="xs:string">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Kód]]></xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ContactDetails">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Kontaktní údaje]]></xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="companyName" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Název firmy]]></xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="branchName" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Název pobočky]]></xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="street" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Ulice]]></xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="orientationNumber" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Číslo orientační]]></xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="houseNumber" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Číslo popisné]]></xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="zip" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation><![CDATA[PSČ]]></xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="municipality" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Obec]]></xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ObligatorySubject">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Povinný subjekt]]></xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ico" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation><![CDATA[IČO]]></xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="companyName" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Název firmy]]></xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="branchName" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Název pobočky]]></xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="address" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Sídlo]]></xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="WaterUsagePlaceRef">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Místo užívání vody (MUV)]]></xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="common:Ref">
+				<xs:sequence/>
+				<xs:attribute name="type" type="common:WaterUsagePlaceType" use="required">
+					<xs:annotation>
+						<xs:documentation><![CDATA[Typ místa užívání vody]]></xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="BasinEnterpriseIdentifier">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Identifikátor podniku povodí]]></xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="enterprise" type="common:BasinEnterprise" use="required">
+					<xs:annotation>
+						<xs:documentation><![CDATA[Podnik povodí]]></xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="PersonalDataReference">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Odkaz na hodnotu osobního údaje]]></xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="value" type="xs:string">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Hodnota osobního údaje]]></xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="deleted" type="xs:dateTime" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Čas zmazání]]></xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="hidden" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Příznak nastaven, když uživatel nemá k hodnotě osobního údaje přístup]]></xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="dataType" type="common:DataType" use="required">
+			<xs:annotation>
+				<xs:documentation><![CDATA[Datový typ]]></xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="PhoneNumber">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Telefon]]></xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="prefix" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Předvolba (area code)]]></xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="number" type="common:PersonalDataReference" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Číslo]]></xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RoleReference">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Role]]></xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="id" type="common:UUID">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Identifikátor]]></xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="name" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Název]]></xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="code" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Kód]]></xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="registeredFor" type="common:SystemReference" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Systém, který eviduje danou roli]]></xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="type" type="common:RoleType" use="required">
+			<xs:annotation>
+				<xs:documentation><![CDATA[Typ role]]></xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="SubjectRef">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Subjekt]]></xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="common:Ref">
+				<xs:sequence/>
+				<xs:attribute name="type" type="common:SubjectType" use="required">
+					<xs:annotation>
+						<xs:documentation><![CDATA[Typ subjektu]]></xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="SubjectReference">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Subjekt]]></xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="id" type="common:UUID">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Identifikátor subjektu]]></xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="name" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Název subjektu]]></xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="type" type="common:SubjectType" use="required">
+			<xs:annotation>
+				<xs:documentation><![CDATA[Typ subjektu]]></xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="ActivateRequest" abstract="true">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Požadavek na obnovení záznamu entity]]></xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="common:TransactionalRequest">
+				<xs:sequence>
+					<xs:element name="id" type="common:UUID">
+						<xs:annotation>
+							<xs:documentation><![CDATA[ID entity]]></xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="TransactionalRequest" abstract="true">
+		<xs:sequence>
+			<xs:element name="transactionId" type="common:UUID">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Identifikátor operace (transakce)]]></xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ActivateResponse" abstract="true">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Odpověď na požadavek na obnovení záznamu entity]]></xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="common:TransactionalResponse">
+				<xs:sequence>
+					<xs:element name="state" type="xs:string">
+						<xs:annotation>
+							<xs:documentation><![CDATA[OK]]></xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="TransactionalResponse" abstract="true">
+		<xs:sequence>
+			<xs:element name="transaction" type="common:Transaction" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Informace o transakci v případě detekce replikovaného requestu na službu]]></xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Transaction">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Informace o transakci]]></xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="transactionId" type="common:UUID">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Identifikátor dávky ve formátu UUID]]></xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="firstReplied" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Čas vykonání prvního dotazu]]></xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="service" type="common:WebService">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Název služby]]></xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="version" type="xs:string">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Verze služby]]></xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="namespace" type="xs:string">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Jmenný prostor]]></xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="localPart" type="xs:string">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Payload root]]></xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CreateRequest" abstract="true">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Požadavek na vytvoření nového záznamu entity]]></xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="common:TransactionalRequest">
+				<xs:all/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CreateResponse" abstract="true">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Odpověď na požadavek na vytvoření záznamu entity]]></xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="common:TransactionalResponse">
+				<xs:all/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="DeactivateRequest" abstract="true">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Požadavek na zneplatnění záznamu entity]]></xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="common:TransactionalRequest">
+				<xs:sequence>
+					<xs:element name="id" type="common:UUID">
+						<xs:annotation>
+							<xs:documentation><![CDATA[ID entity]]></xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="DeactivateResponse" abstract="true">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Odpověď na požadavek na zneplatnění záznamu entity]]></xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="common:TransactionalResponse">
+				<xs:sequence>
+					<xs:element name="state" type="xs:string">
+						<xs:annotation>
+							<xs:documentation><![CDATA[OK]]></xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="DeleteRequest" abstract="true">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Požadavek na smazání záznamu entity]]></xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="common:TransactionalRequest">
+				<xs:sequence>
+					<xs:element name="id" type="common:UUID">
+						<xs:annotation>
+							<xs:documentation><![CDATA[ID entity]]></xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="DeleteResponse" abstract="true">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Odpověď na požadavek na smazání záznamu entity]]></xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="common:TransactionalResponse">
+				<xs:sequence>
+					<xs:element name="state" type="xs:string">
+						<xs:annotation>
+							<xs:documentation><![CDATA[OK]]></xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="UpdateRequest" abstract="true">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Požadavek na editaci záznamu entity]]></xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="common:TransactionalRequest">
+				<xs:sequence>
+					<xs:element name="id" type="common:UUID">
+						<xs:annotation>
+							<xs:documentation><![CDATA[ID entity]]></xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="UpdateResponse" abstract="true">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Odpověď na požadavek na editaci záznamu entity]]></xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="common:TransactionalResponse">
+				<xs:all/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:simpleType name="HouseNumberType">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Typ stavebního objektu]]></xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="DESCRIPTIVE_NUMBER">
+				<xs:annotation>
+					<xs:documentation><![CDATA[č.p. - číslo popisné stavebního objektu]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="REGISTRATION_NUMBER">
+				<xs:annotation>
+					<xs:documentation><![CDATA[č.ev. - číslo evidenční stavebního objektu]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ShapeRelation">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Reprezentuje vztah mezi dotazem / tvarem filtru a indexovanými tvary]]></xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="INTERSECTS">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Vrátí záznamy, kterých hodnota atributu je v průniku s rozsahem definovaným filtrem]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DISJOINT">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Vrátí záznamy, kterých hodnota atributu není v průniku s rozsahem definovaným filtrem]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="WITHIN">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Vrátí záznamy, kterých hodnota atributu je plně obsažena v rozsahu definovaným filtrem]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CONTAINS">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Vrátí záznamy, kterých hodnota atributu pokrývá rozsah definovaný filterm]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="DistanceUnit">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Jednotka vzdálenosti]]></xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="KILOMETERS">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Kilometry]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="METERS">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Metry]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CENTIMETERS">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Centimetry]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MILLIMETERS">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Milimetry]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="MissingValues">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Definuje, jak zacházet se záznamy, kterým chybí hodnota, podle které se ŕadí]]></xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="FIRST">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Záznamy s chybějící hodnotu budou v seznamu první]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LAST">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Záznamy s chybějící hodnotu budou v seznamu poslední]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SortOrder">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Způsob řazení]]></xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="ASC">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Vzestupně]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DESC">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Zestupně]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="GeoDistance">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Způsob kalkulace vzdálenosti]]></xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="PLANE">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Rovina]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ARC">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Oblouk]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Include">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="DEACTIVATED">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Mezi výsledky zahrne i zneplatněné záznamy (uživatel musí mít právo)]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Language">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Jazyk překladu]]></xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="CZECH">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Čeština]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ENGLISH">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Angličtina]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GERMAN">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Němčina]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SLOVAK">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Slovenština]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="AgendaType">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Typ agendy]]></xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="BASIC">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Základní agenda]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SPECIFIED">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Agenda se specifikacemi]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="FaultCode">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Chybové kódy]]></xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="AUTHENTICATION_FAILED">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Chyba autentizace]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BAD_CREDENTIALS">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Nesprávné přihlašovací údaje]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CONFLICT_OBJECT">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Objekt již v systému existuje / konflikt s jiným objektem]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FORBIDDEN_OBJECT">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Neoprávněn přístup k objektu]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FORBIDDEN_OPERATION">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Neoprávněn přístup k operaci]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="INTERNAL_SERVER_ERROR">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Serverová chyba]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="INVALID_ARGUMENT">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Špatný argument na vstupu]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="INVALID_ATTRIBUTE">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Špatný atribút na vstupu]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MISSING_ATTRIBUTE">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Chybí povinný atribut]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MISSING_OBJECT">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Objekt nenalezen]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SOAP_PARSE_ERROR">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Chyba pri parsování SOAP zprávy]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VALIDATION_ERROR">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Chyba při validaci dat]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="WaterUsagePlaceType">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Typ místa užívání vody]]></xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="GROUNDWATER_ABSTRACTION">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Odběr podzemní vody]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SURFACE_WATER_ABSTRACTION">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Odběr povrchové vody]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="STREAM_DISCHARGE">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Vypouštění do toku]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UNDERGROUND_DISCHARGE">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Vypouštění do podzemí]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="WATER_ACCUMULATION">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Akumulace vod]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BasinEnterprise">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Podnik povodí]]></xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="MORAVA_BASIN">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Povodí Moravy]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VLTAVA_BASIN">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Povodí Vltavy]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ELBE_BASIN">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Povodí Labe]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ODER_BASIN">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Povodí Odry]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="OHRE_BASIN">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Povodí Ohře]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="DecisionTypeGroup">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Skupina typu rozhodnutí]]></xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="ACCUMULATION_PERMISSION">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Rozhodnutí o povolení k nakládání s vodami na vodním díle]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DISCHARGE_PERMISSION">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Rozhodnutí o povolení k vypouštění vod]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GROUNDWATER_ABSTRACTION_PERMISSION">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Rozhodnutí o povolení odběru podzemní vody]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="HANDLING_RULES_APPROVAL">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Rozhodnutí o schválení Manipulačního řádu]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PROTECTION_ZONE_DETERMINATION">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Rozhodnutí o stanovení ochranného pásma]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SURFACE_ABSTRACTION_PERMISSION">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Rozhodnutí o povolení k odběru povrchové vody]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="DataType">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Typ osobního údaje]]></xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="EMAIL">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Email]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PHONE">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Telefon]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DATE">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Datum]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DATE_TIME">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Datum a čas]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NUMBER">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Číslo]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TEXT">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Text]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="RoleType">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Typ role]]></xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="RELATIONSHIP_ROLE">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Vztahová role]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SECURITY_ROLE">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Bezpečnostní role]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SUBJECT_ROLE">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Subjektová role]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SYSTEM_ROLE">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Systémová role]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="USER_ROLE">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Uživatelská role]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="RoleInstanceType">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Typ instance role]]></xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="RELATIONSHIP_ROLE_INSTANCE">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Instance vztahové role]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SECURITY_ROLE_INSTANCE">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Instance bezpečnostní role]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SYSTEM_ROLE_INSTANCE">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Instance systémové role]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="USER_ROLE_INSTANCE">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Instance uživatelské role]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SubjectType">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Typ subjektu]]></xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="LEGAL_ENTITY">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Právnická osoba]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LEGAL_ENTITY_WITHOUT_ICO">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Právnická osoba bez IČO]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FOREIGN_LEGAL_ENTITY">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Zahraniční právnická osoba]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="NATURAL_PERSON">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Fyzická osoba]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BUSINESS_NATURAL_PERSON">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Fyzická osoba podnikající]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FOREIGN_NATURAL_PERSON">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Zahraniční fyzická osoba]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="WebService">
+		<xs:annotation>
+			<xs:documentation><![CDATA[Webová služba]]></xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="ADDRESS">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Služba pro adresy (RÚIAN)]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ATHENA">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Služba pro systém Athena]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="DICTIONARY">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Služba pro číselníky]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ENVIIAM">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Služba pro systém EnviIAM]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GENERAL">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Služba pro obecný přístup k datům]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PP">
+				<xs:annotation>
+					<xs:documentation><![CDATA[Služba pro systém Podniků povodí]]></xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

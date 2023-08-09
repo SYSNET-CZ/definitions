@@ -1,0 +1,2900 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sch="https://crzp.inqool.cz/ws/dictionary/v1" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:tns="https://crzp.inqool.cz/ws/dictionary/v1" targetNamespace="https://crzp.inqool.cz/ws/dictionary/v1">
+	<wsdl:types>
+		<xs:schema xmlns:common="https://crzp.inqool.cz/ws/common/v1" xmlns:dictionary="https://crzp.inqool.cz/ws/dictionary/v1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="https://crzp.inqool.cz/ws/dictionary/v1" version="1.0">
+			<xs:import namespace="https://crzp.inqool.cz/ws/common/v1" schemaLocation="common_v1e.xsd"/>
+			<xs:element name="GetBalanceUnitRequest" type="dictionary:GetBalanceUnitRequest"/>
+			<xs:element name="GetBalanceUnitResponse" type="dictionary:GetBalanceUnitResponse"/>
+			<xs:element name="GetCompetentAuthorityRequest" type="dictionary:GetCompetentAuthorityRequest"/>
+			<xs:element name="GetCompetentAuthorityResponse" type="dictionary:GetCompetentAuthorityResponse"/>
+			<xs:element name="GetCompetentControlAuthorityRequest" type="dictionary:GetCompetentControlAuthorityRequest"/>
+			<xs:element name="GetCompetentControlAuthorityResponse" type="dictionary:GetCompetentControlAuthorityResponse"/>
+			<xs:element name="GetCzNaceRequest" type="dictionary:GetCzNaceRequest"/>
+			<xs:element name="GetCzNaceResponse" type="dictionary:GetCzNaceResponse"/>
+			<xs:element name="GetCzRiverBasinDistrictRequest" type="dictionary:GetCzRiverBasinDistrictRequest"/>
+			<xs:element name="GetCzRiverBasinDistrictResponse" type="dictionary:GetCzRiverBasinDistrictResponse"/>
+			<xs:element name="GetDecisionTypeRequest" type="dictionary:GetDecisionTypeRequest"/>
+			<xs:element name="GetDecisionTypeResponse" type="dictionary:GetDecisionTypeResponse"/>
+			<xs:element name="GetDictionaryInfoRequest" type="dictionary:GetDictionaryInfoRequest"/>
+			<xs:element name="GetDictionaryInfoResponse" type="dictionary:GetDictionaryInfoResponse"/>
+			<xs:element name="GetEprtrActivityRequest" type="dictionary:GetEprtrActivityRequest"/>
+			<xs:element name="GetEprtrActivityResponse" type="dictionary:GetEprtrActivityResponse"/>
+			<xs:element name="GetEuRiverBasinDistrictRequest" type="dictionary:GetEuRiverBasinDistrictRequest"/>
+			<xs:element name="GetEuRiverBasinDistrictResponse" type="dictionary:GetEuRiverBasinDistrictResponse"/>
+			<xs:element name="GetHydrogeologicalZoneRequest" type="dictionary:GetHydrogeologicalZoneRequest"/>
+			<xs:element name="GetHydrogeologicalZoneResponse" type="dictionary:GetHydrogeologicalZoneResponse"/>
+			<xs:element name="GetIndicatorRequest" type="dictionary:GetIndicatorRequest"/>
+			<xs:element name="GetIndicatorResponse" type="dictionary:GetIndicatorResponse"/>
+			<xs:element name="GetIppcActivityRequest" type="dictionary:GetIppcActivityRequest"/>
+			<xs:element name="GetIppcActivityResponse" type="dictionary:GetIppcActivityResponse"/>
+			<xs:element name="GetIrzActivityRequest" type="dictionary:GetIrzActivityRequest"/>
+			<xs:element name="GetIrzActivityResponse" type="dictionary:GetIrzActivityResponse"/>
+			<xs:element name="GetLegalFormRequest" type="dictionary:GetLegalFormRequest"/>
+			<xs:element name="GetLegalFormResponse" type="dictionary:GetLegalFormResponse"/>
+			<xs:element name="GetNaceRequest" type="dictionary:GetNaceRequest"/>
+			<xs:element name="GetNaceResponse" type="dictionary:GetNaceResponse"/>
+			<xs:element name="GetProcessingPurposeRequest" type="dictionary:GetProcessingPurposeRequest"/>
+			<xs:element name="GetProcessingPurposeResponse" type="dictionary:GetProcessingPurposeResponse"/>
+			<xs:element name="GetRiverSideRequest" type="dictionary:GetRiverSideRequest"/>
+			<xs:element name="GetRiverSideResponse" type="dictionary:GetRiverSideResponse"/>
+			<xs:element name="GetSampleTypeRequest" type="dictionary:GetSampleTypeRequest"/>
+			<xs:element name="GetSampleTypeResponse" type="dictionary:GetSampleTypeResponse"/>
+			<xs:element name="GetSewerTypeRequest" type="dictionary:GetSewerTypeRequest"/>
+			<xs:element name="GetSewerTypeResponse" type="dictionary:GetSewerTypeResponse"/>
+			<xs:element name="GetWaterFlowRequest" type="dictionary:GetWaterFlowRequest"/>
+			<xs:element name="GetWaterFlowResponse" type="dictionary:GetWaterFlowResponse"/>
+			<xs:element name="GetWaterOriginRequest" type="dictionary:GetWaterOriginRequest"/>
+			<xs:element name="GetWaterOriginResponse" type="dictionary:GetWaterOriginResponse"/>
+			<xs:element name="GetWaterTreatmentMethodRequest" type="dictionary:GetWaterTreatmentMethodRequest"/>
+			<xs:element name="GetWaterTreatmentMethodResponse" type="dictionary:GetWaterTreatmentMethodResponse"/>
+			<xs:element name="ListBalanceUnitRequest" type="dictionary:ListBalanceUnitRequest"/>
+			<xs:element name="ListBalanceUnitResponse" type="dictionary:ListBalanceUnitResponse"/>
+			<xs:element name="ListCompetentAuthorityRequest" type="dictionary:ListCompetentAuthorityRequest"/>
+			<xs:element name="ListCompetentAuthorityResponse" type="dictionary:ListCompetentAuthorityResponse"/>
+			<xs:element name="ListCompetentControlAuthorityRequest" type="dictionary:ListCompetentControlAuthorityRequest"/>
+			<xs:element name="ListCompetentControlAuthorityResponse" type="dictionary:ListCompetentControlAuthorityResponse"/>
+			<xs:element name="ListCzNaceRequest" type="dictionary:ListCzNaceRequest"/>
+			<xs:element name="ListCzNaceResponse" type="dictionary:ListCzNaceResponse"/>
+			<xs:element name="ListCzRiverBasinDistrictRequest" type="dictionary:ListCzRiverBasinDistrictRequest"/>
+			<xs:element name="ListCzRiverBasinDistrictResponse" type="dictionary:ListCzRiverBasinDistrictResponse"/>
+			<xs:element name="ListDecisionTypeRequest" type="dictionary:ListDecisionTypeRequest"/>
+			<xs:element name="ListDecisionTypeResponse" type="dictionary:ListDecisionTypeResponse"/>
+			<xs:element name="ListDictionaryInfoRequest" type="dictionary:ListDictionaryInfoRequest"/>
+			<xs:element name="ListDictionaryInfoResponse" type="dictionary:ListDictionaryInfoResponse"/>
+			<xs:element name="ListEprtrActivityRequest" type="dictionary:ListEprtrActivityRequest"/>
+			<xs:element name="ListEprtrActivityResponse" type="dictionary:ListEprtrActivityResponse"/>
+			<xs:element name="ListEuRiverBasinDistrictRequest" type="dictionary:ListEuRiverBasinDistrictRequest"/>
+			<xs:element name="ListEuRiverBasinDistrictResponse" type="dictionary:ListEuRiverBasinDistrictResponse"/>
+			<xs:element name="ListHydrogeologicalZoneRequest" type="dictionary:ListHydrogeologicalZoneRequest"/>
+			<xs:element name="ListHydrogeologicalZoneResponse" type="dictionary:ListHydrogeologicalZoneResponse"/>
+			<xs:element name="ListIndicatorRequest" type="dictionary:ListIndicatorRequest"/>
+			<xs:element name="ListIndicatorResponse" type="dictionary:ListIndicatorResponse"/>
+			<xs:element name="ListIppcActivityRequest" type="dictionary:ListIppcActivityRequest"/>
+			<xs:element name="ListIppcActivityResponse" type="dictionary:ListIppcActivityResponse"/>
+			<xs:element name="ListIrzActivityRequest" type="dictionary:ListIrzActivityRequest"/>
+			<xs:element name="ListIrzActivityResponse" type="dictionary:ListIrzActivityResponse"/>
+			<xs:element name="ListLegalFormRequest" type="dictionary:ListLegalFormRequest"/>
+			<xs:element name="ListLegalFormResponse" type="dictionary:ListLegalFormResponse"/>
+			<xs:element name="ListNaceRequest" type="dictionary:ListNaceRequest"/>
+			<xs:element name="ListNaceResponse" type="dictionary:ListNaceResponse"/>
+			<xs:element name="ListProcessingPurposeRequest" type="dictionary:ListProcessingPurposeRequest"/>
+			<xs:element name="ListProcessingPurposeResponse" type="dictionary:ListProcessingPurposeResponse"/>
+			<xs:element name="ListRiverSideRequest" type="dictionary:ListRiverSideRequest"/>
+			<xs:element name="ListRiverSideResponse" type="dictionary:ListRiverSideResponse"/>
+			<xs:element name="ListSampleTypeRequest" type="dictionary:ListSampleTypeRequest"/>
+			<xs:element name="ListSampleTypeResponse" type="dictionary:ListSampleTypeResponse"/>
+			<xs:element name="ListSewerTypeRequest" type="dictionary:ListSewerTypeRequest"/>
+			<xs:element name="ListSewerTypeResponse" type="dictionary:ListSewerTypeResponse"/>
+			<xs:element name="ListWaterFlowRequest" type="dictionary:ListWaterFlowRequest"/>
+			<xs:element name="ListWaterFlowResponse" type="dictionary:ListWaterFlowResponse"/>
+			<xs:element name="ListWaterOriginRequest" type="dictionary:ListWaterOriginRequest"/>
+			<xs:element name="ListWaterOriginResponse" type="dictionary:ListWaterOriginResponse"/>
+			<xs:element name="ListWaterTreatmentMethodRequest" type="dictionary:ListWaterTreatmentMethodRequest"/>
+			<xs:element name="ListWaterTreatmentMethodResponse" type="dictionary:ListWaterTreatmentMethodResponse"/>
+			<xs:complexType name="EprtrActivityDetail">
+				<xs:annotation>
+					<xs:documentation>
+        Činnost E-PRTR (European Pollutant Release and Transfer Register)
+      </xs:documentation>
+				</xs:annotation>
+				<xs:complexContent>
+					<xs:extension base="common:DictionaryObject">
+						<xs:sequence/>
+						<xs:attribute name="version" type="xs:int" use="required">
+							<xs:annotation>
+								<xs:documentation>
+              Verze záznamu
+            </xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="EprtrActivityList">
+				<xs:annotation>
+					<xs:documentation>
+        Činnost E-PRTR (European Pollutant Release and Transfer Register)
+      </xs:documentation>
+				</xs:annotation>
+				<xs:complexContent>
+					<xs:extension base="common:DictionaryObject">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="GetEprtrActivityRequest">
+				<xs:complexContent>
+					<xs:extension base="common:GetRequest">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="GetEprtrActivityResponse">
+				<xs:complexContent>
+					<xs:extension base="common:GetResponse">
+						<xs:sequence>
+							<xs:element name="eprtrActivity" type="dictionary:EprtrActivityDetail"/>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ListEprtrActivityRequest">
+				<xs:complexContent>
+					<xs:extension base="common:ListRequest">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ListEprtrActivityResponse">
+				<xs:complexContent>
+					<xs:extension base="common:ListResponse">
+						<xs:sequence>
+							<xs:element name="items">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element maxOccurs="unbounded" minOccurs="0" name="eprtrActivity" type="dictionary:EprtrActivityList"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="IppcActivityDetail">
+				<xs:annotation>
+					<xs:documentation>
+        Činnost IPPC (Integrated Pollution Prevention and Control)
+      </xs:documentation>
+				</xs:annotation>
+				<xs:complexContent>
+					<xs:extension base="common:DictionaryObject">
+						<xs:sequence/>
+						<xs:attribute name="version" type="xs:int" use="required">
+							<xs:annotation>
+								<xs:documentation>
+              Verze záznamu
+            </xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="IppcActivityList">
+				<xs:annotation>
+					<xs:documentation>
+        Činnost IPPC (Integrated Pollution Prevention and Control)
+      </xs:documentation>
+				</xs:annotation>
+				<xs:complexContent>
+					<xs:extension base="common:DictionaryObject">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="GetIppcActivityRequest">
+				<xs:complexContent>
+					<xs:extension base="common:GetRequest">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="GetIppcActivityResponse">
+				<xs:complexContent>
+					<xs:extension base="common:GetResponse">
+						<xs:sequence>
+							<xs:element name="ippcActivity" type="dictionary:IppcActivityDetail"/>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ListIppcActivityRequest">
+				<xs:complexContent>
+					<xs:extension base="common:ListRequest">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ListIppcActivityResponse">
+				<xs:complexContent>
+					<xs:extension base="common:ListResponse">
+						<xs:sequence>
+							<xs:element name="items">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element maxOccurs="unbounded" minOccurs="0" name="ippcActivity" type="dictionary:IppcActivityList"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="IrzActivityDetail">
+				<xs:annotation>
+					<xs:documentation>
+        Činnost dle přílohy zákona o IRZ a ISPOP
+      </xs:documentation>
+				</xs:annotation>
+				<xs:complexContent>
+					<xs:extension base="common:DictionaryObject">
+						<xs:sequence/>
+						<xs:attribute name="version" type="xs:int" use="required">
+							<xs:annotation>
+								<xs:documentation>
+              Verze záznamu
+            </xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="IrzActivityList">
+				<xs:annotation>
+					<xs:documentation>
+        Činnost dle přílohy zákona o IRZ a ISPOP
+      </xs:documentation>
+				</xs:annotation>
+				<xs:complexContent>
+					<xs:extension base="common:DictionaryObject">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="GetIrzActivityRequest">
+				<xs:complexContent>
+					<xs:extension base="common:GetRequest">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="GetIrzActivityResponse">
+				<xs:complexContent>
+					<xs:extension base="common:GetResponse">
+						<xs:sequence>
+							<xs:element name="irzActivity" type="dictionary:IrzActivityDetail"/>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ListIrzActivityRequest">
+				<xs:complexContent>
+					<xs:extension base="common:ListRequest">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ListIrzActivityResponse">
+				<xs:complexContent>
+					<xs:extension base="common:ListResponse">
+						<xs:sequence>
+							<xs:element name="items">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element maxOccurs="unbounded" minOccurs="0" name="irzActivity" type="dictionary:IrzActivityList"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="CompetentControlAuthorityDetail">
+				<xs:annotation>
+					<xs:documentation>
+        Kompetentní kontrolní a ostatní orgány
+      </xs:documentation>
+				</xs:annotation>
+				<xs:complexContent>
+					<xs:extension base="common:DictionaryObject">
+						<xs:sequence/>
+						<xs:attribute name="version" type="xs:int" use="required">
+							<xs:annotation>
+								<xs:documentation>
+              Verze záznamu
+            </xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="CompetentControlAuthorityList">
+				<xs:annotation>
+					<xs:documentation>
+        Kompetentní kontrolní a ostatní orgány
+      </xs:documentation>
+				</xs:annotation>
+				<xs:complexContent>
+					<xs:extension base="common:DictionaryObject">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="GetCompetentControlAuthorityRequest">
+				<xs:complexContent>
+					<xs:extension base="common:GetRequest">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="GetCompetentControlAuthorityResponse">
+				<xs:complexContent>
+					<xs:extension base="common:GetResponse">
+						<xs:sequence>
+							<xs:element name="competentControlAuthority" type="dictionary:CompetentControlAuthorityDetail"/>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ListCompetentControlAuthorityRequest">
+				<xs:complexContent>
+					<xs:extension base="common:ListRequest">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ListCompetentControlAuthorityResponse">
+				<xs:complexContent>
+					<xs:extension base="common:ListResponse">
+						<xs:sequence>
+							<xs:element name="items">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element maxOccurs="unbounded" minOccurs="0" name="competentControlAuthority" type="dictionary:CompetentControlAuthorityList"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="CompetentAuthorityDetail">
+				<xs:annotation>
+					<xs:documentation>
+        Kompetentní orgán
+      </xs:documentation>
+				</xs:annotation>
+				<xs:complexContent>
+					<xs:extension base="common:DictionaryObject">
+						<xs:sequence/>
+						<xs:attribute name="version" type="xs:int" use="required">
+							<xs:annotation>
+								<xs:documentation>
+              Verze záznamu
+            </xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="CompetentAuthorityList">
+				<xs:annotation>
+					<xs:documentation>
+        Kompetentní orgán
+      </xs:documentation>
+				</xs:annotation>
+				<xs:complexContent>
+					<xs:extension base="common:DictionaryObject">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="GetCompetentAuthorityRequest">
+				<xs:complexContent>
+					<xs:extension base="common:GetRequest">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="GetCompetentAuthorityResponse">
+				<xs:complexContent>
+					<xs:extension base="common:GetResponse">
+						<xs:sequence>
+							<xs:element name="competentAuthority" type="dictionary:CompetentAuthorityDetail"/>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ListCompetentAuthorityRequest">
+				<xs:complexContent>
+					<xs:extension base="common:ListRequest">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ListCompetentAuthorityResponse">
+				<xs:complexContent>
+					<xs:extension base="common:ListResponse">
+						<xs:sequence>
+							<xs:element name="items">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element maxOccurs="unbounded" minOccurs="0" name="competentAuthority" type="dictionary:CompetentAuthorityList"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="BalanceUnitDetail">
+				<xs:annotation>
+					<xs:documentation>
+        Jednotka bilance
+      </xs:documentation>
+				</xs:annotation>
+				<xs:complexContent>
+					<xs:extension base="common:DictionaryObject">
+						<xs:sequence/>
+						<xs:attribute name="version" type="xs:int" use="required">
+							<xs:annotation>
+								<xs:documentation>
+              Verze záznamu
+            </xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="BalanceUnitList">
+				<xs:annotation>
+					<xs:documentation>
+        Jednotka bilance
+      </xs:documentation>
+				</xs:annotation>
+				<xs:complexContent>
+					<xs:extension base="common:DictionaryObject">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="GetBalanceUnitRequest">
+				<xs:complexContent>
+					<xs:extension base="common:GetRequest">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="GetBalanceUnitResponse">
+				<xs:complexContent>
+					<xs:extension base="common:GetResponse">
+						<xs:sequence>
+							<xs:element name="balanceUnit" type="dictionary:BalanceUnitDetail"/>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ListBalanceUnitRequest">
+				<xs:complexContent>
+					<xs:extension base="common:ListRequest">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ListBalanceUnitResponse">
+				<xs:complexContent>
+					<xs:extension base="common:ListResponse">
+						<xs:sequence>
+							<xs:element name="items">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element maxOccurs="unbounded" minOccurs="0" name="balanceUnit" type="dictionary:BalanceUnitList"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="DecisionTypeDetail">
+				<xs:annotation>
+					<xs:documentation>
+        Druh rozhodnutí
+      </xs:documentation>
+				</xs:annotation>
+				<xs:complexContent>
+					<xs:extension base="common:DictionaryObject">
+						<xs:sequence>
+							<xs:element minOccurs="0" name="parent" type="common:DictionaryReference">
+								<xs:annotation>
+									<xs:documentation>
+                Nadřazený prvek
+              </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element minOccurs="0" name="description" type="xs:string">
+								<xs:annotation>
+									<xs:documentation>
+                Popis
+              </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element minOccurs="0" name="paragraph" type="xs:string">
+								<xs:annotation>
+									<xs:documentation>
+                Paragraf
+              </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name="version" type="xs:int" use="required">
+							<xs:annotation>
+								<xs:documentation>
+              Verze záznamu
+            </xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="DecisionTypeList">
+				<xs:annotation>
+					<xs:documentation>
+        Druh rozhodnutí
+      </xs:documentation>
+				</xs:annotation>
+				<xs:complexContent>
+					<xs:extension base="common:DictionaryObject">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="GetDecisionTypeRequest">
+				<xs:complexContent>
+					<xs:extension base="common:GetRequest">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="GetDecisionTypeResponse">
+				<xs:complexContent>
+					<xs:extension base="common:GetResponse">
+						<xs:sequence>
+							<xs:element name="decisionType" type="dictionary:DecisionTypeDetail"/>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ListDecisionTypeRequest">
+				<xs:complexContent>
+					<xs:extension base="common:ListRequest">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ListDecisionTypeResponse">
+				<xs:complexContent>
+					<xs:extension base="common:ListResponse">
+						<xs:sequence>
+							<xs:element name="items">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element maxOccurs="unbounded" minOccurs="0" name="decisionType" type="dictionary:DecisionTypeList"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="DictionaryInfoDetail">
+				<xs:annotation>
+					<xs:documentation>
+        Informace o číselníku
+      </xs:documentation>
+				</xs:annotation>
+				<xs:complexContent>
+					<xs:extension base="common:DictionaryObject">
+						<xs:sequence>
+							<xs:element name="description" type="xs:string">
+								<xs:annotation>
+									<xs:documentation>
+                Popis
+              </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="source" type="xs:string">
+								<xs:annotation>
+									<xs:documentation>
+                Zdroj
+              </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element minOccurs="0" name="lastUpdate" type="xs:dateTime">
+								<xs:annotation>
+									<xs:documentation>
+                Čas poslední aktualizace
+              </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name="version" type="xs:int" use="required">
+							<xs:annotation>
+								<xs:documentation>
+              Verze záznamu
+            </xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="DictionaryInfoList">
+				<xs:annotation>
+					<xs:documentation>
+        Informace o číselníku
+      </xs:documentation>
+				</xs:annotation>
+				<xs:complexContent>
+					<xs:extension base="common:DictionaryObject">
+						<xs:sequence>
+							<xs:element name="description" type="xs:string">
+								<xs:annotation>
+									<xs:documentation>
+                Popis
+              </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="source" type="xs:string">
+								<xs:annotation>
+									<xs:documentation>
+                Zdroj
+              </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element minOccurs="0" name="lastUpdate" type="xs:dateTime">
+								<xs:annotation>
+									<xs:documentation>
+                Čas poslední aktualizace
+              </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="GetDictionaryInfoRequest">
+				<xs:complexContent>
+					<xs:extension base="common:GetRequest">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="GetDictionaryInfoResponse">
+				<xs:complexContent>
+					<xs:extension base="common:GetResponse">
+						<xs:sequence>
+							<xs:element name="dictionaryInfo" type="dictionary:DictionaryInfoDetail"/>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ListDictionaryInfoRequest">
+				<xs:complexContent>
+					<xs:extension base="common:ListRequest">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ListDictionaryInfoResponse">
+				<xs:complexContent>
+					<xs:extension base="common:ListResponse">
+						<xs:sequence>
+							<xs:element name="items">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element maxOccurs="unbounded" minOccurs="0" name="dictionaryInfo" type="dictionary:DictionaryInfoList"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="IndicatorDetail">
+				<xs:annotation>
+					<xs:documentation>
+        Ukazatel
+      </xs:documentation>
+				</xs:annotation>
+				<xs:complexContent>
+					<xs:extension base="common:DictionaryObject">
+						<xs:sequence>
+							<xs:element minOccurs="0" name="description" type="xs:string">
+								<xs:annotation>
+									<xs:documentation>
+                Popis
+              </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element minOccurs="0" name="unit" type="xs:string">
+								<xs:annotation>
+									<xs:documentation>
+                Jednotka
+              </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name="version" type="xs:int" use="required">
+							<xs:annotation>
+								<xs:documentation>
+              Verze záznamu
+            </xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="IndicatorList">
+				<xs:annotation>
+					<xs:documentation>
+        Ukazatel
+      </xs:documentation>
+				</xs:annotation>
+				<xs:complexContent>
+					<xs:extension base="common:DictionaryObject">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="GetIndicatorRequest">
+				<xs:complexContent>
+					<xs:extension base="common:GetRequest">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="GetIndicatorResponse">
+				<xs:complexContent>
+					<xs:extension base="common:GetResponse">
+						<xs:sequence>
+							<xs:element name="indicator" type="dictionary:IndicatorDetail"/>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ListIndicatorRequest">
+				<xs:complexContent>
+					<xs:extension base="common:ListRequest">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ListIndicatorResponse">
+				<xs:complexContent>
+					<xs:extension base="common:ListResponse">
+						<xs:sequence>
+							<xs:element name="items">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element maxOccurs="unbounded" minOccurs="0" name="indicator" type="dictionary:IndicatorList"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="LegalFormDetail">
+				<xs:annotation>
+					<xs:documentation>
+        Právní forma
+      </xs:documentation>
+				</xs:annotation>
+				<xs:complexContent>
+					<xs:extension base="common:DictionaryObject">
+						<xs:sequence/>
+						<xs:attribute name="version" type="xs:int" use="required">
+							<xs:annotation>
+								<xs:documentation>
+              Verze záznamu
+            </xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="LegalFormList">
+				<xs:annotation>
+					<xs:documentation>
+        Právní forma
+      </xs:documentation>
+				</xs:annotation>
+				<xs:complexContent>
+					<xs:extension base="common:DictionaryObject">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="GetLegalFormRequest">
+				<xs:complexContent>
+					<xs:extension base="common:GetRequest">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="GetLegalFormResponse">
+				<xs:complexContent>
+					<xs:extension base="common:GetResponse">
+						<xs:sequence>
+							<xs:element name="legalForm" type="dictionary:LegalFormDetail"/>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ListLegalFormRequest">
+				<xs:complexContent>
+					<xs:extension base="common:ListRequest">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ListLegalFormResponse">
+				<xs:complexContent>
+					<xs:extension base="common:ListResponse">
+						<xs:sequence>
+							<xs:element name="items">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element maxOccurs="unbounded" minOccurs="0" name="legalForm" type="dictionary:LegalFormList"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="CzNaceDetail">
+				<xs:annotation>
+					<xs:documentation>
+        Klasifikace ekonomických činností (CZ-NACE)
+      </xs:documentation>
+				</xs:annotation>
+				<xs:complexContent>
+					<xs:extension base="common:DictionaryObject">
+						<xs:sequence/>
+						<xs:attribute name="version" type="xs:int" use="required">
+							<xs:annotation>
+								<xs:documentation>
+              Verze záznamu
+            </xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="CzNaceList">
+				<xs:annotation>
+					<xs:documentation>
+        Klasifikace ekonomických činností (CZ-NACE)
+      </xs:documentation>
+				</xs:annotation>
+				<xs:complexContent>
+					<xs:extension base="common:DictionaryObject">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="GetCzNaceRequest">
+				<xs:complexContent>
+					<xs:extension base="common:GetRequest">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="GetCzNaceResponse">
+				<xs:complexContent>
+					<xs:extension base="common:GetResponse">
+						<xs:sequence>
+							<xs:element name="czNace" type="dictionary:CzNaceDetail"/>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ListCzNaceRequest">
+				<xs:complexContent>
+					<xs:extension base="common:ListRequest">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ListCzNaceResponse">
+				<xs:complexContent>
+					<xs:extension base="common:ListResponse">
+						<xs:sequence>
+							<xs:element name="items">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element maxOccurs="unbounded" minOccurs="0" name="czNace" type="dictionary:CzNaceList"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="NaceDetail">
+				<xs:annotation>
+					<xs:documentation>
+        Klasifikace ekonomických činností (NACE)
+      </xs:documentation>
+				</xs:annotation>
+				<xs:complexContent>
+					<xs:extension base="common:DictionaryObject">
+						<xs:sequence/>
+						<xs:attribute name="version" type="xs:int" use="required">
+							<xs:annotation>
+								<xs:documentation>
+              Verze záznamu
+            </xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="NaceList">
+				<xs:annotation>
+					<xs:documentation>
+        Klasifikace ekonomických činností (NACE)
+      </xs:documentation>
+				</xs:annotation>
+				<xs:complexContent>
+					<xs:extension base="common:DictionaryObject">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="GetNaceRequest">
+				<xs:complexContent>
+					<xs:extension base="common:GetRequest">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="GetNaceResponse">
+				<xs:complexContent>
+					<xs:extension base="common:GetResponse">
+						<xs:sequence>
+							<xs:element name="nace" type="dictionary:NaceDetail"/>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ListNaceRequest">
+				<xs:complexContent>
+					<xs:extension base="common:ListRequest">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ListNaceResponse">
+				<xs:complexContent>
+					<xs:extension base="common:ListResponse">
+						<xs:sequence>
+							<xs:element name="items">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element maxOccurs="unbounded" minOccurs="0" name="nace" type="dictionary:NaceList"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ProcessingPurposeDetail">
+				<xs:annotation>
+					<xs:documentation>
+        Účel zpracování
+      </xs:documentation>
+				</xs:annotation>
+				<xs:complexContent>
+					<xs:extension base="common:DictionaryObject">
+						<xs:sequence>
+							<xs:element name="type" type="dictionary:ProcessingPurposeType">
+								<xs:annotation>
+									<xs:documentation>
+                Typ
+              </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="domain" type="dictionary:ProcessingPurposeDomain">
+								<xs:annotation>
+									<xs:documentation>
+                Oblast
+              </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element minOccurs="0" name="legalReference" type="xs:string">
+								<xs:annotation>
+									<xs:documentation>
+                Zákonná reference nebo důvod
+              </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="shreddingPeriodDays" type="xs:int">
+								<xs:annotation>
+									<xs:documentation>
+                Skartační lhůta (v dnech)
+              </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element minOccurs="0" name="shreddingMark" type="xs:string">
+								<xs:annotation>
+									<xs:documentation>
+                Skartační znak
+              </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name="version" type="xs:int" use="required">
+							<xs:annotation>
+								<xs:documentation>
+              Verze záznamu
+            </xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ProcessingPurposeList">
+				<xs:annotation>
+					<xs:documentation>
+        Účel zpracování
+      </xs:documentation>
+				</xs:annotation>
+				<xs:complexContent>
+					<xs:extension base="common:DictionaryObject">
+						<xs:sequence>
+							<xs:element name="type" type="dictionary:ProcessingPurposeType">
+								<xs:annotation>
+									<xs:documentation>
+                Typ
+              </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="domain" type="dictionary:ProcessingPurposeDomain">
+								<xs:annotation>
+									<xs:documentation>
+                Oblast
+              </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="GetProcessingPurposeRequest">
+				<xs:complexContent>
+					<xs:extension base="common:GetRequest">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="GetProcessingPurposeResponse">
+				<xs:complexContent>
+					<xs:extension base="common:GetResponse">
+						<xs:sequence>
+							<xs:element name="processingPurpose" type="dictionary:ProcessingPurposeDetail"/>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ListProcessingPurposeRequest">
+				<xs:complexContent>
+					<xs:extension base="common:ListRequest">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ListProcessingPurposeResponse">
+				<xs:complexContent>
+					<xs:extension base="common:ListResponse">
+						<xs:sequence>
+							<xs:element name="items">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element maxOccurs="unbounded" minOccurs="0" name="processingPurpose" type="dictionary:ProcessingPurposeList"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="CzRiverBasinDistrictDetail">
+				<xs:annotation>
+					<xs:documentation>
+        Oblast povodí ČR
+      </xs:documentation>
+				</xs:annotation>
+				<xs:complexContent>
+					<xs:extension base="common:DictionaryObject">
+						<xs:sequence/>
+						<xs:attribute name="version" type="xs:int" use="required">
+							<xs:annotation>
+								<xs:documentation>
+              Verze záznamu
+            </xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="CzRiverBasinDistrictList">
+				<xs:annotation>
+					<xs:documentation>
+        Oblast povodí ČR
+      </xs:documentation>
+				</xs:annotation>
+				<xs:complexContent>
+					<xs:extension base="common:DictionaryObject">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="GetCzRiverBasinDistrictRequest">
+				<xs:complexContent>
+					<xs:extension base="common:GetRequest">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="GetCzRiverBasinDistrictResponse">
+				<xs:complexContent>
+					<xs:extension base="common:GetResponse">
+						<xs:sequence>
+							<xs:element name="czRiverBasinDistrict" type="dictionary:CzRiverBasinDistrictDetail"/>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ListCzRiverBasinDistrictRequest">
+				<xs:complexContent>
+					<xs:extension base="common:ListRequest">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ListCzRiverBasinDistrictResponse">
+				<xs:complexContent>
+					<xs:extension base="common:ListResponse">
+						<xs:sequence>
+							<xs:element name="items">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element maxOccurs="unbounded" minOccurs="0" name="czRiverBasinDistrict" type="dictionary:CzRiverBasinDistrictList"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="EuRiverBasinDistrictDetail">
+				<xs:annotation>
+					<xs:documentation>
+        Oblast povodí EU
+      </xs:documentation>
+				</xs:annotation>
+				<xs:complexContent>
+					<xs:extension base="common:DictionaryObject">
+						<xs:sequence/>
+						<xs:attribute name="version" type="xs:int" use="required">
+							<xs:annotation>
+								<xs:documentation>
+              Verze záznamu
+            </xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="EuRiverBasinDistrictList">
+				<xs:annotation>
+					<xs:documentation>
+        Oblast povodí EU
+      </xs:documentation>
+				</xs:annotation>
+				<xs:complexContent>
+					<xs:extension base="common:DictionaryObject">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="GetEuRiverBasinDistrictRequest">
+				<xs:complexContent>
+					<xs:extension base="common:GetRequest">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="GetEuRiverBasinDistrictResponse">
+				<xs:complexContent>
+					<xs:extension base="common:GetResponse">
+						<xs:sequence>
+							<xs:element name="euRiverBasinDistrict" type="dictionary:EuRiverBasinDistrictDetail"/>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ListEuRiverBasinDistrictRequest">
+				<xs:complexContent>
+					<xs:extension base="common:ListRequest">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ListEuRiverBasinDistrictResponse">
+				<xs:complexContent>
+					<xs:extension base="common:ListResponse">
+						<xs:sequence>
+							<xs:element name="items">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element maxOccurs="unbounded" minOccurs="0" name="euRiverBasinDistrict" type="dictionary:EuRiverBasinDistrictList"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="RiverSideDetail">
+				<xs:annotation>
+					<xs:documentation>
+        Břeh
+      </xs:documentation>
+				</xs:annotation>
+				<xs:complexContent>
+					<xs:extension base="common:DictionaryObject">
+						<xs:sequence/>
+						<xs:attribute name="version" type="xs:int" use="required">
+							<xs:annotation>
+								<xs:documentation>
+              Verze záznamu
+            </xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="RiverSideList">
+				<xs:annotation>
+					<xs:documentation>
+        Břeh
+      </xs:documentation>
+				</xs:annotation>
+				<xs:complexContent>
+					<xs:extension base="common:DictionaryObject">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="GetRiverSideRequest">
+				<xs:complexContent>
+					<xs:extension base="common:GetRequest">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="GetRiverSideResponse">
+				<xs:complexContent>
+					<xs:extension base="common:GetResponse">
+						<xs:sequence>
+							<xs:element name="riverSide" type="dictionary:RiverSideDetail"/>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ListRiverSideRequest">
+				<xs:complexContent>
+					<xs:extension base="common:ListRequest">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ListRiverSideResponse">
+				<xs:complexContent>
+					<xs:extension base="common:ListResponse">
+						<xs:sequence>
+							<xs:element name="items">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element maxOccurs="unbounded" minOccurs="0" name="riverSide" type="dictionary:RiverSideList"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="SampleTypeDetail">
+				<xs:annotation>
+					<xs:documentation>
+        Typ vzorku
+      </xs:documentation>
+				</xs:annotation>
+				<xs:complexContent>
+					<xs:extension base="common:DictionaryObject">
+						<xs:sequence/>
+						<xs:attribute name="version" type="xs:int" use="required">
+							<xs:annotation>
+								<xs:documentation>
+              Verze záznamu
+            </xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="SampleTypeList">
+				<xs:annotation>
+					<xs:documentation>
+        Typ vzorku
+      </xs:documentation>
+				</xs:annotation>
+				<xs:complexContent>
+					<xs:extension base="common:DictionaryObject">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="GetSampleTypeRequest">
+				<xs:complexContent>
+					<xs:extension base="common:GetRequest">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="GetSampleTypeResponse">
+				<xs:complexContent>
+					<xs:extension base="common:GetResponse">
+						<xs:sequence>
+							<xs:element name="sampleType" type="dictionary:SampleTypeDetail"/>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ListSampleTypeRequest">
+				<xs:complexContent>
+					<xs:extension base="common:ListRequest">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ListSampleTypeResponse">
+				<xs:complexContent>
+					<xs:extension base="common:ListResponse">
+						<xs:sequence>
+							<xs:element name="items">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element maxOccurs="unbounded" minOccurs="0" name="sampleType" type="dictionary:SampleTypeList"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="SewerTypeDetail">
+				<xs:annotation>
+					<xs:documentation>
+        Typ kanalizace
+      </xs:documentation>
+				</xs:annotation>
+				<xs:complexContent>
+					<xs:extension base="common:DictionaryObject">
+						<xs:sequence/>
+						<xs:attribute name="version" type="xs:int" use="required">
+							<xs:annotation>
+								<xs:documentation>
+              Verze záznamu
+            </xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="SewerTypeList">
+				<xs:annotation>
+					<xs:documentation>
+        Typ kanalizace
+      </xs:documentation>
+				</xs:annotation>
+				<xs:complexContent>
+					<xs:extension base="common:DictionaryObject">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="GetSewerTypeRequest">
+				<xs:complexContent>
+					<xs:extension base="common:GetRequest">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="GetSewerTypeResponse">
+				<xs:complexContent>
+					<xs:extension base="common:GetResponse">
+						<xs:sequence>
+							<xs:element name="sewerType" type="dictionary:SewerTypeDetail"/>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ListSewerTypeRequest">
+				<xs:complexContent>
+					<xs:extension base="common:ListRequest">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ListSewerTypeResponse">
+				<xs:complexContent>
+					<xs:extension base="common:ListResponse">
+						<xs:sequence>
+							<xs:element name="items">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element maxOccurs="unbounded" minOccurs="0" name="sewerType" type="dictionary:SewerTypeList"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="WaterFlowDetail">
+				<xs:annotation>
+					<xs:documentation>
+        Vodní tok
+      </xs:documentation>
+				</xs:annotation>
+				<xs:complexContent>
+					<xs:extension base="common:DictionaryObject">
+						<xs:sequence>
+							<xs:element minOccurs="0" name="length" type="xs:decimal">
+								<xs:annotation>
+									<xs:documentation>
+                Délka toku (v km)
+              </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name="version" type="xs:int" use="required">
+							<xs:annotation>
+								<xs:documentation>
+              Verze záznamu
+            </xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="WaterFlowList">
+				<xs:annotation>
+					<xs:documentation>
+        Vodní tok
+      </xs:documentation>
+				</xs:annotation>
+				<xs:complexContent>
+					<xs:extension base="common:DictionaryObject">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="GetWaterFlowRequest">
+				<xs:complexContent>
+					<xs:extension base="common:GetRequest">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="GetWaterFlowResponse">
+				<xs:complexContent>
+					<xs:extension base="common:GetResponse">
+						<xs:sequence>
+							<xs:element name="waterFlow" type="dictionary:WaterFlowDetail"/>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ListWaterFlowRequest">
+				<xs:complexContent>
+					<xs:extension base="common:ListRequest">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ListWaterFlowResponse">
+				<xs:complexContent>
+					<xs:extension base="common:ListResponse">
+						<xs:sequence>
+							<xs:element name="items">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element maxOccurs="unbounded" minOccurs="0" name="waterFlow" type="dictionary:WaterFlowList"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="WaterOriginDetail">
+				<xs:annotation>
+					<xs:documentation>
+        Původ odebrané vody
+      </xs:documentation>
+				</xs:annotation>
+				<xs:complexContent>
+					<xs:extension base="common:DictionaryObject">
+						<xs:sequence/>
+						<xs:attribute name="version" type="xs:int" use="required">
+							<xs:annotation>
+								<xs:documentation>
+              Verze záznamu
+            </xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="WaterOriginList">
+				<xs:annotation>
+					<xs:documentation>
+        Původ odebrané vody
+      </xs:documentation>
+				</xs:annotation>
+				<xs:complexContent>
+					<xs:extension base="common:DictionaryObject">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="GetWaterOriginRequest">
+				<xs:complexContent>
+					<xs:extension base="common:GetRequest">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="GetWaterOriginResponse">
+				<xs:complexContent>
+					<xs:extension base="common:GetResponse">
+						<xs:sequence>
+							<xs:element name="waterOrigin" type="dictionary:WaterOriginDetail"/>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ListWaterOriginRequest">
+				<xs:complexContent>
+					<xs:extension base="common:ListRequest">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ListWaterOriginResponse">
+				<xs:complexContent>
+					<xs:extension base="common:ListResponse">
+						<xs:sequence>
+							<xs:element name="items">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element maxOccurs="unbounded" minOccurs="0" name="waterOrigin" type="dictionary:WaterOriginList"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="WaterTreatmentMethodDetail">
+				<xs:annotation>
+					<xs:documentation>
+        Způsob úpravy vody
+      </xs:documentation>
+				</xs:annotation>
+				<xs:complexContent>
+					<xs:extension base="common:DictionaryObject">
+						<xs:sequence/>
+						<xs:attribute name="version" type="xs:int" use="required">
+							<xs:annotation>
+								<xs:documentation>
+              Verze záznamu
+            </xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="WaterTreatmentMethodList">
+				<xs:annotation>
+					<xs:documentation>
+        Způsob úpravy vody
+      </xs:documentation>
+				</xs:annotation>
+				<xs:complexContent>
+					<xs:extension base="common:DictionaryObject">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="GetWaterTreatmentMethodRequest">
+				<xs:complexContent>
+					<xs:extension base="common:GetRequest">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="GetWaterTreatmentMethodResponse">
+				<xs:complexContent>
+					<xs:extension base="common:GetResponse">
+						<xs:sequence>
+							<xs:element name="waterTreatmentMethod" type="dictionary:WaterTreatmentMethodDetail"/>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ListWaterTreatmentMethodRequest">
+				<xs:complexContent>
+					<xs:extension base="common:ListRequest">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ListWaterTreatmentMethodResponse">
+				<xs:complexContent>
+					<xs:extension base="common:ListResponse">
+						<xs:sequence>
+							<xs:element name="items">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element maxOccurs="unbounded" minOccurs="0" name="waterTreatmentMethod" type="dictionary:WaterTreatmentMethodList"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="HydrogeologicalZoneDetail">
+				<xs:annotation>
+					<xs:documentation>
+        Hydrogeologický rajón
+      </xs:documentation>
+				</xs:annotation>
+				<xs:complexContent>
+					<xs:extension base="common:DictionaryObject">
+						<xs:sequence>
+							<xs:element minOccurs="0" name="area" type="xs:decimal">
+								<xs:annotation>
+									<xs:documentation>
+                Plocha (v km2)
+              </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name="version" type="xs:int" use="required">
+							<xs:annotation>
+								<xs:documentation>
+              Verze záznamu
+            </xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="HydrogeologicalZoneList">
+				<xs:annotation>
+					<xs:documentation>
+        Hydrogeologický rajón
+      </xs:documentation>
+				</xs:annotation>
+				<xs:complexContent>
+					<xs:extension base="common:DictionaryObject">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="GetHydrogeologicalZoneRequest">
+				<xs:complexContent>
+					<xs:extension base="common:GetRequest">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="GetHydrogeologicalZoneResponse">
+				<xs:complexContent>
+					<xs:extension base="common:GetResponse">
+						<xs:sequence>
+							<xs:element name="hydrogeologicalZone" type="dictionary:HydrogeologicalZoneDetail"/>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ListHydrogeologicalZoneRequest">
+				<xs:complexContent>
+					<xs:extension base="common:ListRequest">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ListHydrogeologicalZoneResponse">
+				<xs:complexContent>
+					<xs:extension base="common:ListResponse">
+						<xs:sequence>
+							<xs:element name="items">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element maxOccurs="unbounded" minOccurs="0" name="hydrogeologicalZone" type="dictionary:HydrogeologicalZoneList"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:simpleType name="ProcessingPurposeType">
+				<xs:annotation>
+					<xs:documentation>
+        Typ účelu zpracování
+      </xs:documentation>
+				</xs:annotation>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="LEGAL">
+						<xs:annotation>
+							<xs:documentation>
+            Oprávněný zájem (čl. 6 písm. f) GDPR)
+          </xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="CONSENT">
+						<xs:annotation>
+							<xs:documentation>
+            Souhlas (čl. 6 písm. a) GDPR)
+          </xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="FULFILLMENT_OF_CONTRACT">
+						<xs:annotation>
+							<xs:documentation>
+            Splnění smlouvy (čl. 6 písm. b) GDPR)
+          </xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="COMPLIANCE_WITH_LEGAL_OBLIGATION">
+						<xs:annotation>
+							<xs:documentation>
+            Splnění právní povinnosti (čl. 6 písm. c) GDPR)
+          </xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="PROTECTION_OF_VITAL_INTERESTS">
+						<xs:annotation>
+							<xs:documentation>
+            Ochrana životně důležitých zájmů (čl. 6 písm. d) GDPR)
+          </xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="PUBLIC_INTEREST">
+						<xs:annotation>
+							<xs:documentation>
+            Veřejný zájem (čl. 6 písm. e) GDPR)
+          </xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="ProcessingPurposeDomain">
+				<xs:annotation>
+					<xs:documentation>
+        Oblast účelu zpracování
+      </xs:documentation>
+				</xs:annotation>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="SUBJECT">
+						<xs:annotation>
+							<xs:documentation>
+            Subjekt
+          </xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="IRZ">
+						<xs:annotation>
+							<xs:documentation>
+            IRZ
+          </xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="OVZ">
+						<xs:annotation>
+							<xs:documentation>
+            OVZ
+          </xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="WATER_USAGE_PLACE">
+						<xs:annotation>
+							<xs:documentation>
+            MUV
+          </xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="OZO">
+						<xs:annotation>
+							<xs:documentation>
+            OZO
+          </xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="EMPOWERMENT">
+						<xs:annotation>
+							<xs:documentation>
+            Zmocnění
+          </xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="USER">
+						<xs:annotation>
+							<xs:documentation>
+            Uživatel
+          </xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+					<xs:enumeration value="MAILING">
+						<xs:annotation>
+							<xs:documentation>
+            Mailing
+          </xs:documentation>
+						</xs:annotation>
+					</xs:enumeration>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="ListHydrogeologicalZoneResponse">
+		<wsdl:part name="ListHydrogeologicalZoneResponse" element="tns:ListHydrogeologicalZoneResponse">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="GetSampleTypeRequest">
+		<wsdl:part name="GetSampleTypeRequest" element="tns:GetSampleTypeRequest">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ListCzRiverBasinDistrictResponse">
+		<wsdl:part name="ListCzRiverBasinDistrictResponse" element="tns:ListCzRiverBasinDistrictResponse">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="GetSewerTypeResponse">
+		<wsdl:part name="GetSewerTypeResponse" element="tns:GetSewerTypeResponse">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="GetDecisionTypeRequest">
+		<wsdl:part name="GetDecisionTypeRequest" element="tns:GetDecisionTypeRequest">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="GetLegalFormRequest">
+		<wsdl:part name="GetLegalFormRequest" element="tns:GetLegalFormRequest">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ListEuRiverBasinDistrictRequest">
+		<wsdl:part name="ListEuRiverBasinDistrictRequest" element="tns:ListEuRiverBasinDistrictRequest">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ListBalanceUnitResponse">
+		<wsdl:part name="ListBalanceUnitResponse" element="tns:ListBalanceUnitResponse">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ListSampleTypeResponse">
+		<wsdl:part name="ListSampleTypeResponse" element="tns:ListSampleTypeResponse">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ListEuRiverBasinDistrictResponse">
+		<wsdl:part name="ListEuRiverBasinDistrictResponse" element="tns:ListEuRiverBasinDistrictResponse">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="GetIrzActivityResponse">
+		<wsdl:part name="GetIrzActivityResponse" element="tns:GetIrzActivityResponse">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="GetDictionaryInfoRequest">
+		<wsdl:part name="GetDictionaryInfoRequest" element="tns:GetDictionaryInfoRequest">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="GetSampleTypeResponse">
+		<wsdl:part name="GetSampleTypeResponse" element="tns:GetSampleTypeResponse">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ListIppcActivityResponse">
+		<wsdl:part name="ListIppcActivityResponse" element="tns:ListIppcActivityResponse">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="GetEprtrActivityRequest">
+		<wsdl:part name="GetEprtrActivityRequest" element="tns:GetEprtrActivityRequest">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ListHydrogeologicalZoneRequest">
+		<wsdl:part name="ListHydrogeologicalZoneRequest" element="tns:ListHydrogeologicalZoneRequest">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ListWaterOriginResponse">
+		<wsdl:part name="ListWaterOriginResponse" element="tns:ListWaterOriginResponse">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="GetIndicatorResponse">
+		<wsdl:part name="GetIndicatorResponse" element="tns:GetIndicatorResponse">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="GetWaterTreatmentMethodResponse">
+		<wsdl:part name="GetWaterTreatmentMethodResponse" element="tns:GetWaterTreatmentMethodResponse">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="GetHydrogeologicalZoneResponse">
+		<wsdl:part name="GetHydrogeologicalZoneResponse" element="tns:GetHydrogeologicalZoneResponse">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ListCompetentAuthorityRequest">
+		<wsdl:part name="ListCompetentAuthorityRequest" element="tns:ListCompetentAuthorityRequest">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="GetCzNaceRequest">
+		<wsdl:part name="GetCzNaceRequest" element="tns:GetCzNaceRequest">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ListWaterFlowRequest">
+		<wsdl:part name="ListWaterFlowRequest" element="tns:ListWaterFlowRequest">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="GetEprtrActivityResponse">
+		<wsdl:part name="GetEprtrActivityResponse" element="tns:GetEprtrActivityResponse">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="GetCompetentControlAuthorityResponse">
+		<wsdl:part name="GetCompetentControlAuthorityResponse" element="tns:GetCompetentControlAuthorityResponse">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="GetWaterOriginRequest">
+		<wsdl:part name="GetWaterOriginRequest" element="tns:GetWaterOriginRequest">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ListNaceResponse">
+		<wsdl:part name="ListNaceResponse" element="tns:ListNaceResponse">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="GetWaterOriginResponse">
+		<wsdl:part name="GetWaterOriginResponse" element="tns:GetWaterOriginResponse">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="GetCompetentControlAuthorityRequest">
+		<wsdl:part name="GetCompetentControlAuthorityRequest" element="tns:GetCompetentControlAuthorityRequest">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="GetProcessingPurposeResponse">
+		<wsdl:part name="GetProcessingPurposeResponse" element="tns:GetProcessingPurposeResponse">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ListIndicatorRequest">
+		<wsdl:part name="ListIndicatorRequest" element="tns:ListIndicatorRequest">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ListSewerTypeResponse">
+		<wsdl:part name="ListSewerTypeResponse" element="tns:ListSewerTypeResponse">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ListNaceRequest">
+		<wsdl:part name="ListNaceRequest" element="tns:ListNaceRequest">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="GetIppcActivityRequest">
+		<wsdl:part name="GetIppcActivityRequest" element="tns:GetIppcActivityRequest">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ListCzRiverBasinDistrictRequest">
+		<wsdl:part name="ListCzRiverBasinDistrictRequest" element="tns:ListCzRiverBasinDistrictRequest">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ListRiverSideResponse">
+		<wsdl:part name="ListRiverSideResponse" element="tns:ListRiverSideResponse">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="GetBalanceUnitRequest">
+		<wsdl:part name="GetBalanceUnitRequest" element="tns:GetBalanceUnitRequest">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="GetEuRiverBasinDistrictResponse">
+		<wsdl:part name="GetEuRiverBasinDistrictResponse" element="tns:GetEuRiverBasinDistrictResponse">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="GetLegalFormResponse">
+		<wsdl:part name="GetLegalFormResponse" element="tns:GetLegalFormResponse">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ListCompetentAuthorityResponse">
+		<wsdl:part name="ListCompetentAuthorityResponse" element="tns:ListCompetentAuthorityResponse">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ListCompetentControlAuthorityResponse">
+		<wsdl:part name="ListCompetentControlAuthorityResponse" element="tns:ListCompetentControlAuthorityResponse">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="GetRiverSideRequest">
+		<wsdl:part name="GetRiverSideRequest" element="tns:GetRiverSideRequest">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="GetEuRiverBasinDistrictRequest">
+		<wsdl:part name="GetEuRiverBasinDistrictRequest" element="tns:GetEuRiverBasinDistrictRequest">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ListCzNaceResponse">
+		<wsdl:part name="ListCzNaceResponse" element="tns:ListCzNaceResponse">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ListProcessingPurposeRequest">
+		<wsdl:part name="ListProcessingPurposeRequest" element="tns:ListProcessingPurposeRequest">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="GetSewerTypeRequest">
+		<wsdl:part name="GetSewerTypeRequest" element="tns:GetSewerTypeRequest">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="GetCzRiverBasinDistrictRequest">
+		<wsdl:part name="GetCzRiverBasinDistrictRequest" element="tns:GetCzRiverBasinDistrictRequest">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ListIrzActivityRequest">
+		<wsdl:part name="ListIrzActivityRequest" element="tns:ListIrzActivityRequest">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ListCzNaceRequest">
+		<wsdl:part name="ListCzNaceRequest" element="tns:ListCzNaceRequest">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ListDecisionTypeResponse">
+		<wsdl:part name="ListDecisionTypeResponse" element="tns:ListDecisionTypeResponse">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="GetCzRiverBasinDistrictResponse">
+		<wsdl:part name="GetCzRiverBasinDistrictResponse" element="tns:GetCzRiverBasinDistrictResponse">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="GetHydrogeologicalZoneRequest">
+		<wsdl:part name="GetHydrogeologicalZoneRequest" element="tns:GetHydrogeologicalZoneRequest">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="GetIndicatorRequest">
+		<wsdl:part name="GetIndicatorRequest" element="tns:GetIndicatorRequest">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="GetProcessingPurposeRequest">
+		<wsdl:part name="GetProcessingPurposeRequest" element="tns:GetProcessingPurposeRequest">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="GetNaceResponse">
+		<wsdl:part name="GetNaceResponse" element="tns:GetNaceResponse">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ListDictionaryInfoRequest">
+		<wsdl:part name="ListDictionaryInfoRequest" element="tns:ListDictionaryInfoRequest">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="GetCzNaceResponse">
+		<wsdl:part name="GetCzNaceResponse" element="tns:GetCzNaceResponse">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ListLegalFormRequest">
+		<wsdl:part name="ListLegalFormRequest" element="tns:ListLegalFormRequest">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="GetWaterFlowResponse">
+		<wsdl:part name="GetWaterFlowResponse" element="tns:GetWaterFlowResponse">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="GetCompetentAuthorityRequest">
+		<wsdl:part name="GetCompetentAuthorityRequest" element="tns:GetCompetentAuthorityRequest">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="GetDictionaryInfoResponse">
+		<wsdl:part name="GetDictionaryInfoResponse" element="tns:GetDictionaryInfoResponse">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="GetNaceRequest">
+		<wsdl:part name="GetNaceRequest" element="tns:GetNaceRequest">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="GetWaterFlowRequest">
+		<wsdl:part name="GetWaterFlowRequest" element="tns:GetWaterFlowRequest">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ListDecisionTypeRequest">
+		<wsdl:part name="ListDecisionTypeRequest" element="tns:ListDecisionTypeRequest">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ListIndicatorResponse">
+		<wsdl:part name="ListIndicatorResponse" element="tns:ListIndicatorResponse">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ListSampleTypeRequest">
+		<wsdl:part name="ListSampleTypeRequest" element="tns:ListSampleTypeRequest">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ListWaterOriginRequest">
+		<wsdl:part name="ListWaterOriginRequest" element="tns:ListWaterOriginRequest">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ListRiverSideRequest">
+		<wsdl:part name="ListRiverSideRequest" element="tns:ListRiverSideRequest">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ListBalanceUnitRequest">
+		<wsdl:part name="ListBalanceUnitRequest" element="tns:ListBalanceUnitRequest">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ListSewerTypeRequest">
+		<wsdl:part name="ListSewerTypeRequest" element="tns:ListSewerTypeRequest">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ListWaterTreatmentMethodRequest">
+		<wsdl:part name="ListWaterTreatmentMethodRequest" element="tns:ListWaterTreatmentMethodRequest">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ListProcessingPurposeResponse">
+		<wsdl:part name="ListProcessingPurposeResponse" element="tns:ListProcessingPurposeResponse">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="GetDecisionTypeResponse">
+		<wsdl:part name="GetDecisionTypeResponse" element="tns:GetDecisionTypeResponse">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ListDictionaryInfoResponse">
+		<wsdl:part name="ListDictionaryInfoResponse" element="tns:ListDictionaryInfoResponse">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="GetRiverSideResponse">
+		<wsdl:part name="GetRiverSideResponse" element="tns:GetRiverSideResponse">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ListEprtrActivityResponse">
+		<wsdl:part name="ListEprtrActivityResponse" element="tns:ListEprtrActivityResponse">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="GetWaterTreatmentMethodRequest">
+		<wsdl:part name="GetWaterTreatmentMethodRequest" element="tns:GetWaterTreatmentMethodRequest">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="GetIrzActivityRequest">
+		<wsdl:part name="GetIrzActivityRequest" element="tns:GetIrzActivityRequest">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ListIppcActivityRequest">
+		<wsdl:part name="ListIppcActivityRequest" element="tns:ListIppcActivityRequest">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ListWaterFlowResponse">
+		<wsdl:part name="ListWaterFlowResponse" element="tns:ListWaterFlowResponse">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="GetBalanceUnitResponse">
+		<wsdl:part name="GetBalanceUnitResponse" element="tns:GetBalanceUnitResponse">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="GetCompetentAuthorityResponse">
+		<wsdl:part name="GetCompetentAuthorityResponse" element="tns:GetCompetentAuthorityResponse">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ListEprtrActivityRequest">
+		<wsdl:part name="ListEprtrActivityRequest" element="tns:ListEprtrActivityRequest">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ListWaterTreatmentMethodResponse">
+		<wsdl:part name="ListWaterTreatmentMethodResponse" element="tns:ListWaterTreatmentMethodResponse">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="GetIppcActivityResponse">
+		<wsdl:part name="GetIppcActivityResponse" element="tns:GetIppcActivityResponse">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ListCompetentControlAuthorityRequest">
+		<wsdl:part name="ListCompetentControlAuthorityRequest" element="tns:ListCompetentControlAuthorityRequest">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ListLegalFormResponse">
+		<wsdl:part name="ListLegalFormResponse" element="tns:ListLegalFormResponse">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ListIrzActivityResponse">
+		<wsdl:part name="ListIrzActivityResponse" element="tns:ListIrzActivityResponse">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:portType name="Dictionary">
+		<wsdl:operation name="ListHydrogeologicalZone">
+			<wsdl:input name="ListHydrogeologicalZoneRequest" message="sch:ListHydrogeologicalZoneRequest">
+    </wsdl:input>
+			<wsdl:output name="ListHydrogeologicalZoneResponse" message="sch:ListHydrogeologicalZoneResponse">
+    </wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetSampleType">
+			<wsdl:input name="GetSampleTypeRequest" message="sch:GetSampleTypeRequest">
+    </wsdl:input>
+			<wsdl:output name="GetSampleTypeResponse" message="sch:GetSampleTypeResponse">
+    </wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ListCzRiverBasinDistrict">
+			<wsdl:input name="ListCzRiverBasinDistrictRequest" message="sch:ListCzRiverBasinDistrictRequest">
+    </wsdl:input>
+			<wsdl:output name="ListCzRiverBasinDistrictResponse" message="sch:ListCzRiverBasinDistrictResponse">
+    </wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetSewerType">
+			<wsdl:input name="GetSewerTypeRequest" message="sch:GetSewerTypeRequest">
+    </wsdl:input>
+			<wsdl:output name="GetSewerTypeResponse" message="sch:GetSewerTypeResponse">
+    </wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetDecisionType">
+			<wsdl:input name="GetDecisionTypeRequest" message="sch:GetDecisionTypeRequest">
+    </wsdl:input>
+			<wsdl:output name="GetDecisionTypeResponse" message="sch:GetDecisionTypeResponse">
+    </wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetLegalForm">
+			<wsdl:input name="GetLegalFormRequest" message="sch:GetLegalFormRequest">
+    </wsdl:input>
+			<wsdl:output name="GetLegalFormResponse" message="sch:GetLegalFormResponse">
+    </wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ListEuRiverBasinDistrict">
+			<wsdl:input name="ListEuRiverBasinDistrictRequest" message="sch:ListEuRiverBasinDistrictRequest">
+    </wsdl:input>
+			<wsdl:output name="ListEuRiverBasinDistrictResponse" message="sch:ListEuRiverBasinDistrictResponse">
+    </wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ListBalanceUnit">
+			<wsdl:input name="ListBalanceUnitRequest" message="sch:ListBalanceUnitRequest">
+    </wsdl:input>
+			<wsdl:output name="ListBalanceUnitResponse" message="sch:ListBalanceUnitResponse">
+    </wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ListSampleType">
+			<wsdl:input name="ListSampleTypeRequest" message="sch:ListSampleTypeRequest">
+    </wsdl:input>
+			<wsdl:output name="ListSampleTypeResponse" message="sch:ListSampleTypeResponse">
+    </wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetIrzActivity">
+			<wsdl:input name="GetIrzActivityRequest" message="sch:GetIrzActivityRequest">
+    </wsdl:input>
+			<wsdl:output name="GetIrzActivityResponse" message="sch:GetIrzActivityResponse">
+    </wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetDictionaryInfo">
+			<wsdl:input name="GetDictionaryInfoRequest" message="sch:GetDictionaryInfoRequest">
+    </wsdl:input>
+			<wsdl:output name="GetDictionaryInfoResponse" message="sch:GetDictionaryInfoResponse">
+    </wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ListIppcActivity">
+			<wsdl:input name="ListIppcActivityRequest" message="sch:ListIppcActivityRequest">
+    </wsdl:input>
+			<wsdl:output name="ListIppcActivityResponse" message="sch:ListIppcActivityResponse">
+    </wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetEprtrActivity">
+			<wsdl:input name="GetEprtrActivityRequest" message="sch:GetEprtrActivityRequest">
+    </wsdl:input>
+			<wsdl:output name="GetEprtrActivityResponse" message="sch:GetEprtrActivityResponse">
+    </wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ListWaterOrigin">
+			<wsdl:input name="ListWaterOriginRequest" message="sch:ListWaterOriginRequest">
+    </wsdl:input>
+			<wsdl:output name="ListWaterOriginResponse" message="sch:ListWaterOriginResponse">
+    </wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetIndicator">
+			<wsdl:input name="GetIndicatorRequest" message="sch:GetIndicatorRequest">
+    </wsdl:input>
+			<wsdl:output name="GetIndicatorResponse" message="sch:GetIndicatorResponse">
+    </wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetWaterTreatmentMethod">
+			<wsdl:input name="GetWaterTreatmentMethodRequest" message="sch:GetWaterTreatmentMethodRequest">
+    </wsdl:input>
+			<wsdl:output name="GetWaterTreatmentMethodResponse" message="sch:GetWaterTreatmentMethodResponse">
+    </wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetHydrogeologicalZone">
+			<wsdl:input name="GetHydrogeologicalZoneRequest" message="sch:GetHydrogeologicalZoneRequest">
+    </wsdl:input>
+			<wsdl:output name="GetHydrogeologicalZoneResponse" message="sch:GetHydrogeologicalZoneResponse">
+    </wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ListCompetentAuthority">
+			<wsdl:input name="ListCompetentAuthorityRequest" message="sch:ListCompetentAuthorityRequest">
+    </wsdl:input>
+			<wsdl:output name="ListCompetentAuthorityResponse" message="sch:ListCompetentAuthorityResponse">
+    </wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetCzNace">
+			<wsdl:input name="GetCzNaceRequest" message="sch:GetCzNaceRequest">
+    </wsdl:input>
+			<wsdl:output name="GetCzNaceResponse" message="sch:GetCzNaceResponse">
+    </wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ListWaterFlow">
+			<wsdl:input name="ListWaterFlowRequest" message="sch:ListWaterFlowRequest">
+    </wsdl:input>
+			<wsdl:output name="ListWaterFlowResponse" message="sch:ListWaterFlowResponse">
+    </wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetCompetentControlAuthority">
+			<wsdl:input name="GetCompetentControlAuthorityRequest" message="sch:GetCompetentControlAuthorityRequest">
+    </wsdl:input>
+			<wsdl:output name="GetCompetentControlAuthorityResponse" message="sch:GetCompetentControlAuthorityResponse">
+    </wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetWaterOrigin">
+			<wsdl:input name="GetWaterOriginRequest" message="sch:GetWaterOriginRequest">
+    </wsdl:input>
+			<wsdl:output name="GetWaterOriginResponse" message="sch:GetWaterOriginResponse">
+    </wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ListNace">
+			<wsdl:input name="ListNaceRequest" message="sch:ListNaceRequest">
+    </wsdl:input>
+			<wsdl:output name="ListNaceResponse" message="sch:ListNaceResponse">
+    </wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetProcessingPurpose">
+			<wsdl:input name="GetProcessingPurposeRequest" message="sch:GetProcessingPurposeRequest">
+    </wsdl:input>
+			<wsdl:output name="GetProcessingPurposeResponse" message="sch:GetProcessingPurposeResponse">
+    </wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ListIndicator">
+			<wsdl:input name="ListIndicatorRequest" message="sch:ListIndicatorRequest">
+    </wsdl:input>
+			<wsdl:output name="ListIndicatorResponse" message="sch:ListIndicatorResponse">
+    </wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ListSewerType">
+			<wsdl:input name="ListSewerTypeRequest" message="sch:ListSewerTypeRequest">
+    </wsdl:input>
+			<wsdl:output name="ListSewerTypeResponse" message="sch:ListSewerTypeResponse">
+    </wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetIppcActivity">
+			<wsdl:input name="GetIppcActivityRequest" message="sch:GetIppcActivityRequest">
+    </wsdl:input>
+			<wsdl:output name="GetIppcActivityResponse" message="sch:GetIppcActivityResponse">
+    </wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ListRiverSide">
+			<wsdl:input name="ListRiverSideRequest" message="sch:ListRiverSideRequest">
+    </wsdl:input>
+			<wsdl:output name="ListRiverSideResponse" message="sch:ListRiverSideResponse">
+    </wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetBalanceUnit">
+			<wsdl:input name="GetBalanceUnitRequest" message="sch:GetBalanceUnitRequest">
+    </wsdl:input>
+			<wsdl:output name="GetBalanceUnitResponse" message="sch:GetBalanceUnitResponse">
+    </wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetEuRiverBasinDistrict">
+			<wsdl:input name="GetEuRiverBasinDistrictRequest" message="sch:GetEuRiverBasinDistrictRequest">
+    </wsdl:input>
+			<wsdl:output name="GetEuRiverBasinDistrictResponse" message="sch:GetEuRiverBasinDistrictResponse">
+    </wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ListCompetentControlAuthority">
+			<wsdl:input name="ListCompetentControlAuthorityRequest" message="sch:ListCompetentControlAuthorityRequest">
+    </wsdl:input>
+			<wsdl:output name="ListCompetentControlAuthorityResponse" message="sch:ListCompetentControlAuthorityResponse">
+    </wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetRiverSide">
+			<wsdl:input name="GetRiverSideRequest" message="sch:GetRiverSideRequest">
+    </wsdl:input>
+			<wsdl:output name="GetRiverSideResponse" message="sch:GetRiverSideResponse">
+    </wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ListCzNace">
+			<wsdl:input name="ListCzNaceRequest" message="sch:ListCzNaceRequest">
+    </wsdl:input>
+			<wsdl:output name="ListCzNaceResponse" message="sch:ListCzNaceResponse">
+    </wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ListProcessingPurpose">
+			<wsdl:input name="ListProcessingPurposeRequest" message="sch:ListProcessingPurposeRequest">
+    </wsdl:input>
+			<wsdl:output name="ListProcessingPurposeResponse" message="sch:ListProcessingPurposeResponse">
+    </wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetCzRiverBasinDistrict">
+			<wsdl:input name="GetCzRiverBasinDistrictRequest" message="sch:GetCzRiverBasinDistrictRequest">
+    </wsdl:input>
+			<wsdl:output name="GetCzRiverBasinDistrictResponse" message="sch:GetCzRiverBasinDistrictResponse">
+    </wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ListIrzActivity">
+			<wsdl:input name="ListIrzActivityRequest" message="sch:ListIrzActivityRequest">
+    </wsdl:input>
+			<wsdl:output name="ListIrzActivityResponse" message="sch:ListIrzActivityResponse">
+    </wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ListDecisionType">
+			<wsdl:input name="ListDecisionTypeRequest" message="sch:ListDecisionTypeRequest">
+    </wsdl:input>
+			<wsdl:output name="ListDecisionTypeResponse" message="sch:ListDecisionTypeResponse">
+    </wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetNace">
+			<wsdl:input name="GetNaceRequest" message="sch:GetNaceRequest">
+    </wsdl:input>
+			<wsdl:output name="GetNaceResponse" message="sch:GetNaceResponse">
+    </wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ListDictionaryInfo">
+			<wsdl:input name="ListDictionaryInfoRequest" message="sch:ListDictionaryInfoRequest">
+    </wsdl:input>
+			<wsdl:output name="ListDictionaryInfoResponse" message="sch:ListDictionaryInfoResponse">
+    </wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ListLegalForm">
+			<wsdl:input name="ListLegalFormRequest" message="sch:ListLegalFormRequest">
+    </wsdl:input>
+			<wsdl:output name="ListLegalFormResponse" message="sch:ListLegalFormResponse">
+    </wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetWaterFlow">
+			<wsdl:input name="GetWaterFlowRequest" message="sch:GetWaterFlowRequest">
+    </wsdl:input>
+			<wsdl:output name="GetWaterFlowResponse" message="sch:GetWaterFlowResponse">
+    </wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetCompetentAuthority">
+			<wsdl:input name="GetCompetentAuthorityRequest" message="sch:GetCompetentAuthorityRequest">
+    </wsdl:input>
+			<wsdl:output name="GetCompetentAuthorityResponse" message="sch:GetCompetentAuthorityResponse">
+    </wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ListWaterTreatmentMethod">
+			<wsdl:input name="ListWaterTreatmentMethodRequest" message="sch:ListWaterTreatmentMethodRequest">
+    </wsdl:input>
+			<wsdl:output name="ListWaterTreatmentMethodResponse" message="sch:ListWaterTreatmentMethodResponse">
+    </wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ListEprtrActivity">
+			<wsdl:input name="ListEprtrActivityRequest" message="sch:ListEprtrActivityRequest">
+    </wsdl:input>
+			<wsdl:output name="ListEprtrActivityResponse" message="sch:ListEprtrActivityResponse">
+    </wsdl:output>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="DictionarySoap12" type="tns:Dictionary">
+		<soap12:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="ListHydrogeologicalZone">
+			<soap12:operation soapAction="https://crzp.inqool.cz/ws/dictionary/v1"/>
+			<wsdl:input name="ListHydrogeologicalZoneRequest">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="ListHydrogeologicalZoneResponse">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetSampleType">
+			<soap12:operation soapAction="https://crzp.inqool.cz/ws/dictionary/v1"/>
+			<wsdl:input name="GetSampleTypeRequest">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="GetSampleTypeResponse">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ListCzRiverBasinDistrict">
+			<soap12:operation soapAction="https://crzp.inqool.cz/ws/dictionary/v1"/>
+			<wsdl:input name="ListCzRiverBasinDistrictRequest">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="ListCzRiverBasinDistrictResponse">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetSewerType">
+			<soap12:operation soapAction="https://crzp.inqool.cz/ws/dictionary/v1"/>
+			<wsdl:input name="GetSewerTypeRequest">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="GetSewerTypeResponse">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetDecisionType">
+			<soap12:operation soapAction="https://crzp.inqool.cz/ws/dictionary/v1"/>
+			<wsdl:input name="GetDecisionTypeRequest">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="GetDecisionTypeResponse">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetLegalForm">
+			<soap12:operation soapAction="https://crzp.inqool.cz/ws/dictionary/v1"/>
+			<wsdl:input name="GetLegalFormRequest">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="GetLegalFormResponse">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ListEuRiverBasinDistrict">
+			<soap12:operation soapAction="https://crzp.inqool.cz/ws/dictionary/v1"/>
+			<wsdl:input name="ListEuRiverBasinDistrictRequest">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="ListEuRiverBasinDistrictResponse">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ListBalanceUnit">
+			<soap12:operation soapAction="https://crzp.inqool.cz/ws/dictionary/v1"/>
+			<wsdl:input name="ListBalanceUnitRequest">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="ListBalanceUnitResponse">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ListSampleType">
+			<soap12:operation soapAction="https://crzp.inqool.cz/ws/dictionary/v1"/>
+			<wsdl:input name="ListSampleTypeRequest">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="ListSampleTypeResponse">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetIrzActivity">
+			<soap12:operation soapAction="https://crzp.inqool.cz/ws/dictionary/v1"/>
+			<wsdl:input name="GetIrzActivityRequest">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="GetIrzActivityResponse">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetDictionaryInfo">
+			<soap12:operation soapAction="https://crzp.inqool.cz/ws/dictionary/v1"/>
+			<wsdl:input name="GetDictionaryInfoRequest">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="GetDictionaryInfoResponse">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ListIppcActivity">
+			<soap12:operation soapAction="https://crzp.inqool.cz/ws/dictionary/v1"/>
+			<wsdl:input name="ListIppcActivityRequest">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="ListIppcActivityResponse">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetEprtrActivity">
+			<soap12:operation soapAction="https://crzp.inqool.cz/ws/dictionary/v1"/>
+			<wsdl:input name="GetEprtrActivityRequest">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="GetEprtrActivityResponse">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ListWaterOrigin">
+			<soap12:operation soapAction="https://crzp.inqool.cz/ws/dictionary/v1"/>
+			<wsdl:input name="ListWaterOriginRequest">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="ListWaterOriginResponse">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetIndicator">
+			<soap12:operation soapAction="https://crzp.inqool.cz/ws/dictionary/v1"/>
+			<wsdl:input name="GetIndicatorRequest">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="GetIndicatorResponse">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetWaterTreatmentMethod">
+			<soap12:operation soapAction="https://crzp.inqool.cz/ws/dictionary/v1"/>
+			<wsdl:input name="GetWaterTreatmentMethodRequest">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="GetWaterTreatmentMethodResponse">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetHydrogeologicalZone">
+			<soap12:operation soapAction="https://crzp.inqool.cz/ws/dictionary/v1"/>
+			<wsdl:input name="GetHydrogeologicalZoneRequest">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="GetHydrogeologicalZoneResponse">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ListCompetentAuthority">
+			<soap12:operation soapAction="https://crzp.inqool.cz/ws/dictionary/v1"/>
+			<wsdl:input name="ListCompetentAuthorityRequest">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="ListCompetentAuthorityResponse">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetCzNace">
+			<soap12:operation soapAction="https://crzp.inqool.cz/ws/dictionary/v1"/>
+			<wsdl:input name="GetCzNaceRequest">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="GetCzNaceResponse">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ListWaterFlow">
+			<soap12:operation soapAction="https://crzp.inqool.cz/ws/dictionary/v1"/>
+			<wsdl:input name="ListWaterFlowRequest">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="ListWaterFlowResponse">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetCompetentControlAuthority">
+			<soap12:operation soapAction="https://crzp.inqool.cz/ws/dictionary/v1"/>
+			<wsdl:input name="GetCompetentControlAuthorityRequest">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="GetCompetentControlAuthorityResponse">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetWaterOrigin">
+			<soap12:operation soapAction="https://crzp.inqool.cz/ws/dictionary/v1"/>
+			<wsdl:input name="GetWaterOriginRequest">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="GetWaterOriginResponse">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ListNace">
+			<soap12:operation soapAction="https://crzp.inqool.cz/ws/dictionary/v1"/>
+			<wsdl:input name="ListNaceRequest">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="ListNaceResponse">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetProcessingPurpose">
+			<soap12:operation soapAction="https://crzp.inqool.cz/ws/dictionary/v1"/>
+			<wsdl:input name="GetProcessingPurposeRequest">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="GetProcessingPurposeResponse">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ListIndicator">
+			<soap12:operation soapAction="https://crzp.inqool.cz/ws/dictionary/v1"/>
+			<wsdl:input name="ListIndicatorRequest">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="ListIndicatorResponse">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ListSewerType">
+			<soap12:operation soapAction="https://crzp.inqool.cz/ws/dictionary/v1"/>
+			<wsdl:input name="ListSewerTypeRequest">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="ListSewerTypeResponse">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetIppcActivity">
+			<soap12:operation soapAction="https://crzp.inqool.cz/ws/dictionary/v1"/>
+			<wsdl:input name="GetIppcActivityRequest">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="GetIppcActivityResponse">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ListRiverSide">
+			<soap12:operation soapAction="https://crzp.inqool.cz/ws/dictionary/v1"/>
+			<wsdl:input name="ListRiverSideRequest">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="ListRiverSideResponse">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetBalanceUnit">
+			<soap12:operation soapAction="https://crzp.inqool.cz/ws/dictionary/v1"/>
+			<wsdl:input name="GetBalanceUnitRequest">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="GetBalanceUnitResponse">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetEuRiverBasinDistrict">
+			<soap12:operation soapAction="https://crzp.inqool.cz/ws/dictionary/v1"/>
+			<wsdl:input name="GetEuRiverBasinDistrictRequest">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="GetEuRiverBasinDistrictResponse">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ListCompetentControlAuthority">
+			<soap12:operation soapAction="https://crzp.inqool.cz/ws/dictionary/v1"/>
+			<wsdl:input name="ListCompetentControlAuthorityRequest">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="ListCompetentControlAuthorityResponse">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetRiverSide">
+			<soap12:operation soapAction="https://crzp.inqool.cz/ws/dictionary/v1"/>
+			<wsdl:input name="GetRiverSideRequest">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="GetRiverSideResponse">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ListCzNace">
+			<soap12:operation soapAction="https://crzp.inqool.cz/ws/dictionary/v1"/>
+			<wsdl:input name="ListCzNaceRequest">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="ListCzNaceResponse">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ListProcessingPurpose">
+			<soap12:operation soapAction="https://crzp.inqool.cz/ws/dictionary/v1"/>
+			<wsdl:input name="ListProcessingPurposeRequest">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="ListProcessingPurposeResponse">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetCzRiverBasinDistrict">
+			<soap12:operation soapAction="https://crzp.inqool.cz/ws/dictionary/v1"/>
+			<wsdl:input name="GetCzRiverBasinDistrictRequest">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="GetCzRiverBasinDistrictResponse">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ListIrzActivity">
+			<soap12:operation soapAction="https://crzp.inqool.cz/ws/dictionary/v1"/>
+			<wsdl:input name="ListIrzActivityRequest">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="ListIrzActivityResponse">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ListDecisionType">
+			<soap12:operation soapAction="https://crzp.inqool.cz/ws/dictionary/v1"/>
+			<wsdl:input name="ListDecisionTypeRequest">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="ListDecisionTypeResponse">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetNace">
+			<soap12:operation soapAction="https://crzp.inqool.cz/ws/dictionary/v1"/>
+			<wsdl:input name="GetNaceRequest">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="GetNaceResponse">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ListDictionaryInfo">
+			<soap12:operation soapAction="https://crzp.inqool.cz/ws/dictionary/v1"/>
+			<wsdl:input name="ListDictionaryInfoRequest">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="ListDictionaryInfoResponse">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ListLegalForm">
+			<soap12:operation soapAction="https://crzp.inqool.cz/ws/dictionary/v1"/>
+			<wsdl:input name="ListLegalFormRequest">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="ListLegalFormResponse">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetWaterFlow">
+			<soap12:operation soapAction="https://crzp.inqool.cz/ws/dictionary/v1"/>
+			<wsdl:input name="GetWaterFlowRequest">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="GetWaterFlowResponse">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetCompetentAuthority">
+			<soap12:operation soapAction="https://crzp.inqool.cz/ws/dictionary/v1"/>
+			<wsdl:input name="GetCompetentAuthorityRequest">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="GetCompetentAuthorityResponse">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ListWaterTreatmentMethod">
+			<soap12:operation soapAction="https://crzp.inqool.cz/ws/dictionary/v1"/>
+			<wsdl:input name="ListWaterTreatmentMethodRequest">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="ListWaterTreatmentMethodResponse">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ListEprtrActivity">
+			<soap12:operation soapAction="https://crzp.inqool.cz/ws/dictionary/v1"/>
+			<wsdl:input name="ListEprtrActivityRequest">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="ListEprtrActivityResponse">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="DictionaryService">
+		<wsdl:port name="DictionarySoap12" binding="tns:DictionarySoap12">
+			<soap12:address location="https://ext.crzp-test.mzp.cz/ws/dictionary/"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>
