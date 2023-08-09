@@ -1,0 +1,1428 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sch="https://crzp.inqool.cz/ws/address/v1" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:tns="https://crzp.inqool.cz/ws/address/v1" xmlns:ns="https://crzp.inqool.cz/ws/common/v1" targetNamespace="https://crzp.inqool.cz/ws/address/v1">
+	<wsdl:types>
+		<xs:schema xmlns:address="https://crzp.inqool.cz/ws/address/v1" xmlns:common="https://crzp.inqool.cz/ws/common/v1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="https://crzp.inqool.cz/ws/address/v1" version="1.0">
+			<xs:import namespace="https://crzp.inqool.cz/ws/common/v1" schemaLocation="common_v1e.xsd"/>
+			<xs:element name="GetAddressPlaceRequest" type="address:GetAddressPlaceRequest"/>
+			<xs:element name="GetAddressPlaceResponse" type="address:GetAddressPlaceResponse"/>
+			<xs:element name="GetCadastralTerritoryRequest" type="address:GetCadastralTerritoryRequest"/>
+			<xs:element name="GetCadastralTerritoryResponse" type="address:GetCadastralTerritoryResponse"/>
+			<xs:element name="GetCityDistrictRequest" type="address:GetCityDistrictRequest"/>
+			<xs:element name="GetCityDistrictResponse" type="address:GetCityDistrictResponse"/>
+			<xs:element name="GetCountryRequest" type="address:GetCountryRequest"/>
+			<xs:element name="GetCountryResponse" type="address:GetCountryResponse"/>
+			<xs:element name="GetDistrictRequest" type="address:GetDistrictRequest"/>
+			<xs:element name="GetDistrictResponse" type="address:GetDistrictResponse"/>
+			<xs:element name="GetMunicipalityPartRequest" type="address:GetMunicipalityPartRequest"/>
+			<xs:element name="GetMunicipalityPartResponse" type="address:GetMunicipalityPartResponse"/>
+			<xs:element name="GetMunicipalityRequest" type="address:GetMunicipalityRequest"/>
+			<xs:element name="GetMunicipalityResponse" type="address:GetMunicipalityResponse"/>
+			<xs:element name="GetRegionRequest" type="address:GetRegionRequest"/>
+			<xs:element name="GetRegionResponse" type="address:GetRegionResponse"/>
+			<xs:element name="GetStreetRequest" type="address:GetStreetRequest"/>
+			<xs:element name="GetStreetResponse" type="address:GetStreetResponse"/>
+			<xs:element name="ListAddressPlaceRequest" type="address:ListAddressPlaceRequest"/>
+			<xs:element name="ListAddressPlaceResponse" type="address:ListAddressPlaceResponse"/>
+			<xs:element name="ListCadastralTerritoryRequest" type="address:ListCadastralTerritoryRequest"/>
+			<xs:element name="ListCadastralTerritoryResponse" type="address:ListCadastralTerritoryResponse"/>
+			<xs:element name="ListCityDistrictRequest" type="address:ListCityDistrictRequest"/>
+			<xs:element name="ListCityDistrictResponse" type="address:ListCityDistrictResponse"/>
+			<xs:element name="ListCountryRequest" type="address:ListCountryRequest"/>
+			<xs:element name="ListCountryResponse" type="address:ListCountryResponse"/>
+			<xs:element name="ListDistrictRequest" type="address:ListDistrictRequest"/>
+			<xs:element name="ListDistrictResponse" type="address:ListDistrictResponse"/>
+			<xs:element name="ListMunicipalityPartRequest" type="address:ListMunicipalityPartRequest"/>
+			<xs:element name="ListMunicipalityPartResponse" type="address:ListMunicipalityPartResponse"/>
+			<xs:element name="ListMunicipalityRequest" type="address:ListMunicipalityRequest"/>
+			<xs:element name="ListMunicipalityResponse" type="address:ListMunicipalityResponse"/>
+			<xs:element name="ListRegionRequest" type="address:ListRegionRequest"/>
+			<xs:element name="ListRegionResponse" type="address:ListRegionResponse"/>
+			<xs:element name="ListStreetRequest" type="address:ListStreetRequest"/>
+			<xs:element name="ListStreetResponse" type="address:ListStreetResponse"/>
+			<xs:complexType name="AddressPlaceDetail">
+				<xs:annotation>
+					<xs:documentation>
+        Adresní místo
+      </xs:documentation>
+				</xs:annotation>
+				<xs:complexContent>
+					<xs:extension base="common:RuianObject">
+						<xs:sequence>
+							<xs:element minOccurs="0" name="municipality" type="common:RuianReference">
+								<xs:annotation>
+									<xs:documentation>
+                Obec
+              </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element minOccurs="0" name="cityDistrict" type="common:RuianReference">
+								<xs:annotation>
+									<xs:documentation>
+                Městský obvod/městská část
+              </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element minOccurs="0" name="cityDistrictPrague" type="common:RuianReference">
+								<xs:annotation>
+									<xs:documentation>
+                Městský obvod Praha (vyplněn pouze v případě Hlavního města Praha)
+              </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element minOccurs="0" name="municipalityPart" type="common:RuianReference">
+								<xs:annotation>
+									<xs:documentation>
+                Část obce
+              </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element minOccurs="0" name="street" type="common:RuianReference">
+								<xs:annotation>
+									<xs:documentation>
+                Ulice
+              </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element minOccurs="0" name="houseNumber" type="xs:string">
+								<xs:annotation>
+									<xs:documentation>
+                Číslo domovní
+              </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element minOccurs="0" name="houseNumberType" type="common:HouseNumberType">
+								<xs:annotation>
+									<xs:documentation>
+                Typ stavebního objektu
+              </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element minOccurs="0" name="orientationNumber" type="xs:string">
+								<xs:annotation>
+									<xs:documentation>
+                Číslo orientační
+              </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element minOccurs="0" name="orientationNumberMark" type="xs:string">
+								<xs:annotation>
+									<xs:documentation>
+                Znak čísla orientačního
+              </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element minOccurs="0" name="zip" type="xs:string">
+								<xs:annotation>
+									<xs:documentation>
+                PSČ
+              </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element minOccurs="0" name="jtskCoordinates" type="common:JtskCoordinates">
+								<xs:annotation>
+									<xs:documentation>
+                Souřadnice JTSK
+              </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element minOccurs="0" name="wgs84Coordinates" type="common:Wgs84Coordinates">
+								<xs:annotation>
+									<xs:documentation>
+                Souřadnice WGS-84
+              </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name="version" type="xs:int" use="required">
+							<xs:annotation>
+								<xs:documentation>
+              Verze záznamu
+            </xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="AddressPlaceList">
+				<xs:annotation>
+					<xs:documentation>
+        Adresní místo
+      </xs:documentation>
+				</xs:annotation>
+				<xs:complexContent>
+					<xs:extension base="common:RuianObject">
+						<xs:sequence>
+							<xs:element minOccurs="0" name="municipality" type="common:RuianReference">
+								<xs:annotation>
+									<xs:documentation>
+                Obec
+              </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element minOccurs="0" name="cityDistrict" type="common:RuianReference">
+								<xs:annotation>
+									<xs:documentation>
+                Městský obvod/městská část
+              </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element minOccurs="0" name="cityDistrictPrague" type="common:RuianReference">
+								<xs:annotation>
+									<xs:documentation>
+                Městský obvod Praha (vyplněn pouze v případě Hlavního města Praha)
+              </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element minOccurs="0" name="municipalityPart" type="common:RuianReference">
+								<xs:annotation>
+									<xs:documentation>
+                Část obce
+              </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element minOccurs="0" name="street" type="common:RuianReference">
+								<xs:annotation>
+									<xs:documentation>
+                Ulice
+              </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element minOccurs="0" name="houseNumber" type="xs:string">
+								<xs:annotation>
+									<xs:documentation>
+                Číslo domovní
+              </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element minOccurs="0" name="houseNumberType" type="common:HouseNumberType">
+								<xs:annotation>
+									<xs:documentation>
+                Typ stavebního objektu
+              </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element minOccurs="0" name="orientationNumber" type="xs:string">
+								<xs:annotation>
+									<xs:documentation>
+                Číslo orientační
+              </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element minOccurs="0" name="orientationNumberMark" type="xs:string">
+								<xs:annotation>
+									<xs:documentation>
+                Znak čísla orientačního
+              </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element minOccurs="0" name="zip" type="xs:string">
+								<xs:annotation>
+									<xs:documentation>
+                PSČ
+              </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="GetAddressPlaceRequest">
+				<xs:complexContent>
+					<xs:extension base="common:GetRequest">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="GetAddressPlaceResponse">
+				<xs:complexContent>
+					<xs:extension base="common:GetResponse">
+						<xs:sequence>
+							<xs:element name="addressPlace" type="address:AddressPlaceDetail"/>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ListAddressPlaceRequest">
+				<xs:complexContent>
+					<xs:extension base="common:ListRequest">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ListAddressPlaceResponse">
+				<xs:complexContent>
+					<xs:extension base="common:ListResponse">
+						<xs:sequence>
+							<xs:element name="items">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element maxOccurs="unbounded" minOccurs="0" name="addressPlace" type="address:AddressPlaceList"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="CadastralTerritoryDetail">
+				<xs:annotation>
+					<xs:documentation>
+        Katastrální území
+      </xs:documentation>
+				</xs:annotation>
+				<xs:complexContent>
+					<xs:extension base="common:RuianObject">
+						<xs:sequence>
+							<xs:element minOccurs="0" name="municipality" type="common:RuianReference">
+								<xs:annotation>
+									<xs:documentation>
+                Obec
+              </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name="version" type="xs:int" use="required">
+							<xs:annotation>
+								<xs:documentation>
+              Verze záznamu
+            </xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="CadastralTerritoryList">
+				<xs:annotation>
+					<xs:documentation>
+        Katastrální území
+      </xs:documentation>
+				</xs:annotation>
+				<xs:complexContent>
+					<xs:extension base="common:RuianObject">
+						<xs:sequence>
+							<xs:element minOccurs="0" name="municipality" type="common:RuianReference">
+								<xs:annotation>
+									<xs:documentation>
+                Obec
+              </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="GetCadastralTerritoryRequest">
+				<xs:complexContent>
+					<xs:extension base="common:GetRequest">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="GetCadastralTerritoryResponse">
+				<xs:complexContent>
+					<xs:extension base="common:GetResponse">
+						<xs:sequence>
+							<xs:element name="cadastralTerritory" type="address:CadastralTerritoryDetail"/>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ListCadastralTerritoryRequest">
+				<xs:complexContent>
+					<xs:extension base="common:ListRequest">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ListCadastralTerritoryResponse">
+				<xs:complexContent>
+					<xs:extension base="common:ListResponse">
+						<xs:sequence>
+							<xs:element name="items">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element maxOccurs="unbounded" minOccurs="0" name="cadastralTerritory" type="address:CadastralTerritoryList"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="CountryDetail">
+				<xs:annotation>
+					<xs:documentation>
+        Stát
+      </xs:documentation>
+				</xs:annotation>
+				<xs:complexContent>
+					<xs:extension base="common:DictionaryObject">
+						<xs:sequence>
+							<xs:element minOccurs="0" name="alpha2" type="xs:string">
+								<xs:annotation>
+									<xs:documentation>
+                Alpha-2 kód
+              </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element minOccurs="0" name="alpha3" type="xs:string">
+								<xs:annotation>
+									<xs:documentation>
+                Alpha-3 kód
+              </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name="version" type="xs:int" use="required">
+							<xs:annotation>
+								<xs:documentation>
+              Verze záznamu
+            </xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="CountryList">
+				<xs:annotation>
+					<xs:documentation>
+        Stát
+      </xs:documentation>
+				</xs:annotation>
+				<xs:complexContent>
+					<xs:extension base="common:DictionaryObject">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="GetCountryRequest">
+				<xs:complexContent>
+					<xs:extension base="common:GetRequest">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="GetCountryResponse">
+				<xs:complexContent>
+					<xs:extension base="common:GetResponse">
+						<xs:sequence>
+							<xs:element name="country" type="address:CountryDetail"/>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ListCountryRequest">
+				<xs:complexContent>
+					<xs:extension base="common:ListRequest">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ListCountryResponse">
+				<xs:complexContent>
+					<xs:extension base="common:ListResponse">
+						<xs:sequence>
+							<xs:element name="items">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element maxOccurs="unbounded" minOccurs="0" name="country" type="address:CountryList"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="CityDistrictDetail">
+				<xs:annotation>
+					<xs:documentation>
+        Městský obvod/městská část územně členěného statutárního města (MOMC)
+      </xs:documentation>
+				</xs:annotation>
+				<xs:complexContent>
+					<xs:extension base="common:RuianObject">
+						<xs:sequence>
+							<xs:element minOccurs="0" name="municipality" type="common:RuianReference">
+								<xs:annotation>
+									<xs:documentation>
+                Obec
+              </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element minOccurs="0" name="cityDistrictPrague" type="common:RuianReference">
+								<xs:annotation>
+									<xs:documentation>
+                Městský obvod v hlavním městě Praze
+              </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element minOccurs="0" name="administrativeDistrictPrague" type="common:RuianReference">
+								<xs:annotation>
+									<xs:documentation>
+                Správní obvod v hlavním městě Praze
+              </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element minOccurs="0" name="ruianOrder" type="xs:int">
+								<xs:annotation>
+									<xs:documentation>
+                Pořadí
+              </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name="version" type="xs:int" use="required">
+							<xs:annotation>
+								<xs:documentation>
+              Verze záznamu
+            </xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="CityDistrictList">
+				<xs:annotation>
+					<xs:documentation>
+        Městský obvod/městská část územně členěného statutárního města (MOMC)
+      </xs:documentation>
+				</xs:annotation>
+				<xs:complexContent>
+					<xs:extension base="common:RuianObject">
+						<xs:sequence>
+							<xs:element minOccurs="0" name="municipality" type="common:RuianReference">
+								<xs:annotation>
+									<xs:documentation>
+                Obec
+              </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="GetCityDistrictRequest">
+				<xs:complexContent>
+					<xs:extension base="common:GetRequest">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="GetCityDistrictResponse">
+				<xs:complexContent>
+					<xs:extension base="common:GetResponse">
+						<xs:sequence>
+							<xs:element name="cityDistrict" type="address:CityDistrictDetail"/>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ListCityDistrictRequest">
+				<xs:complexContent>
+					<xs:extension base="common:ListRequest">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ListCityDistrictResponse">
+				<xs:complexContent>
+					<xs:extension base="common:ListResponse">
+						<xs:sequence>
+							<xs:element name="items">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element maxOccurs="unbounded" minOccurs="0" name="cityDistrict" type="address:CityDistrictList"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="DistrictDetail">
+				<xs:annotation>
+					<xs:documentation>
+        Okres
+      </xs:documentation>
+				</xs:annotation>
+				<xs:complexContent>
+					<xs:extension base="common:RuianObject">
+						<xs:sequence>
+							<xs:element minOccurs="0" name="nutsLauCode" type="xs:string">
+								<xs:annotation>
+									<xs:documentation>
+                Kód NUTS/LAU (Nomenclature of Territorial Units for Statistics/Local Administrative Units)
+              </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element minOccurs="0" name="region" type="common:RuianReference">
+								<xs:annotation>
+									<xs:documentation>
+                Regionu soudržnosti (oblast)
+              </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name="version" type="xs:int" use="required">
+							<xs:annotation>
+								<xs:documentation>
+              Verze záznamu
+            </xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="DistrictList">
+				<xs:annotation>
+					<xs:documentation>
+        Okres
+      </xs:documentation>
+				</xs:annotation>
+				<xs:complexContent>
+					<xs:extension base="common:RuianObject">
+						<xs:sequence>
+							<xs:element minOccurs="0" name="nutsLauCode" type="xs:string">
+								<xs:annotation>
+									<xs:documentation>
+                Kód NUTS/LAU (Nomenclature of Territorial Units for Statistics/Local Administrative Units)
+              </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element minOccurs="0" name="region" type="common:RuianReference">
+								<xs:annotation>
+									<xs:documentation>
+                Regionu soudržnosti (oblast)
+              </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="GetDistrictRequest">
+				<xs:complexContent>
+					<xs:extension base="common:GetRequest">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="GetDistrictResponse">
+				<xs:complexContent>
+					<xs:extension base="common:GetResponse">
+						<xs:sequence>
+							<xs:element name="district" type="address:DistrictDetail"/>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ListDistrictRequest">
+				<xs:complexContent>
+					<xs:extension base="common:ListRequest">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ListDistrictResponse">
+				<xs:complexContent>
+					<xs:extension base="common:ListResponse">
+						<xs:sequence>
+							<xs:element name="items">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element maxOccurs="unbounded" minOccurs="0" name="district" type="address:DistrictList"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="MunicipalityDetail">
+				<xs:annotation>
+					<xs:documentation>
+        Obec
+      </xs:documentation>
+				</xs:annotation>
+				<xs:complexContent>
+					<xs:extension base="common:RuianObject">
+						<xs:sequence>
+							<xs:element minOccurs="0" name="commissionedLocalAuthorityMunicipality" type="common:RuianReference">
+								<xs:annotation>
+									<xs:documentation>
+                Obec s pověřeným obecním úřadem (POÚ)
+              </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element minOccurs="0" name="district" type="common:RuianReference">
+								<xs:annotation>
+									<xs:documentation>
+                Okres
+              </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name="version" type="xs:int" use="required">
+							<xs:annotation>
+								<xs:documentation>
+              Verze záznamu
+            </xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="MunicipalityList">
+				<xs:annotation>
+					<xs:documentation>
+        Obec
+      </xs:documentation>
+				</xs:annotation>
+				<xs:complexContent>
+					<xs:extension base="common:RuianObject">
+						<xs:sequence>
+							<xs:element minOccurs="0" name="district" type="common:RuianReference">
+								<xs:annotation>
+									<xs:documentation>
+                Okres
+              </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="GetMunicipalityRequest">
+				<xs:complexContent>
+					<xs:extension base="common:GetRequest">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="GetMunicipalityResponse">
+				<xs:complexContent>
+					<xs:extension base="common:GetResponse">
+						<xs:sequence>
+							<xs:element name="municipality" type="address:MunicipalityDetail"/>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ListMunicipalityRequest">
+				<xs:complexContent>
+					<xs:extension base="common:ListRequest">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ListMunicipalityResponse">
+				<xs:complexContent>
+					<xs:extension base="common:ListResponse">
+						<xs:sequence>
+							<xs:element name="items">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element maxOccurs="unbounded" minOccurs="0" name="municipality" type="address:MunicipalityList"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="MunicipalityPartDetail">
+				<xs:annotation>
+					<xs:documentation>
+        Část obce
+      </xs:documentation>
+				</xs:annotation>
+				<xs:complexContent>
+					<xs:extension base="common:RuianObject">
+						<xs:sequence>
+							<xs:element minOccurs="0" name="municipality" type="common:RuianReference">
+								<xs:annotation>
+									<xs:documentation>
+                Obec
+              </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name="version" type="xs:int" use="required">
+							<xs:annotation>
+								<xs:documentation>
+              Verze záznamu
+            </xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="MunicipalityPartList">
+				<xs:annotation>
+					<xs:documentation>
+        Část obce
+      </xs:documentation>
+				</xs:annotation>
+				<xs:complexContent>
+					<xs:extension base="common:RuianObject">
+						<xs:sequence>
+							<xs:element minOccurs="0" name="municipality" type="common:RuianReference">
+								<xs:annotation>
+									<xs:documentation>
+                Obec
+              </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="GetMunicipalityPartRequest">
+				<xs:complexContent>
+					<xs:extension base="common:GetRequest">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="GetMunicipalityPartResponse">
+				<xs:complexContent>
+					<xs:extension base="common:GetResponse">
+						<xs:sequence>
+							<xs:element name="municipalityPart" type="address:MunicipalityPartDetail"/>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ListMunicipalityPartRequest">
+				<xs:complexContent>
+					<xs:extension base="common:ListRequest">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ListMunicipalityPartResponse">
+				<xs:complexContent>
+					<xs:extension base="common:ListResponse">
+						<xs:sequence>
+							<xs:element name="items">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element maxOccurs="unbounded" minOccurs="0" name="municipalityPart" type="address:MunicipalityPartList"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="RegionDetail">
+				<xs:annotation>
+					<xs:documentation>
+        Vyšší územní samoprávní celek (nový kraj)
+      </xs:documentation>
+				</xs:annotation>
+				<xs:complexContent>
+					<xs:extension base="common:RuianObject">
+						<xs:sequence>
+							<xs:element minOccurs="0" name="nutsLauCode" type="xs:string">
+								<xs:annotation>
+									<xs:documentation>
+                Kód NUTS/LAU (Nomenclature of Territorial Units for Statistics/Local Administrative Units)
+              </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element minOccurs="0" name="cohesionRegion" type="common:RuianReference">
+								<xs:annotation>
+									<xs:documentation>
+                Regionu soudržnosti (oblast)
+              </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name="version" type="xs:int" use="required">
+							<xs:annotation>
+								<xs:documentation>
+              Verze záznamu
+            </xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="RegionList">
+				<xs:annotation>
+					<xs:documentation>
+        Vyšší územní samoprávní celek (nový kraj)
+      </xs:documentation>
+				</xs:annotation>
+				<xs:complexContent>
+					<xs:extension base="common:RuianObject">
+						<xs:sequence>
+							<xs:element minOccurs="0" name="nutsLauCode" type="xs:string">
+								<xs:annotation>
+									<xs:documentation>
+                Kód NUTS/LAU (Nomenclature of Territorial Units for Statistics/Local Administrative Units)
+              </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element minOccurs="0" name="cohesionRegion" type="common:RuianReference">
+								<xs:annotation>
+									<xs:documentation>
+                Regionu soudržnosti (oblast)
+              </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="GetRegionRequest">
+				<xs:complexContent>
+					<xs:extension base="common:GetRequest">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="GetRegionResponse">
+				<xs:complexContent>
+					<xs:extension base="common:GetResponse">
+						<xs:sequence>
+							<xs:element name="region" type="address:RegionDetail"/>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ListRegionRequest">
+				<xs:complexContent>
+					<xs:extension base="common:ListRequest">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ListRegionResponse">
+				<xs:complexContent>
+					<xs:extension base="common:ListResponse">
+						<xs:sequence>
+							<xs:element name="items">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element maxOccurs="unbounded" minOccurs="0" name="region" type="address:RegionList"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="StreetDetail">
+				<xs:annotation>
+					<xs:documentation>
+        Ulice
+      </xs:documentation>
+				</xs:annotation>
+				<xs:complexContent>
+					<xs:extension base="common:RuianObject">
+						<xs:sequence>
+							<xs:element minOccurs="0" name="municipality" type="common:RuianReference">
+								<xs:annotation>
+									<xs:documentation>
+                Obec
+              </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name="version" type="xs:int" use="required">
+							<xs:annotation>
+								<xs:documentation>
+              Verze záznamu
+            </xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="StreetList">
+				<xs:annotation>
+					<xs:documentation>
+        Ulice
+      </xs:documentation>
+				</xs:annotation>
+				<xs:complexContent>
+					<xs:extension base="common:RuianObject">
+						<xs:sequence>
+							<xs:element minOccurs="0" name="municipality" type="common:RuianReference">
+								<xs:annotation>
+									<xs:documentation>
+                Obec
+              </xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="GetStreetRequest">
+				<xs:complexContent>
+					<xs:extension base="common:GetRequest">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="GetStreetResponse">
+				<xs:complexContent>
+					<xs:extension base="common:GetResponse">
+						<xs:sequence>
+							<xs:element name="street" type="address:StreetDetail"/>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ListStreetRequest">
+				<xs:complexContent>
+					<xs:extension base="common:ListRequest">
+						<xs:all/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ListStreetResponse">
+				<xs:complexContent>
+					<xs:extension base="common:ListResponse">
+						<xs:sequence>
+							<xs:element name="items">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element maxOccurs="unbounded" minOccurs="0" name="street" type="address:StreetList"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="ListRegionRequest">
+		<wsdl:part name="ListRegionRequest" element="tns:ListRegionRequest">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ListMunicipalityResponse">
+		<wsdl:part name="ListMunicipalityResponse" element="tns:ListMunicipalityResponse">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="GetDistrictRequest">
+		<wsdl:part name="GetDistrictRequest" element="tns:GetDistrictRequest">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ListMunicipalityPartRequest">
+		<wsdl:part name="ListMunicipalityPartRequest" element="tns:ListMunicipalityPartRequest">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="GetDistrictResponse">
+		<wsdl:part name="GetDistrictResponse" element="tns:GetDistrictResponse">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="GetStreetRequest">
+		<wsdl:part name="GetStreetRequest" element="tns:GetStreetRequest">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ListDistrictRequest">
+		<wsdl:part name="ListDistrictRequest" element="tns:ListDistrictRequest">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ListCadastralTerritoryResponse">
+		<wsdl:part name="ListCadastralTerritoryResponse" element="tns:ListCadastralTerritoryResponse">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ListCityDistrictResponse">
+		<wsdl:part name="ListCityDistrictResponse" element="tns:ListCityDistrictResponse">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="GetCadastralTerritoryResponse">
+		<wsdl:part name="GetCadastralTerritoryResponse" element="tns:GetCadastralTerritoryResponse">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="GetAddressPlaceResponse">
+		<wsdl:part name="GetAddressPlaceResponse" element="tns:GetAddressPlaceResponse">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ListMunicipalityPartResponse">
+		<wsdl:part name="ListMunicipalityPartResponse" element="tns:ListMunicipalityPartResponse">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ListMunicipalityRequest">
+		<wsdl:part name="ListMunicipalityRequest" element="tns:ListMunicipalityRequest">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ListCadastralTerritoryRequest">
+		<wsdl:part name="ListCadastralTerritoryRequest" element="tns:ListCadastralTerritoryRequest">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ListRegionResponse">
+		<wsdl:part name="ListRegionResponse" element="tns:ListRegionResponse">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="GetCountryRequest">
+		<wsdl:part name="GetCountryRequest" element="tns:GetCountryRequest">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="GetMunicipalityResponse">
+		<wsdl:part name="GetMunicipalityResponse" element="tns:GetMunicipalityResponse">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="GetStreetResponse">
+		<wsdl:part name="GetStreetResponse" element="tns:GetStreetResponse">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="GetMunicipalityPartResponse">
+		<wsdl:part name="GetMunicipalityPartResponse" element="tns:GetMunicipalityPartResponse">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="GetCityDistrictResponse">
+		<wsdl:part name="GetCityDistrictResponse" element="tns:GetCityDistrictResponse">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ListCountryResponse">
+		<wsdl:part name="ListCountryResponse" element="tns:ListCountryResponse">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="GetCountryResponse">
+		<wsdl:part name="GetCountryResponse" element="tns:GetCountryResponse">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="GetRegionResponse">
+		<wsdl:part name="GetRegionResponse" element="tns:GetRegionResponse">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ListCountryRequest">
+		<wsdl:part name="ListCountryRequest" element="tns:ListCountryRequest">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ListStreetRequest">
+		<wsdl:part name="ListStreetRequest" element="tns:ListStreetRequest">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="GetRegionRequest">
+		<wsdl:part name="GetRegionRequest" element="tns:GetRegionRequest">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="GetAddressPlaceRequest">
+		<wsdl:part name="GetAddressPlaceRequest" element="tns:GetAddressPlaceRequest">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ListAddressPlaceResponse">
+		<wsdl:part name="ListAddressPlaceResponse" element="tns:ListAddressPlaceResponse">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="GetMunicipalityRequest">
+		<wsdl:part name="GetMunicipalityRequest" element="tns:GetMunicipalityRequest">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="GetCityDistrictRequest">
+		<wsdl:part name="GetCityDistrictRequest" element="tns:GetCityDistrictRequest">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ListCityDistrictRequest">
+		<wsdl:part name="ListCityDistrictRequest" element="tns:ListCityDistrictRequest">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ListAddressPlaceRequest">
+		<wsdl:part name="ListAddressPlaceRequest" element="tns:ListAddressPlaceRequest">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ListDistrictResponse">
+		<wsdl:part name="ListDistrictResponse" element="tns:ListDistrictResponse">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="GetCadastralTerritoryRequest">
+		<wsdl:part name="GetCadastralTerritoryRequest" element="tns:GetCadastralTerritoryRequest">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="GetMunicipalityPartRequest">
+		<wsdl:part name="GetMunicipalityPartRequest" element="tns:GetMunicipalityPartRequest">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="ListStreetResponse">
+		<wsdl:part name="ListStreetResponse" element="tns:ListStreetResponse">
+    </wsdl:part>
+	</wsdl:message>
+	<wsdl:portType name="Address">
+		<wsdl:operation name="ListRegion">
+			<wsdl:input name="ListRegionRequest" message="sch:ListRegionRequest">
+    </wsdl:input>
+			<wsdl:output name="ListRegionResponse" message="sch:ListRegionResponse">
+    </wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ListMunicipality">
+			<wsdl:input name="ListMunicipalityRequest" message="sch:ListMunicipalityRequest">
+    </wsdl:input>
+			<wsdl:output name="ListMunicipalityResponse" message="sch:ListMunicipalityResponse">
+    </wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetDistrict">
+			<wsdl:input name="GetDistrictRequest" message="sch:GetDistrictRequest">
+    </wsdl:input>
+			<wsdl:output name="GetDistrictResponse" message="sch:GetDistrictResponse">
+    </wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ListMunicipalityPart">
+			<wsdl:input name="ListMunicipalityPartRequest" message="sch:ListMunicipalityPartRequest">
+    </wsdl:input>
+			<wsdl:output name="ListMunicipalityPartResponse" message="sch:ListMunicipalityPartResponse">
+    </wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetStreet">
+			<wsdl:input name="GetStreetRequest" message="sch:GetStreetRequest">
+    </wsdl:input>
+			<wsdl:output name="GetStreetResponse" message="sch:GetStreetResponse">
+    </wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ListDistrict">
+			<wsdl:input name="ListDistrictRequest" message="sch:ListDistrictRequest">
+    </wsdl:input>
+			<wsdl:output name="ListDistrictResponse" message="sch:ListDistrictResponse">
+    </wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ListCadastralTerritory">
+			<wsdl:input name="ListCadastralTerritoryRequest" message="sch:ListCadastralTerritoryRequest">
+    </wsdl:input>
+			<wsdl:output name="ListCadastralTerritoryResponse" message="sch:ListCadastralTerritoryResponse">
+    </wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ListCityDistrict">
+			<wsdl:input name="ListCityDistrictRequest" message="sch:ListCityDistrictRequest">
+    </wsdl:input>
+			<wsdl:output name="ListCityDistrictResponse" message="sch:ListCityDistrictResponse">
+    </wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetCadastralTerritory">
+			<wsdl:input name="GetCadastralTerritoryRequest" message="sch:GetCadastralTerritoryRequest">
+    </wsdl:input>
+			<wsdl:output name="GetCadastralTerritoryResponse" message="sch:GetCadastralTerritoryResponse">
+    </wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetAddressPlace">
+			<wsdl:input name="GetAddressPlaceRequest" message="sch:GetAddressPlaceRequest">
+    </wsdl:input>
+			<wsdl:output name="GetAddressPlaceResponse" message="sch:GetAddressPlaceResponse">
+    </wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetCountry">
+			<wsdl:input name="GetCountryRequest" message="sch:GetCountryRequest">
+    </wsdl:input>
+			<wsdl:output name="GetCountryResponse" message="sch:GetCountryResponse">
+    </wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetMunicipality">
+			<wsdl:input name="GetMunicipalityRequest" message="sch:GetMunicipalityRequest">
+    </wsdl:input>
+			<wsdl:output name="GetMunicipalityResponse" message="sch:GetMunicipalityResponse">
+    </wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetMunicipalityPart">
+			<wsdl:input name="GetMunicipalityPartRequest" message="sch:GetMunicipalityPartRequest">
+    </wsdl:input>
+			<wsdl:output name="GetMunicipalityPartResponse" message="sch:GetMunicipalityPartResponse">
+    </wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetCityDistrict">
+			<wsdl:input name="GetCityDistrictRequest" message="sch:GetCityDistrictRequest">
+    </wsdl:input>
+			<wsdl:output name="GetCityDistrictResponse" message="sch:GetCityDistrictResponse">
+    </wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ListCountry">
+			<wsdl:input name="ListCountryRequest" message="sch:ListCountryRequest">
+    </wsdl:input>
+			<wsdl:output name="ListCountryResponse" message="sch:ListCountryResponse">
+    </wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetRegion">
+			<wsdl:input name="GetRegionRequest" message="sch:GetRegionRequest">
+    </wsdl:input>
+			<wsdl:output name="GetRegionResponse" message="sch:GetRegionResponse">
+    </wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ListStreet">
+			<wsdl:input name="ListStreetRequest" message="sch:ListStreetRequest">
+    </wsdl:input>
+			<wsdl:output name="ListStreetResponse" message="sch:ListStreetResponse">
+    </wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ListAddressPlace">
+			<wsdl:input name="ListAddressPlaceRequest" message="sch:ListAddressPlaceRequest">
+    </wsdl:input>
+			<wsdl:output name="ListAddressPlaceResponse" message="sch:ListAddressPlaceResponse">
+    </wsdl:output>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="AddressSoap12" type="tns:Address">
+		<soap12:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="ListRegion">
+			<soap12:operation soapAction="https://crzp.inqool.cz/ws/address/v1"/>
+			<wsdl:input name="ListRegionRequest">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="ListRegionResponse">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ListMunicipality">
+			<soap12:operation soapAction="https://crzp.inqool.cz/ws/address/v1"/>
+			<wsdl:input name="ListMunicipalityRequest">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="ListMunicipalityResponse">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetDistrict">
+			<soap12:operation soapAction="https://crzp.inqool.cz/ws/address/v1"/>
+			<wsdl:input name="GetDistrictRequest">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="GetDistrictResponse">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ListMunicipalityPart">
+			<soap12:operation soapAction="https://crzp.inqool.cz/ws/address/v1"/>
+			<wsdl:input name="ListMunicipalityPartRequest">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="ListMunicipalityPartResponse">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetStreet">
+			<soap12:operation soapAction="https://crzp.inqool.cz/ws/address/v1"/>
+			<wsdl:input name="GetStreetRequest">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="GetStreetResponse">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ListDistrict">
+			<soap12:operation soapAction="https://crzp.inqool.cz/ws/address/v1"/>
+			<wsdl:input name="ListDistrictRequest">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="ListDistrictResponse">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ListCadastralTerritory">
+			<soap12:operation soapAction="https://crzp.inqool.cz/ws/address/v1"/>
+			<wsdl:input name="ListCadastralTerritoryRequest">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="ListCadastralTerritoryResponse">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ListCityDistrict">
+			<soap12:operation soapAction="https://crzp.inqool.cz/ws/address/v1"/>
+			<wsdl:input name="ListCityDistrictRequest">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="ListCityDistrictResponse">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetCadastralTerritory">
+			<soap12:operation soapAction="https://crzp.inqool.cz/ws/address/v1"/>
+			<wsdl:input name="GetCadastralTerritoryRequest">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="GetCadastralTerritoryResponse">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetAddressPlace">
+			<soap12:operation soapAction="https://crzp.inqool.cz/ws/address/v1"/>
+			<wsdl:input name="GetAddressPlaceRequest">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="GetAddressPlaceResponse">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetCountry">
+			<soap12:operation soapAction="https://crzp.inqool.cz/ws/address/v1"/>
+			<wsdl:input name="GetCountryRequest">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="GetCountryResponse">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetMunicipality">
+			<soap12:operation soapAction="https://crzp.inqool.cz/ws/address/v1"/>
+			<wsdl:input name="GetMunicipalityRequest">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="GetMunicipalityResponse">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetMunicipalityPart">
+			<soap12:operation soapAction="https://crzp.inqool.cz/ws/address/v1"/>
+			<wsdl:input name="GetMunicipalityPartRequest">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="GetMunicipalityPartResponse">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetCityDistrict">
+			<soap12:operation soapAction="https://crzp.inqool.cz/ws/address/v1"/>
+			<wsdl:input name="GetCityDistrictRequest">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="GetCityDistrictResponse">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ListCountry">
+			<soap12:operation soapAction="https://crzp.inqool.cz/ws/address/v1"/>
+			<wsdl:input name="ListCountryRequest">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="ListCountryResponse">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="GetRegion">
+			<soap12:operation soapAction="https://crzp.inqool.cz/ws/address/v1"/>
+			<wsdl:input name="GetRegionRequest">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="GetRegionResponse">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ListStreet">
+			<soap12:operation soapAction="https://crzp.inqool.cz/ws/address/v1"/>
+			<wsdl:input name="ListStreetRequest">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="ListStreetResponse">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="ListAddressPlace">
+			<soap12:operation soapAction="https://crzp.inqool.cz/ws/address/v1"/>
+			<wsdl:input name="ListAddressPlaceRequest">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="ListAddressPlaceResponse">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="AddressService">
+		<wsdl:port name="AddressSoap12" binding="tns:AddressSoap12">
+			<soap12:address location="https://ext.crzp-dev.mzp.cz/ws/address/"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>
