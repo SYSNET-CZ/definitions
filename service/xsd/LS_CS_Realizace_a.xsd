@@ -1,0 +1,703 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.celnisprava.cz/registrlicenci" 
+           xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ls="http://www.celnisprava.cz/registrlicenci">
+
+  <!-- Změny ve verzi 1.1: -->
+  <!--    přidán element CisloPolozkyCelnihoDokladu pro SZIF -->
+  <!--    změna názvu elementu Typ na TypPohybu -->
+  <!--    změna názvu elementu DatumACasEvidence na DatumCasPohybu -->
+
+  <!-- Změny ve verzi 1.2: -->
+  <!--    drobná změna v definici elementu CisloLicence_t -->
+  <!--    přidána definice pro CITES -->
+  <!--    přidána pro ČBÚ a SZIF možnost, pro MPO a CITES nutnost zasílání potvrzovacích zpráv -->
+  <!--    pro všechny vydavatele kromě MPO zrušen element KonecXml -->
+
+ 
+  <!-- Definice dotazovacích a odpovědních zpráv pro jednotlivé vydavatele licencí -->
+  <xs:element name="MPO_CS_RealizaceReq" type="ls:CS_RealizaceReq_t"/>
+  <xs:element name="MPO_CS_RealizaceResp" type="ls:CS_RealizaceResp_General_t"/>
+  <xs:element name="OPL_CS_RealizaceReq" type="ls:CS_RealizaceReq_t"/>
+  <xs:element name="OPL_CS_RealizaceResp" type="ls:OPL_CS_RealizaceResp_t"/>
+  <xs:element name="CBU_CS_RealizaceReq" type="ls:CS_RealizaceReq_t"/>
+  <xs:element name="CBU_CS_RealizaceResp" type="ls:CBU_CS_RealizaceResp_t"/>
+  <xs:element name="SZIF_CS_RealizaceReq" type="ls:CS_RealizaceReq_t"/>
+  <xs:element name="SZIF_CS_RealizaceResp" type="ls:SZIF_CS_RealizaceResp_t"/>
+  <xs:element name="CITES_CS_RealizaceReq" type="ls:CS_RealizaceReq_t"/>
+  <xs:element name="CITES_CS_RealizaceResp" type="ls:CITES_CS_RealizaceResp_t"/>
+
+  <xs:element name="MPO_CS_RealizaceConfirm" type="ls:CS_RealizaceConfirm_t"/>
+  <xs:element name="MPO_CS_RealizaceConfirmAck" type="ls:CS_RealizaceConfirmAck_t"/>
+  <xs:element name="CBU_CS_RealizaceConfirm" type="ls:CS_RealizaceConfirm_t"/>
+  <xs:element name="CBU_CS_RealizaceConfirmAck" type="ls:CS_RealizaceConfirmAck_t"/>
+  <xs:element name="SZIF_CS_RealizaceConfirm" type="ls:CS_RealizaceConfirm_t"/>
+  <xs:element name="SZIF_CS_RealizaceConfirmAck" type="ls:CS_RealizaceConfirmAck_t"/>
+  <xs:element name="CITES_CS_RealizaceConfirm" type="ls:CS_RealizaceConfirm_t"/>
+  <xs:element name="CITES_CS_RealizaceConfirmAck" type="ls:CS_RealizaceConfirmAck_t"/>
+
+
+  <!-- Definice struktury odpovědi na vrácení odpisových listů licencí -->
+  <xs:complexType name="CS_RealizaceConfirmAck_t">
+    <xs:annotation>
+      <xs:documentation>Potvrzení pro vydavatele o převzetí jeho zprávy CS_RealizaceConfirm</xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="Verze" type="xs:string" fixed="1.0">
+      <xs:annotation>
+        <xs:documentation>Verze zprávy č. 1.0</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <!-- Definice struktury odpovědi na vrácení odpisových listů licencí -->
+  <xs:complexType name="CS_RealizaceConfirm_t">
+    <xs:annotation>
+      <xs:documentation>Seznam převzatých pohybů. Vydavatel tímto potvrzuje, které pohyby má jejich odesílatel považovat za předané.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="ls:CS_RealizaceConfirmAck_t">
+        <xs:sequence>
+          <xs:element name="Id" minOccurs="1" maxOccurs="100000" type="xs:long">
+            <xs:annotation>
+              <xs:documentation>Unikátní identifikátor pohybu na odpisovém listě</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+
+  <!-- Definice dotazu na vrácení odpisových listů licencí -->
+  <xs:complexType name="CS_RealizaceReq_t">
+    <xs:annotation>
+      <xs:documentation>Dotaz</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="DatumOd" minOccurs="0" maxOccurs="1"  type="ls:DateTime_t">
+        <xs:annotation>
+          <xs:documentation>
+            Počáteční datum vymezující období, za které jsou záznamy o pohybech předány. Datum se porovnává s datem a časem uložení záznamu o pohybu. 
+            Je-li uvedeno, vrátí se za požadované období všechny záznamy bez ohledu na to, zda již byly v minulosti předány. 
+            Není-li uvedeno, vrátí se jen ty záznamy, které dosud předány nebyly, nebo u kterých byly od minulého předání doplněny položky z datového skladu.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="DatumDo" minOccurs="0" maxOccurs="1" type="ls:DateTime_t">
+        <xs:annotation>
+          <xs:documentation>Konečné datum vymezující období, za které jsou záznamy o pohybech předány. Datum se porovnává s datem a časem uložení záznamu o pohybu.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ExpImp" minOccurs="0" maxOccurs="1" type="ls:ExpImp_t">
+        <xs:annotation>
+          <xs:documentation>Příznak, zda mají být předány pouze dovozní nebo vývozní pohyby.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="Verze" type="xs:string" fixed="1.2">
+      <xs:annotation>
+        <xs:documentation>Verze zprávy č. 1.2</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+
+  <!-- Definice struktury odpovědi na vrácení odpisových listů licencí -->
+  <xs:complexType name="CS_RealizaceResp_Base_t">
+    <xs:annotation>
+      <xs:documentation>Základ odpovědi společný pro všechny vydavatele</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="ResultCode" minOccurs="1" maxOccurs="1" type="ls:ResultCode_t">
+        <xs:annotation>
+          <xs:documentation>Návratový kód</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="Verze" type="xs:string" fixed="1.2">
+      <xs:annotation>
+        <xs:documentation>Verze zprávy č. 1.2</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <xs:complexType name="CS_RealizaceResp_General_t">
+    <xs:annotation>
+      <xs:documentation>Odpověď pro vydavatele, kteří v odpovědi nepožadují specifické tagy</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="ls:CS_RealizaceResp_Base_t">
+        <xs:sequence>
+          <xs:element name="Pohyb" minOccurs="0" maxOccurs="100000" type="ls:Pohyb_Base_MPO_OPL_t">
+            <xs:annotation>
+              <xs:documentation>Jeden záznam o pohybu. Upraveno v 2019M12 (MinOccurs a MaxOccurs)</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="KonecXml" minOccurs="1" maxOccurs="1" type="xs:string" fixed="KonecXml">
+            <xs:annotation>
+              <xs:documentation>Tag pro kontrolu celistvosti zprávy. Přidáno v 2019M11 na žádost MPO.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- Definice struktury odpovědi pro vydavatele OPL licencí -->
+  <xs:complexType name="OPL_CS_RealizaceResp_t">
+    <xs:annotation>
+      <xs:documentation>Odpověď pro OPL</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="ls:CS_RealizaceResp_Base_t">
+        <xs:sequence>
+          <xs:element name="Pohyb" minOccurs="0" maxOccurs="100000" type="ls:Pohyb_OPL_t">
+            <xs:annotation>
+              <xs:documentation>Jeden záznam o pohybu obsahující navíc datum překročení hranice EU</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- Definice struktury odpovědi pro vydavatele ČBÚ licencí -->
+  <xs:complexType name="CBU_CS_RealizaceResp_t">
+    <xs:annotation>
+      <xs:documentation>Odpověď pro OPL</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="ls:CS_RealizaceResp_Base_t">
+        <xs:sequence>
+          <xs:element name="Pohyb" minOccurs="0" maxOccurs="100000" type="ls:Pohyb_CBU_t">
+            <xs:annotation>
+              <xs:documentation>Jeden záznam o pohybu pro ČBÚ</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- Definice struktury odpovědi pro vydavatele SZIF licencí -->
+  <xs:complexType name="SZIF_CS_RealizaceResp_t">
+    <xs:annotation>
+      <xs:documentation>Odpověď pro OPL</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="ls:CS_RealizaceResp_Base_t">
+        <xs:sequence>
+          <xs:element name="Pohyb" minOccurs="0" maxOccurs="100000" type="ls:Pohyb_SZIF_t">
+            <xs:annotation>
+              <xs:documentation>Jeden záznam o pohybu pro SZIF</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- Definice struktury odpovědi pro vydavatele CITES permitů -->
+  <xs:complexType name="CITES_CS_RealizaceResp_t">
+    <xs:annotation>
+      <xs:documentation>Odpověď pro CITES</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="ls:CS_RealizaceResp_Base_t">
+        <xs:sequence>
+          <xs:element name="Pohyb" minOccurs="0" maxOccurs="100000" type="ls:Pohyb_CITES_t">
+            <xs:annotation>
+              <xs:documentation>Jeden záznam o pohybu pro CITES</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+
+  <!-- Definice struktury jednoho odpisového záznamu - část, která je společná pro všechny vydavatele licencí -->
+  <xs:complexType name="Pohyb_Base_t">
+    <xs:annotation>
+      <xs:documentation>Jeden záznam o pohybu</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Id" minOccurs="1" maxOccurs="1" type="xs:long">
+        <xs:annotation>
+          <xs:documentation>Unikátní identifikátor pohybu na odpisovém listě</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="TypPohybu" minOccurs="1" maxOccurs="1" type="ls:TypPohybu_t">
+        <xs:annotation>
+          <xs:documentation>Typ záznamu o pohybu</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="CisloLicence" minOccurs="1" maxOccurs="1" type="ls:CisloLicence_t">
+        <xs:annotation>
+          <xs:documentation>Číslo licence</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Definice struktury jednoho odpisového záznamu - část, která je společná pro vydavatele licencí MPO, OPL, ČBÚ, CITES -->
+  <xs:complexType name="Pohyb_Base_MPO_OPL_CBU_CITES_t">
+    <xs:annotation>
+      <xs:documentation>Jeden záznam o pohybu</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="ls:Pohyb_Base_t">
+        <xs:sequence>
+          <xs:element name="CisloPolozkyLicence" minOccurs="1" maxOccurs="1" type="xs:int">
+            <xs:annotation>
+              <xs:documentation>Číslo položky licence</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="CisloCelnihoDokladu" minOccurs="1" maxOccurs="1" type="ls:CisloCelnihoDokladu_t">
+            <xs:annotation>
+              <xs:documentation>Číslo celního dokladu</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="CisloPolozkyCelnihoDokladu" minOccurs="1" maxOccurs="1" type="xs:int">
+            <xs:annotation>
+              <xs:documentation>Číslo položky na celním dokladu JSD</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="DatumCasPohybu" minOccurs="1" maxOccurs="1" type="ls:DateTime_t">
+            <xs:annotation>
+              <xs:documentation>Datum a čas evidence pohybu v systému Single Window</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- Definice struktury jednoho odpisového záznamu - část, která je společná pro vydavatele licencí MPO, OPL, ČBÚ -->
+  <xs:complexType name="Pohyb_Base_MPO_OPL_CBU_t">
+    <xs:annotation>
+      <xs:documentation>Jeden záznam o pohybu</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="ls:Pohyb_Base_MPO_OPL_CBU_CITES_t">
+        <xs:sequence>
+          <xs:element name="DatumPropusteniCelnihoDokladu" minOccurs="0" maxOccurs="1" type="ls:Date_t">
+            <xs:annotation>
+              <xs:documentation>Datum propuštění celního dokladu</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- Definice struktury jednoho odpisového záznamu - část, která je společná pro vydavatele licencí MPO, OPL -->
+  <xs:complexType name="Pohyb_Base_MPO_OPL_t">
+    <xs:annotation>
+      <xs:documentation>Jeden záznam o pohybu</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="ls:Pohyb_Base_MPO_OPL_CBU_t">
+        <xs:sequence>
+          <xs:element name="CisloCU" minOccurs="0" maxOccurs="1" type="ls:CisloCU_t">
+            <xs:annotation>
+              <xs:documentation>Číslo celního úřadu</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="KodZbozi" minOccurs="0" maxOccurs="1" type="ls:KodZbozi_t">
+            <xs:annotation>
+              <xs:documentation>Kód zboží</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="PopisZbozi" minOccurs="0" maxOccurs="1" type="ls:PopisZbozi_t">
+            <xs:annotation>
+              <xs:documentation>Popis zboží uvedený deklarantem</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="Hodnota" minOccurs="0" maxOccurs="1" type="ls:Hodnota_t">
+            <xs:annotation>
+              <xs:documentation>Statistická hodnota zboží</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="Mnozstvi" minOccurs="0" maxOccurs="1" type="ls:Mnozstvi_t">
+            <xs:annotation>
+              <xs:documentation>Množství zboží v sazebníkové jednotce</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="MernaJednotka" minOccurs="0" maxOccurs="1" type="ls:MernaJednotka_t">
+            <xs:annotation>
+              <xs:documentation>Sazebníková měrná jednotka</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- Definice struktury jednoho odpisového záznamu - pro vydavatele licencí OPL -->
+  <xs:complexType name="Pohyb_OPL_t">
+    <xs:annotation>
+      <xs:documentation>Jeden záznam o pohybu pro OPL</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="ls:Pohyb_Base_MPO_OPL_t">
+        <xs:sequence>
+          <xs:element name="DatumPrekroceniHraniceEU" minOccurs="0" maxOccurs="1" type="ls:Date_t">
+            <xs:annotation>
+              <xs:documentation>Datum, kdy zboží překročilo hranici EU. Údaj je získáván z datového skladu GŘC. Tag přidán 2021M04 pro potřeby vydavatele licencí OPL.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- Definice struktury jednoho odpisového záznamu - pro vydavatele licencí ČBÚ -->
+  <xs:complexType name="Pohyb_CBU_t">
+    <xs:annotation>
+      <xs:documentation>Jeden záznam o pohybu pro ČBÚ</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="ls:Pohyb_Base_MPO_OPL_CBU_t">
+        <xs:sequence>
+          <xs:element name="KodZbozi" minOccurs="0" maxOccurs="1" type="ls:KodZbozi_t">
+            <xs:annotation>
+              <xs:documentation>Kód zboží</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="PopisZbozi" minOccurs="0" maxOccurs="1" type="ls:PopisZbozi_t">
+            <xs:annotation>
+              <xs:documentation>Popis zboží uvedený deklarantem</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="Mnozstvi" minOccurs="0" maxOccurs="1" type="ls:Mnozstvi_t">
+            <xs:annotation>
+              <xs:documentation>Množství zboží v sazebníkové jednotce</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="MernaJednotka" minOccurs="0" maxOccurs="1" type="ls:MernaJednotka_t">
+            <xs:annotation>
+              <xs:documentation>Sazebníková měrná jednotka</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="OdesilatelEORI" minOccurs="0" maxOccurs="1" type="ls:EORI_t">
+            <xs:annotation>
+              <xs:documentation>EORI odesílatele</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="PrijemceEORI" minOccurs="0" maxOccurs="1" type="ls:EORI_t">
+            <xs:annotation>
+              <xs:documentation>EORI příjemce</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="ZemeOdeslani" minOccurs="0" maxOccurs="1" type="ls:Zeme_t">
+            <xs:annotation>
+              <xs:documentation>Země odeslání</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="ZemeUrceni" minOccurs="0" maxOccurs="1" type="ls:Zeme_t">
+            <xs:annotation>
+              <xs:documentation>Země určení</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- Definice struktury jednoho odpisového záznamu - pro vydavatele permitů CITES -->
+  <xs:complexType name="Pohyb_CITES_t">
+    <xs:annotation>
+      <xs:documentation>Jeden záznam o pohybu pro CITES</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="ls:Pohyb_Base_MPO_OPL_CBU_CITES_t">
+        <xs:sequence>
+          <xs:element name="DatumPrijetiCelnihoDokladu" minOccurs="0" maxOccurs="1" type="ls:Date_t">
+            <xs:annotation>
+              <xs:documentation>Datum přijetí celního dokladu</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="DatumPropusteniCelnihoDokladu" minOccurs="0" maxOccurs="1" type="ls:Date_t">
+            <xs:annotation>
+              <xs:documentation>Datum propuštění celního dokladu</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="KodZbozi" minOccurs="0" maxOccurs="1" type="ls:KodZbozi_t">
+            <xs:annotation>
+              <xs:documentation>Kód zboží</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="Mnozstvi" minOccurs="0" maxOccurs="1" type="ls:Mnozstvi_t">
+            <xs:annotation>
+              <xs:documentation>Množství zboží v sazebníkové jednotce</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="MernaJednotka" minOccurs="0" maxOccurs="1" type="ls:MernaJednotka_t">
+            <xs:annotation>
+              <xs:documentation>Sazebníková měrná jednotka</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="DruhLicence" minOccurs="0" maxOccurs="1" type="ls:DruhLicence_t">
+            <xs:annotation>
+              <xs:documentation>Druh dokladu</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="DoplnujiciZaznam" minOccurs="0" maxOccurs="1" type="ls:DoplnujiciZaznam_t">
+            <xs:annotation>
+              <xs:documentation>Doplňující záznamy k dokladu</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="LicenceOverenaCU" minOccurs="0" maxOccurs="1" type="xs:boolean">
+            <xs:annotation>
+              <xs:documentation>Byl doklad ověřen v papírové podobě pracovníkem CÚ?</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- Definice struktury jednoho odpisového záznamu - pro vydavatele licencí SZIF -->
+  <xs:complexType name="Pohyb_SZIF_t">
+    <xs:annotation>
+      <xs:documentation>Jeden záznam o pohybu pro SZIF</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="ls:Pohyb_Base_t">
+        <xs:sequence>
+          <xs:element name="CisloCelnihoDokladu" minOccurs="1" maxOccurs="1" type="ls:CisloCelnihoDokladu_t">
+            <xs:annotation>
+              <xs:documentation>Číslo celního dokladu</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="CisloPolozkyCelnihoDokladu" minOccurs="1" maxOccurs="1" type="xs:int">
+            <xs:annotation>
+              <xs:documentation>Číslo položky na celním dokladu JSD</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="DatumCasPohybu" minOccurs="1" maxOccurs="1" type="ls:DateTime_t">
+            <xs:annotation>
+              <xs:documentation>Datum a čas evidence pohybu v systému Single Window</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="DatumPrijetiCelnihoDokladu" minOccurs="0" maxOccurs="1" type="ls:Date_t">
+            <xs:annotation>
+              <xs:documentation>Datum přijetí celního dokladu</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="DatumPropusteniCelnihoDokladu" minOccurs="0" maxOccurs="1" type="ls:Date_t">
+            <xs:annotation>
+              <xs:documentation>Datum propuštění celního dokladu</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="KodZbozi" minOccurs="0" maxOccurs="1" type="ls:KodZbozi_t">
+            <xs:annotation>
+              <xs:documentation>Kód zboží</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="Mnozstvi" minOccurs="0" maxOccurs="1" type="ls:Mnozstvi_t">
+            <xs:annotation>
+              <xs:documentation>Množství zboží v sazebníkové jednotce</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="MernaJednotka" minOccurs="0" maxOccurs="1" type="ls:MernaJednotka_t">
+            <xs:annotation>
+              <xs:documentation>Sazebníková měrná jednotka</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="MnozstviDopl" minOccurs="0" maxOccurs="1" type="ls:MnozstviDopl_t">
+            <xs:annotation>
+              <xs:documentation>Množství v doplňkových jednotkách</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="MernaJednotkaDopl" minOccurs="0" maxOccurs="1" type="ls:MernaJednotkaDopl_t">
+            <xs:annotation>
+              <xs:documentation>Doplňková měrná jednotka</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="DatumPrekroceniHraniceEU" minOccurs="0" maxOccurs="1" type="ls:Date_t">
+            <xs:annotation>
+              <xs:documentation>Datum, kdy zboží překročilo hranici EU</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="OdesilatelEORI" minOccurs="0" maxOccurs="1" type="ls:EORI_t">
+            <xs:annotation>
+              <xs:documentation>EORI odesílatele</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="PrijemceEORI" minOccurs="0" maxOccurs="1" type="ls:EORI_t">
+            <xs:annotation>
+              <xs:documentation>EORI příjemce</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="ZemePuvodu" minOccurs="0" maxOccurs="1" type="ls:Zeme_t">
+            <xs:annotation>
+              <xs:documentation>Země původu</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="ZemeOdeslani" minOccurs="0" maxOccurs="1" type="ls:Zeme_t">
+            <xs:annotation>
+              <xs:documentation>Země odeslání</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="ZemeUrceni" minOccurs="0" maxOccurs="1" type="ls:Zeme_t">
+            <xs:annotation>
+              <xs:documentation>Země určení</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="Preference" minOccurs="0" maxOccurs="1" type="ls:Preference_t">
+            <xs:annotation>
+              <xs:documentation>Údaj o sazebním zacházení se zbožím</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="KodKvoty" minOccurs="0" maxOccurs="1" type="ls:KodKvoty_t">
+            <xs:annotation>
+              <xs:documentation>Číslo celní kvóty</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="Vzorek" minOccurs="0" maxOccurs="1" type="xs:boolean">
+            <xs:annotation>
+              <xs:documentation>Příznak, zda byl odebrán vzorek</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+
+  <!-- Definice SIMPLE datových typů -->
+  <xs:simpleType name="DateTime_t">
+    <xs:annotation>
+      <xs:documentation>Formát je ve tvaru "d.M.yyyy HH:mm:ss"</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="(\d?\d\.){2}\d{4} (\d{2}:){2}\d{2}"/>
+      <xs:minLength value="17"/>
+      <xs:maxLength value="19"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="Date_t">
+    <xs:annotation>
+      <xs:documentation>Formát je ve tvaru "d.M.yyyy"</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="(\d?\d\.){2}\d{4}"/>
+      <xs:minLength value="8"/>
+      <xs:maxLength value="10"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ExpImp_t">
+    <xs:annotation>
+      <xs:documentation>Příznak, zda se jedná o dovoz/vývoz</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:length value="3"/>
+      <xs:enumeration value="EXP"/>
+      <xs:enumeration value="IMP"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ResultCode_t">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Ok"/>
+      <xs:enumeration value="Resend"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TypPohybu_t">
+    <xs:annotation>
+      <xs:documentation>Příznak typu záznamu, který je vrácen</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Odpis"/>
+      <xs:enumeration value="Oprava"/>
+      <xs:enumeration value="Storno"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="DruhLicence_t">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="4"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="CisloLicence_t">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="70"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="CisloCelnihoDokladu_t">
+    <xs:restriction base="xs:string">
+      <xs:length value="18"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="CisloCU_t">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[A-Z]{2}[A-Z0-9]{6}"/>
+      <xs:length value="8"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="KodZbozi_t">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="10"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="PopisZbozi_t">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="1000"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="Hodnota_t">
+    <xs:restriction base="xs:decimal">
+      <xs:minInclusive value="0"/>
+      <xs:maxInclusive value="99999999999999.9999"/>
+      <xs:fractionDigits value="4"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="Mnozstvi_t">
+    <xs:restriction base="xs:decimal">
+      <xs:minInclusive value="0"/>
+      <xs:maxInclusive value="999999999999.999999"/>
+      <xs:fractionDigits value="6"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="MernaJednotka_t">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="10"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="MnozstviDopl_t">
+    <xs:restriction base="xs:decimal">
+      <xs:minInclusive value="0"/>
+      <xs:maxInclusive value="999999999999999.999"/>
+      <xs:fractionDigits value="3"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="MernaJednotkaDopl_t">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="25"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="EORI_t">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="17"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="Zeme_t">
+    <xs:restriction base="xs:string">
+      <xs:length value="2"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="Preference_t">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="3"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="KodKvoty_t">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="13"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="DoplnujiciZaznam_t">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="35"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>
