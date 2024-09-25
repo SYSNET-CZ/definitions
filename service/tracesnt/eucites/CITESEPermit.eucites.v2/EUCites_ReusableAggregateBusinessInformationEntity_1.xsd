@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
+           xmlns:ram="urn:un:unece:uncefact:data:draft:ReusableAggregateBusinessInformationEntity:1"
+           xmlns:udt="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:13"
+           targetNamespace="urn:un:unece:uncefact:data:draft:ReusableAggregateBusinessInformationEntity:1"
+           elementFormDefault="qualified">
+
+    <xs:import namespace="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:13" schemaLocation="CITESEPermit_2p0_urn_un_unece_uncefact_data_standard_UnqualifiedDataType_13.xsd"/>
+ 
+	<!-- EXTENDING UNCEFACT -->
+	<xs:redefine schemaLocation="CITESEPermit_2p0_urn_un_unece_uncefact_data_draft_ReusableAggregateBusinessInformationEntity_1.xsd">
+		<xs:complexType name="SupplyChainTradeLineItemType">
+			<xs:complexContent>
+				<xs:extension base="ram:SupplyChainTradeLineItemType">
+					<xs:sequence>
+						<xs:element name="EUAnnex" type="xs:string" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>
+									EUAnnex attribute for Species ---- EU Cites box 12
+								</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="Purpose" type="udt:TextType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>
+									Purpose (of specific addendum ?)
+								</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="NetMass" type="udt:QuantityType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>
+									Purpose (of specific addendum ?)
+								</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+				
+			</xs:complexContent>
+		</xs:complexType>
+		
+		<xs:complexType name="SupplyChainConsignmentType">
+			<xs:complexContent>
+				<xs:extension base="ram:SupplyChainConsignmentType">
+					<xs:sequence>
+						<xs:element name="CountryOfExport" type="ram:TradeCountryType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>
+									Export Country - EU Cites box 4
+								</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="CountryOfImport" type="ram:TradeCountryType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>
+									Import Country - EU Cites box 5
+								</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+		
+		<xs:complexType name="ExchangedDocumentType">
+			<xs:complexContent>
+				<xs:extension base="ram:ExchangedDocumentType">
+					<xs:sequence>
+						<xs:element name="AuthorizedStorage" type="ram:LogisticsLocationType" minOccurs="0" >
+							<xs:annotation>
+								<xs:documentation>
+									Authorized location for live specimens of Annex A species (Box 6 )
+								</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="DocumentationSurrenderedTo" type="udt:IDType" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>
+									0 - has been surrendered to the issuing authority
+									1 - has to be surrendered to the border customs office of introduction
+									Others: Ignored, not has being marked
+								</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="DocumentationSurrenderedToComment" type="udt:TextType" minOccurs="0"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:redefine>
+</xs:schema>

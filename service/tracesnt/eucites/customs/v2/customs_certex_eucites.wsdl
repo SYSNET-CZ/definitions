@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                  xmlns:base="http://ec.europa.eu/sanco/tracesnt/base/v4"
+                  xmlns:body="http://ec.europa.eu/tracesnt/body/v3"
+                  xmlns:common="http://ec.europa.eu/tracesnt/cites/common/v1"
+                  xmlns:customs_certex_eucites="http://ec.europa.eu/tracesnt/customs_certex/eucites/v2" 
+                  targetNamespace="http://ec.europa.eu/tracesnt/customs_certex/eucites/v2">
+
+    <wsdl:import location="../../../../body/v3/body.wsdl" namespace="http://ec.europa.eu/tracesnt/body/v3"/>
+    <wsdl:import location="../../../../base/v4/base.wsdl" namespace="http://ec.europa.eu/sanco/tracesnt/base/v4"/>
+
+    <wsp:Policy xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy"
+		        xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+		<sp:TransportBinding>
+			<wsp:Policy>
+				<sp:TransportToken>
+					<wsp:Policy>
+						<sp:HttpsToken />
+					</wsp:Policy>
+				</sp:TransportToken>
+				<sp:AlgorithmSuite>
+					<wsp:Policy>
+						<sp:Basic256 />
+					</wsp:Policy>
+				</sp:AlgorithmSuite>
+				<sp:Layout>
+					<wsp:Policy>
+						<sp:Lax />
+					</wsp:Policy>
+				</sp:Layout>
+				<sp:IncludeTimestamp />
+			</wsp:Policy>
+		</sp:TransportBinding>
+		<sp:SupportingTokens>
+			<wsp:Policy>
+				<sp:UsernameToken
+					sp:IncludeToken="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702/IncludeToken/AlwaysToRecipient">
+					<wsp:Policy>
+						<sp:HashPassword />
+						<sp:WssUsernameToken10 />
+					</wsp:Policy>
+				</sp:UsernameToken>
+			</wsp:Policy>
+		</sp:SupportingTokens>
+	</wsp:Policy>        
+   
+    <wsdl:types>
+        <xs:schema>
+            <xs:import schemaLocation="customs_certex_eucites.xsd" namespace="http://ec.europa.eu/tracesnt/customs_certex/eucites/v2"/>
+        </xs:schema>
+    </wsdl:types>
+    
+	<wsdl:message name="CertexHeader">
+		<wsdl:part name="certexHeader" element="customs_certex_eucites:CertexHeader"></wsdl:part>
+	</wsdl:message> 
+ 
+    <wsdl:message name="EUCitesIntroductionRequest">
+        <wsdl:part name="permitIdentifier" element="customs_certex_eucites:EUCitesRecordRequest" />
+    </wsdl:message>
+
+    <wsdl:message name="EUCitesIntroductionResponse">
+        <wsdl:part name="permitInfo" element="customs_certex_eucites:EUCitesRecordResponse" />
+    </wsdl:message>
+ 	
+    <wsdl:message name="ProcessedEUCitesRequest">
+        <wsdl:part name="permitIdentifier" element="customs_certex_eucites:ProcessedEUCitesRequest" />
+    </wsdl:message>
+
+    <wsdl:message name="ProcessedEUCitesResponse">
+        <wsdl:part name="permitInfo" element="customs_certex_eucites:ProcessedEUCitesResponse" />
+    </wsdl:message>
+ 
+    <wsdl:message name="GoodsClearanceRequest">
+        <wsdl:part name="goodsClearance" element="customs_certex_eucites:GoodsClearanceRequest" />
+    </wsdl:message>
+    
+    <wsdl:message name="GoodsClearanceResponse">
+        <wsdl:part name="quantityManagementOutcome" element="customs_certex_eucites:QuantityManagementResult" />
+    </wsdl:message>
+    
+    <wsdl:message name="InterventionMessageRequest">
+        <wsdl:part name="interventionMessage" element="customs_certex_eucites:InterventionMessageRequest" />
+    </wsdl:message>
+    
+    <wsdl:message name="InterventionMessageResponse">
+        <wsdl:part name="interventionMessageResult" element="customs_certex_eucites:QuantityManagementResult" />
+    </wsdl:message>
+    
+    <wsdl:portType name="CustomsCertexCitesPort">
+    	<wsdl:operation name="citesIntroductionRequest">
+        	<wsdl:documentation>
+        		Gets information about a permit
+			</wsdl:documentation>					
+            <wsdl:input message="customs_certex_eucites:EUCitesIntroductionRequest" name="EUCitesIntroductionRequest">
+	        	<wsdl:documentation>
+            		<ul>
+            			<li>Licence ID</li>
+            			<li>Customs Office ID -> the Customs Office identity is to be captured by the system during the authentication 
+            			    phase that precedes acceptance of the request, not provided explicitly as an input parameter.</li>
+            		</ul> 
+            	</wsdl:documentation>          
+            </wsdl:input>
+            <wsdl:output message="customs_certex_eucites:EUCitesIntroductionResponse" name="EUCitesIntroductionResponse">
+            	<wsdl:documentation>
+            		<ul>
+            			<li>Permit Information</li>
+            			<li>Validation Status Information</li>
+            			<li>Clearance Information, having quantity management status including already the amounts reserved by this operation.</li>
+            		</ul>
+            	</wsdl:documentation>
+            </wsdl:output>
+
+        </wsdl:operation>
+    	
+    	<wsdl:operation name="processedCitesRequest">
+        	<wsdl:documentation>
+        		Gets information about a permit
+			</wsdl:documentation>					
+            <wsdl:input message="customs_certex_eucites:ProcessedEUCitesRequest" name="ProcessedEUCitesRequest">
+	        	<wsdl:documentation>
+            		<ul>
+            			<li>Licence ID</li>
+            			<li>Customs Office ID -> the Customs Office identity is to be captured by the system during the authentication 
+            			    phase that precedes acceptance of the request, not provided explicitly as an input parameter.</li>
+            		</ul> 
+            	</wsdl:documentation>          
+            </wsdl:input>
+            <wsdl:output message="customs_certex_eucites:ProcessedEUCitesResponse" name="ProcessedEUCitesResponse">
+            	<wsdl:documentation>
+            		<ul>
+            			<li>Permit Information</li>
+            			<li>Validation Status Information</li>
+            			<li>Clearance Information, having quantity management status including already the amounts reserved by this operation.</li>
+            		</ul>
+            	</wsdl:documentation>
+            </wsdl:output>
+
+        </wsdl:operation>
+      
+        
+        <wsdl:operation name="goodsClearance">
+        	<wsdl:documentation>
+        		Reserves a certain quantity per annex for later clearance by a certain Customs Office, as expressed in a given 
+        		Customs Declaration associated to a CITES permit
+        		<br/>
+        		Requests having the same input combination {Licence ID, MRN, Customs Office} override each other. The last one prevails.
+			</wsdl:documentation>					
+            <wsdl:input message="customs_certex_eucites:GoodsClearanceRequest" name="GoodsClearanceRequest">
+	        	<wsdl:documentation>
+            		<ul>
+            			<li>Permit  ID</li>
+            			<li>MRN</li>
+            			<li>Net Weight per annex</li>
+            			<li>Customs Office ID -> the Customs Office identity is to be captured by the system during the authentication 
+            			    phase that precedes acceptance of the request, not provided explicitly as an input parameter.</li>
+            		</ul> 
+            	</wsdl:documentation>          
+            </wsdl:input>
+            <wsdl:output message="customs_certex_eucites:GoodsClearanceResponse" name="GoodsClearanceResponse">
+            	<wsdl:documentation>
+            		<ul>
+            			<li>Permit Information</li>
+            			<li>Validation Status Information</li>
+            			<li>Clearance Information, having quantity management status including already the amounts reserved by this operation.</li>
+            		</ul>
+            	</wsdl:documentation>
+            </wsdl:output>
+        </wsdl:operation>
+         
+        <wsdl:operation name="interventionMessage">
+        	<wsdl:documentation>
+        		Informs the system that a forced operation has to be executed on the element, selected by a combination of intervention type, licence identifier , 
+        		customs office and customs declaration number 
+        		<br/>
+				Note that the Customs Office identity is to be captured by the system during the authentication phase that precedes acceptance of the request, 
+				not provided explicitly as an input parameter.
+			</wsdl:documentation>					
+            <wsdl:input message="customs_certex_eucites:InterventionMessageRequest" name="InterventionMessageRequest">
+            	<wsdl:documentation>
+            		<ul>
+            			<li>Licence ID</li>
+            			<li>MRN</li>
+            			<li>Customs Office ID -> the Customs Office identity is to be captured by the system during the authentication phase that precedes 
+            				acceptance of the request, not provided explicitly as an input parameter.</li>
+            		</ul>
+           		</wsdl:documentation>            
+            </wsdl:input>            
+            <wsdl:output message="customs_certex_eucites:InterventionMessageResponse" name="InterventionMessageResponse"/>
+
+        </wsdl:operation>
+    </wsdl:portType>
+    
+        
+    <wsdl:binding name="CustomsCertexCitesSoapBinding" type="customs_certex_eucites:CustomsCertexCitesPort">
+        
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+  
+        <wsdl:operation name="citesIntroductionRequest">
+            <wsdl:input>
+                <soap:body use="literal"/>
+                <soap:header use="literal" part="webServiceClientId" message="base:WebServiceClientIdHeader"/>
+                <soap:header use="literal" part="customsOfficeReferenceNumber" message="body:CustomsOfficeIdentityHeader"/>
+                <soap:header use="literal" part="certexHeader" message="customs_certex_eucites:CertexHeader" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+              
+        <wsdl:operation name="processedCitesRequest">
+            <wsdl:input>
+                <soap:body use="literal"/>
+                <soap:header use="literal" part="webServiceClientId" message="base:WebServiceClientIdHeader"/>
+                <soap:header use="literal" part="customsOfficeReferenceNumber" message="body:CustomsOfficeIdentityHeader"/>
+                <soap:header use="literal" part="certexHeader" message="customs_certex_eucites:CertexHeader" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        
+                    
+        <wsdl:operation name="goodsClearance">
+            <wsdl:input>
+                <soap:body use="literal"/>
+                <soap:header use="literal" part="webServiceClientId" message="base:WebServiceClientIdHeader"/>
+                <soap:header use="literal" part="customsOfficeReferenceNumber" message="body:CustomsOfficeIdentityHeader"/>
+                <soap:header use="literal" message="customs_certex_eucites:CertexHeader" part="certexHeader" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        
+        <wsdl:operation name="interventionMessage">
+        	<soap:operation soapAction="http://ec.europa.eu/env/flegt4customs/interventionMessage"/>
+            <wsdl:input>
+	        	<soap:body use="literal"/>
+	            <soap:header use="literal" part="webServiceClientId" message="base:WebServiceClientIdHeader"/>
+	            <soap:header use="literal" part="customsOfficeReferenceNumber" message="body:CustomsOfficeIdentityHeader"/>
+                <soap:header use="literal" message="customs_certex_eucites:CertexHeader" part="certexHeader" />
+	        </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+
+        </wsdl:operation>
+    </wsdl:binding>
+
+    <wsdl:service name="CustomsCertexCitesServiceV2">
+        <wsdl:port name="CustomsCertexCitesServiceV2Endpoint" binding="customs_certex_eucites:CustomsCertexCitesSoapBinding">
+            <soap:address location="http://localhost:7001/tracesnt/ws/CustomsCertexCitesServiceV2"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

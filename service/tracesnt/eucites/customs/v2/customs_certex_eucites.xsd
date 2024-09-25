@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
+           xmlns:base="http://ec.europa.eu/sanco/tracesnt/base/v4"
+           xmlns:customs_certex_base="http://ec.europa.eu/sanco/tracesnt/customs_certex/base/v03"
+           xmlns:common="http://ec.europa.eu/tracesnt/cites/common/v1"
+		   xmlns:epermit="urn:un:unece:uncefact:data:standard:CITESEPermit:2"
+		   targetNamespace="http://ec.europa.eu/tracesnt/customs_certex/eucites/v2"
+	       xmlns:customs_certex_eucites="http://ec.europa.eu/tracesnt/customs_certex/eucites/v2"
+           elementFormDefault="qualified">
+
+
+    <xs:import schemaLocation="../../../base/v4/base.xsd" namespace="http://ec.europa.eu/sanco/tracesnt/base/v4"/>
+    <xs:import schemaLocation="../../common/v1/common.xsd" namespace="http://ec.europa.eu/tracesnt/cites/common/v1"/>
+    <xs:import schemaLocation="../../../customs_certex/base/v03/customs_certex_base.xsd" namespace="http://ec.europa.eu/sanco/tracesnt/customs_certex/base/v03"/>
+	<xs:import schemaLocation="../../CITESEPermit/CITESEPermit_2p0.xsd" namespace="urn:un:unece:uncefact:data:standard:CITESEPermit:2"/>
+
+    <!--  WSDL Messages element definitions -->
+    <xs:element name="EUCitesRecordRequest" type="customs_certex_eucites:EUCitesRecordRequest" />
+    <xs:element name="EUCitesRecordResponse" type="customs_certex_eucites:EUCitesRecordResponse" />
+    <xs:element name="ProcessedEUCitesRequest" type="customs_certex_eucites:ProcessedEUCitesRequest" />
+	<xs:element name="ProcessedEUCitesResponse" type="customs_certex_eucites:ProcessedEUCitesResponse" />
+	<xs:element name="GoodsClearanceRequest" type="customs_certex_eucites:GoodsClearanceRequest" />
+	<xs:element name="InterventionMessageRequest" type="customs_certex_eucites:InterventionMessage"/>
+	<xs:element name="QuantityManagementResult" type="customs_certex_eucites:EUCitesQuantityManagementType" />
+	<xs:element name="CertexHeader" type="customs_certex_base:CertexHeaderType"/>
+	
+	<xs:complexType name="EUCitesRecordRequest">
+	    <xs:sequence>
+            <xs:element name="euCitesPermitNumber" type="xs:string" minOccurs="1" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>
+                        EUCites permit number.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="SendingDate" type="customs_certex_base:DateTimeType" nillable="false"/>
+            <xs:element name="recordType" type="xs:string" minOccurs="1"/>
+            <xs:element name="declarationType" type="xs:string" minOccurs="0"/>
+            <xs:element name="declarationDate" type="xs:dateTime" minOccurs="1"/>
+            <xs:element name="decisionStatus" type="xs:string" minOccurs="1"/>
+            <xs:element name="additionalComment" type="xs:string" minOccurs="0"/>
+			<xs:element name="customsDocumentReference" type="customs_certex_base:CustomsDocumentReferenceType" nillable="false"/>
+			<xs:element name="customsOfficeReferenceNumber" type="customs_certex_base:CompetentCustomsOfficeType" nillable="false"/>
+			<xs:element name="PdfGenerationIndication" type="xs:boolean" nillable="false"/>
+			<!-- ISO 639-1 two letter code -->
+			<xs:element name="Language" type="customs_certex_base:LanguageType" minOccurs="0" nillable="false"/>
+			<xs:element name="CommodityDescriptionForCites" type="customs_certex_eucites:CommodityDescriptionForCitesType" maxOccurs="unbounded" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+						The consignments for a Reservation when qmIndicator is true
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+        </xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ProcessedEUCitesRequest">
+	    <xs:sequence>
+            <xs:element name="euCitesPermitNumber" type="xs:string" minOccurs="1" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>
+                        EUCites permit number.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="SendingDate" type="customs_certex_base:DateTimeType" nillable="false"/>
+            <xs:element name="customsDocumentReference" type="customs_certex_base:CustomsDeclarationReferenceNumberType" nillable="false"/>
+			<xs:element name="customsOfficeReferenceNumber" type="customs_certex_base:CompetentCustomsOfficeType" nillable="false"/>
+			<xs:element name="PdfGenerationIndication" type="xs:boolean" nillable="false"/>
+			<!-- ISO 639-1 two letter code -->
+			<xs:element name="Language" type="customs_certex_base:LanguageType" minOccurs="0" nillable="false"/>
+			<xs:element name="QuantityManagementIndication"  type="xs:boolean" />
+			<xs:element name="PushIndication" type="customs_certex_base:PushIndicationType" minOccurs="0" nillable="false"/>
+			
+        </xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="ProcessedEUCitesResponse">
+        <xs:sequence>
+            <xs:element name="euCitesPermit" type="customs_certex_eucites:CitesPermitType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Requested EUCites permit.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="citesPermit" type="customs_certex_eucites:CitesPermitType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Requested EUCites permit.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="SendingDate" type="customs_certex_base:DateTimeType" nillable="false"/>
+			<xs:element name="customsDocumentReference" type="customs_certex_base:CustomsDocumentReferenceType" nillable="false"/>
+			<xs:element name="OperationCode" type="customs_certex_base:OperationCodeType" minOccurs="1"/>
+			<xs:element name="ReservationResult" type="customs_certex_base:OperationResultType" minOccurs="0"/>
+			<xs:element name="ReasonForReservationFailure" type="customs_certex_base:OperationFailureReasonType" minOccurs="0"/>
+			<xs:element name="IntroductionSummary" type="customs_certex_eucites:EUCitesIntroductionSummaryType" minOccurs="0"/>
+
+        </xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="EUCitesIntroductionSummaryType">
+		<xs:sequence>
+		    <xs:element name="declarationType" type="xs:string" minOccurs="0"/>
+            <xs:element name="dateOfIntroduction" type="xs:dateTime" minOccurs="1"/>
+            <xs:element name="decisionStatus" type="xs:string" minOccurs="1"/>
+            <xs:element name="additionalComment" type="xs:string" minOccurs="0"/>
+		    <xs:element name="customsDocumentReference" type="customs_certex_base:CustomsDocumentReferenceType" nillable="false"/>
+			<xs:element name="customsOfficeReferenceNumber" type="customs_certex_base:CompetentCustomsOfficeType" nillable="false"/>
+			<xs:element name="CommodityDescriptionForCites" type="customs_certex_eucites:CommodityDescriptionForCitesType" maxOccurs="unbounded" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+						The consignments for a Reservation when qmIndicator is true
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="EUCitesRecordResponse">
+        <xs:sequence>
+            <xs:element name="euCitesPermit" type="customs_certex_eucites:CitesPermitType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Requested EUCites permit.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="citesPermit" type="customs_certex_eucites:CitesPermitType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Related Cites permit.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="SendingDate" type="customs_certex_base:DateTimeType" nillable="false"/>
+            <xs:element name="customsDocumentReference" type="customs_certex_base:CustomsDocumentReferenceType" nillable="false"/>
+			<xs:element name="OperationCode" type="customs_certex_base:OperationCodeType" minOccurs="1"/>
+			<xs:element name="RecordOutcome" type="xs:string" minOccurs="1"/>
+			<xs:element name="IntroductionSummary" type="customs_certex_eucites:EUCitesIntroductionSummaryType" minOccurs="0"/>
+        </xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="GoodsClearanceRequest">
+		<xs:sequence>
+            <xs:element name="euCitesPermitNumber" type="xs:string" minOccurs="1" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>
+                        EUCites permit number.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+			<xs:element name="customsOfficeReferenceNumber" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>
+						A customs office reference number as defined in :
+						http://ec.europa.eu/taxation_customs/dds2/col/col_home.jsp?Lang=en
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+			<xs:element name="declarationReferenceNumber" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>
+						The identification number of the Single Administrative Document.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+			<xs:element name="goodsClearanceInformation" type="customs_certex_eucites:GoodsClearanceType" minOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						 Goods Clearance scenario (clear, dipose or cancel) 
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="InterventionMessage">
+		<xs:sequence>
+            <xs:element name="euCitesPermitNumber" type="xs:string" minOccurs="1" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>
+                        EUCites permit number.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+			<xs:element name="CompetentCustomsOffice" type="customs_certex_base:CompetentCustomsOfficeType" nillable="false"/>
+			<xs:element name="CustomsDocumentReference" type="customs_certex_base:CustomsDocumentReferenceType" nillable="false"/>
+			<xs:element name="InterventionType"  type="customs_certex_base:InterventionMessageInformationType" nillable="false"/>
+			<!-- quantities -->
+			<xs:element name="CommodityDescriptionForCites" type="customs_certex_eucites:CommodityDescriptionForCitesType" maxOccurs="unbounded" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+						The consignments for a Reservation when qmIndicator is true
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<!-- type of operation -->
+			<xs:element name="goodsClearanceInformation" type="customs_certex_eucites:GoodsClearanceType" minOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						 Goods Clearance scenario (clear, dipose or cancel) 
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="EUCitesQuantityManagementType">
+		<xs:annotation>
+			<xs:documentation>
+				Element for EUCITES Quantity Management Outcome (IEH011).
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="QuantityManagementOutcome" type="customs_certex_base:QuantityManagementOutcomeType" />
+			<xs:element name="StatusCode" type="customs_certex_base:CertificateStatusType" minOccurs="0" nillable="false"/>
+			<xs:element name="SendingDate" type="customs_certex_base:DateTimeType" nillable="false"/>
+			<xs:element name="OperationCode" type="customs_certex_base:OperationCodeType" nillable="false"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="CommodityDescriptionForCitesType">
+		<xs:sequence>
+		 	<xs:element name="GoodsItemNumber" type="customs_certex_base:GoodsItemNumberType" minOccurs="0" />
+			<xs:element name="CertificateLineNumber" type="customs_certex_base:CertificateLineNumberType" minOccurs="1" />
+            <xs:element name="additionalComment" type="xs:string" minOccurs="0"/>
+			<xs:element name="quantity" type="customs_certex_eucites:CitesQuantityType" maxOccurs="2" minOccurs="0"></xs:element>
+			<xs:element name="NumberOfAnimalsDeadOnArrival" type="xs:decimal" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+   <xs:complexType name="CitesQuantityType">
+		<xs:sequence>
+			<xs:element name="UnitOfMeasure" type="customs_certex_base:UniversalUnitOfMeasureType" nillable="false" />
+			<xs:element name="Quantity" type="customs_certex_base:DecimalSixteenTotalSixPrecType" nillable="false" />
+		</xs:sequence>
+   </xs:complexType>
+
+	<xs:simpleType name="GoodsClearanceType">
+		<xs:restriction base="xs:string">
+			<xs:annotation>
+				<xs:documentation>
+					The code list contains the possible Goods Clearance scenarios. 
+				</xs:documentation>
+			</xs:annotation>
+			
+			<xs:enumeration value="01">
+				<xs:annotation>
+					<xs:documentation>
+						Goods Released (clear reservation)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			
+			<xs:enumeration value="02">
+				<xs:annotation>
+					<xs:documentation>
+						Goods not Released (cancel reservation)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			
+			<xs:enumeration value="03">
+				<xs:annotation>
+					<xs:documentation>
+						Goods Disposed (dispose reservation)					
+					</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			
+		</xs:restriction>
+	
+	</xs:simpleType>
+	
+    <xs:simpleType name="EUCitesUnityCode">
+        <xs:annotation>
+            <xs:documentation>Unity Code</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[a-zA-Z]{3}" />
+        </xs:restriction>
+    </xs:simpleType>
+
+	<xs:complexType name="CitesPermitType">
+		<xs:annotation>
+			<xs:documentation>
+				Permit. Electronic / Paper / Link
+				If it's a electronic type, only number, type and country needs to be informed
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="identifier" type="customs_certex_eucites:PermitIdentifier" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="permit" type="customs_certex_eucites:CitesPermitInformationType" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="permitStatus" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Status of the permit. Might be empty if not informed to IMSOC.
+						[NOT_EXISTING,IN_PROGRESS,WITHDRAWN,APPROVED,REJECTED]
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+
+	<xs:complexType name="PermitIdentifier">
+		<xs:sequence>
+			<xs:element name="permitNumber" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						EUCites permit number.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+
+			<xs:element name="permitDocumentType" type="common:EUCitesPermitDocumentType" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						EUCites permit type (Import, Export, ReExport, Other).
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+
+			<xs:element name="permitCountry" type="base:CountryType" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						EUCites permit country.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+
+	<xs:complexType name="CitesPermitInformationType">
+		<xs:annotation>
+			<xs:documentation>
+				For EUCites and Cites permits.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="structuredPermit" type="epermit:CITESEPermitType" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Cites or EUCites permit. Structured using UN/CEFACT for Cites and Extended UN/CEFACT for EUCites.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+
+			<xs:element name="permitFile" minOccurs="0" maxOccurs="1" type="common:BinaryObject">
+				<xs:annotation>
+					<xs:documentation>
+						Scaned version of Cites permit. (PDF, Image, etc...)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+
+			<xs:element name="generatedPermitFile" minOccurs="0" maxOccurs="1" type="common:BinaryObject">
+				<xs:annotation>
+					<xs:documentation>
+						Generated PDF file based on Structured data in IMSOC. (This is not available if there is no structured data)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+
+			<xs:element name="permitExternalLink" minOccurs="0" maxOccurs="1" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>
+						Link to an external Cites permit resource. (External System, not in IMSOC and probably not in EU domains)
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+</xs:schema>

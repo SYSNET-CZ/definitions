@@ -8,8 +8,14 @@
            targetNamespace="http://ec.europa.eu/tracesnt/eucites/v01"
            elementFormDefault="qualified">
 
-    <xs:import schemaLocation="../CITESEPermit/CITESEPermit_2p0.xsd" namespace="urn:un:unece:uncefact:data:standard:CITESEPermit:2"/>
+    <xs:import schemaLocation="../CITESEPermit/CITESEPermit_2p0_eu.xsd" namespace="urn:un:unece:uncefact:data:standard:CITESEPermit:2"/>
     <xs:import schemaLocation="../../base/v4/base.xsd" namespace="http://ec.europa.eu/sanco/tracesnt/base/v4"/>
+    <xs:annotation>
+        <xs:documentation>
+            EU CITES modified permit definition: CITESEPermit_2p0_eu.xsd
+            CITES Toolkit v2: CITESEPermit_2p0.xsd
+        </xs:documentation>
+    </xs:annotation>
 
     <!--  WSDL Messages element definitions -->
     <xs:element name="SendPermitRequestMessage" type="eucites:SendPermitRequestMessage"/>

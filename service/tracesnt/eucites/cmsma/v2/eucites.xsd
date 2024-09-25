@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
+           xmlns:base="http://ec.europa.eu/sanco/tracesnt/base/v4"
+           xmlns:common="http://ec.europa.eu/tracesnt/cites/common/v1"
+	       xmlns:customs_certex_eucites="http://ec.europa.eu/tracesnt/customs_certex/eucites/v2"
+           xmlns:eucmsma="http://ec.europa.eu/tracesnt/citesmsma/v2"
+           targetNamespace="http://ec.europa.eu/tracesnt/citesmsma/v2"
+           elementFormDefault="qualified">
+
+    <xs:import schemaLocation="../../../base/v4/base.xsd" namespace="http://ec.europa.eu/sanco/tracesnt/base/v4"/>
+    <xs:import schemaLocation="../../common/v1/common.xsd" namespace="http://ec.europa.eu/tracesnt/cites/common/v1"/>
+    <xs:import schemaLocation="../../customs/v2/customs_certex_eucites.xsd" namespace="http://ec.europa.eu/tracesnt/customs_certex/eucites/v2" />
+
+    <!--  WSDL Messages element definitions -->
+    <xs:element name="SendPermitRequestMessage" type="eucmsma:SendPermitRequestMessage"/>
+    <xs:element name="GetPermitRequestMessage" type="eucmsma:GetPermitRequestMessage"/>
+    <xs:element name="GetPermitResponseMessage" type="eucmsma:GetPermitResponseMessage"/>
+    <xs:element name="GetPermitStatusRequestMessage" type="eucmsma:GetPermitStatusRequestMessage"/>
+    <xs:element name="GetPermitStatusResponseMessage" type="eucmsma:GetPermitStatusResponseMessage"/>
+    <xs:element name="GetIntroductionRequestMessage" type="eucmsma:GetIntroductionRequestMessage"/>
+    <xs:element name="GetIntroductionResponseMessage" type="eucmsma:GetIntroductionResponseMessage"/>
+    <xs:element name="EUCITESResponseMessage" type="eucmsma:EUCITESResponseMessage" />
+
+
+    <!-- TYPE DEFINITIONS -->
+
+    <xs:complexType name="EUCITESResponseMessage">
+        <xs:sequence>
+            <xs:element name="response" type="common:StatusCode"/>
+            <xs:element name="info" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="warning" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="SendPermitRequestMessage">
+        <xs:sequence>
+            <xs:element name="identifier" type="common:PermitIdentifier" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="permit" type="common:CitesPermitInformationType" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="permitStatus" type="eucmsma:PermitStatusType" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="relatedPermit" type="common:RelatedPermitType" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="GetPermitRequestMessage">
+        <xs:sequence>
+            <xs:element name="euCitesPermitIdentifier" type="common:PermitIdentifier" minOccurs="1" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="GetPermitResponseMessage">
+        <xs:sequence>
+            <xs:element name="euCitesPermit" type="common:PermitType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="GetPermitStatusRequestMessage">
+        <xs:sequence>
+            <xs:element name="euCitesPermitIdentifier" type="common:PermitIdentifier" minOccurs="1" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="GetPermitStatusResponseMessage">
+        <xs:sequence>
+            <xs:element name="euCitesPermitStatus" type="common:EUCitesPermitStatusType">
+                <xs:annotation>
+                    <xs:documentation>
+                        Requested CITES permit status.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+	<xs:complexType name="GetIntroductionRequestMessage">
+        <xs:sequence>
+            <xs:element name="euCitesPermitIdentifier" type="common:PermitIdentifier" minOccurs="1" maxOccurs="1"/>
+        </xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="GetIntroductionResponseMessage">
+		<xs:sequence>
+			<xs:element name="introduction" type="customs_certex_eucites:EUCitesIntroductionSummaryType" />
+		</xs:sequence>
+	</xs:complexType>
+
+	
+
+    <xs:simpleType name="PermitStatusType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="WITHDRAWN"/>
+            <xs:enumeration value="APPROVED"/>
+            <xs:enumeration value="REJECTED"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

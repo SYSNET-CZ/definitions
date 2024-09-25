@@ -1,0 +1,453 @@
+openapi: "3.0.2"
+info:
+  title: API Title
+  version: "1.0"
+servers:
+  - url: https://api.server.test/v1
+paths:
+  /test:
+    get:
+      responses:
+        '200':
+          description: OK
+components:
+  schemas:
+    IDType:
+      type: object
+      properties:
+        value:
+          type: string
+        schemeID:
+          type: string
+        schemeAgencyID:
+          type: string
+    TextType:
+      type: object
+      properties:
+        value:
+          type: string
+        languageID:
+          type: string
+    DocumentVersionType:
+      type: object
+      properties:
+        id:
+          $ref: "#/components/schemas/IDType"
+        issueDateTime:
+          type: string
+          format: date-time
+    DocumentContextParameterType:
+      type: object
+      properties:
+        id:
+          $ref: "#/components/schemas/IDType"
+        value:
+          $ref: "#/components/schemas/TextType"
+        specifiedDocumentVersion:
+          $ref: "#/components/schemas/DocumentVersionType"
+    ExchangedDocumentContextType:
+      type: object
+      properties:
+        businessProcessSpecifiedDocumentContextParameter:
+          type: array
+          items:
+            $ref: "#/components/schemas/DocumentContextParameterType"
+          minItems: 0
+        bimSpecifiedDocumentContextParameter:
+          type: array
+          items:
+            $ref: "#/components/schemas/DocumentContextParameterType"
+          minItems: 0
+    DocumentCodeType:
+      type: object
+      properties:
+        value:
+          type: string
+        listID:
+          type: string
+        listAgencyID:
+          type: string
+    MessageFunctionCodeType:
+      type: object
+      properties:
+        value:
+          type: string
+    SpecifiedPeriodType:
+      type: object
+      properties:
+        startDateTime:
+          type: string
+          format: date-time
+        endDateTime:
+          type: string
+          format: date-time
+    ReferencedDocumentType:
+      type: object
+      properties:
+        issueDateTime:
+          type: string
+          format: date-time
+        typeCode:
+          $ref: "#/components/schemas/DocumentCodeType"
+        id:
+          type: array
+          items:
+            $ref: "#/components/schemas/IDType"
+          minItems: 0
+        name:
+          type: array
+          items:
+            $ref: "#/components/schemas/TextType"
+          minItems: 0
+        effectiveSpecifiedPeriod:
+          $ref: "#/components/schemas/SpecifiedPeriodType"
+    LogisticsLocationType:
+      type: object
+      properties:
+        id:
+          type: array
+          items:
+            $ref: "#/components/schemas/IDType"
+          minItems: 0
+        name:
+          type: array
+          items:
+            $ref: "#/components/schemas/TextType"
+          minItems: 0
+    GovernmentActionCodeType:
+      type: object
+      properties:
+        value:
+          type: string
+    CodeType:
+      type: object
+      properties:
+        value:
+          type: string
+        listID:
+          type: string
+        listAgencyID:
+          type: string
+    CountryIDType:
+      type: object
+      properties:
+        value:
+          type: string
+        schemeID:
+          type: string
+        schemeAgencyID:
+          type: string
+    TradeAddressType:
+      type: object
+      properties:
+        postcodeCode:
+          type: array
+          items:
+            $ref: "#/components/schemas/CodeType"
+          minItems: 0
+        postOfficeBox:
+          $ref: "#/components/schemas/TextType"
+        streetName:
+          type: array
+          items:
+            $ref: "#/components/schemas/TextType"
+          minItems: 0
+        cityName:
+          $ref: "#/components/schemas/TextType"
+        countryID:
+          $ref: "#/components/schemas/CountryIDType"
+        countryName:
+          type: array
+          items:
+            $ref: "#/components/schemas/TextType"
+          minItems: 0
+        countrySubDivisionName:
+          type: array
+          items:
+            $ref: "#/components/schemas/TextType"
+          minItems: 0
+    RepresentativePersonType:
+      type: object
+      properties:
+        name:
+          $ref: "#/components/schemas/TextType"
+    AuthoritativeSignatoryPersonType:
+      type: object
+      properties:
+        name:
+          $ref: "#/components/schemas/TextType"
+    TradePartyType:
+      type: object
+      properties:
+        id:
+          type: array
+          items:
+            $ref: "#/components/schemas/IDType"
+          minItems: 0
+        name:
+          $ref: "#/components/schemas/TextType"
+        postalTradeAddress:
+          $ref: "#/components/schemas/TradeAddressType"
+        specifiedRepresentativePerson:
+          $ref: "#/components/schemas/RepresentativePersonType"
+        specifiedAuthoritativeSignatoryPerson:
+          type: array
+          items:
+            $ref: "#/components/schemas/AuthoritativeSignatoryPersonType"
+          minItems: 0
+    DocumentAuthenticationType:
+      type: object
+      properties:
+        typeCode:
+          $ref: "#/components/schemas/GovernmentActionCodeType"
+        actualDateTime:
+          type: string
+          format: date-time
+        id:
+          type: array
+          items:
+            $ref: "#/components/schemas/IDType"
+          minItems: 0
+        statement:
+          $ref: "#/components/schemas/TextType"
+        providerTradeParty:
+          $ref: "#/components/schemas/TradePartyType"
+        issueLogisticsLocation:
+          $ref: "#/components/schemas/LogisticsLocationType"
+    ExchangedDocumentType:
+      type: object
+      properties:
+        id:
+          $ref: "#/components/schemas/IDType"
+        name:
+          type: array
+          items:
+            $ref: "#/components/schemas/TextType"
+          minItems: 0
+        typeCode:
+          $ref: "#/components/schemas/DocumentCodeType"
+        issueDateTime:
+          type: string
+          format: date-time
+        copyIndicator:
+          type: boolean
+        purpose:
+          $ref: "#/components/schemas/TextType"
+        purposeCode:
+          type: array
+          items:
+            $ref: "#/components/schemas/MessageFunctionCodeType"
+          minItems: 0
+        information:
+          type: array
+          items:
+            $ref: "#/components/schemas/TextType"
+          minItems: 0
+        referenceReferencedDocument:
+          type: array
+          items:
+            $ref: "#/components/schemas/ReferencedDocumentType"
+          minItems: 0
+        effectiveSpecifiedPeriod:
+          $ref: "#/components/schemas/SpecifiedPeriodType"
+        issueLogisticsLocation:
+          $ref: "#/components/schemas/LogisticsLocationType"
+        firstSignatoryDocumentAuthentication:
+          $ref: "#/components/schemas/DocumentAuthenticationType"
+        secondSignatoryDocumentAuthentication:
+          $ref: "#/components/schemas/DocumentAuthenticationType"
+        thirdSignatoryDocumentAuthentication:
+          $ref: "#/components/schemas/DocumentAuthenticationType"
+        fourthSignatoryDocumentAuthentication:
+          $ref: "#/components/schemas/DocumentAuthenticationType"
+    QuantityType:
+      type: object
+      properties:
+        value:
+          type: number
+        unitCode:
+          type: string
+    TransportEventType:
+      type: object
+      properties:
+        actualOccurrenceDateTime:
+          type: string
+          format: date-time
+        unitQuantity:
+          $ref: "#/components/schemas/QuantityType"
+        occurrenceLogisticsLocation:
+          $ref: "#/components/schemas/LogisticsLocationType"
+        certifyingTradeParty:
+          type: array
+          items:
+            $ref: "#/components/schemas/TradePartyType"
+          minItems: 0
+    LogisticsShippingMarksType:
+      type: object
+      properties:
+        marking:
+          type: array
+          items:
+            $ref: "#/components/schemas/TextType"
+          minItems: 0
+    TradeCountryType:
+      type: object
+      properties:
+        id:
+          type: array
+          items:
+            $ref: "#/components/schemas/CountryIDType"
+          minItems: 0
+        name:
+          type: array
+          items:
+            $ref: "#/components/schemas/TextType"
+          minItems: 0
+    LogisticsPackageType:
+      type: object
+      properties:
+        itemQuantity:
+          $ref: "#/components/schemas/QuantityType"
+    GoodsTypeCodeType:
+      type: object
+      properties:
+        value:
+          type: string
+    GoodsTypeExtensionCodeType:
+      type: object
+      properties:
+        value:
+          type: string
+    TradeProductType:
+      type: object
+      properties:
+        sellerAssignedID:
+          $ref: "#/components/schemas/IDType"
+        manufacturerAssignedID:
+          type: array
+          items:
+            $ref: "#/components/schemas/IDType"
+          minItems: 0
+        description:
+          type: array
+          items:
+            $ref: "#/components/schemas/TextType"
+          minItems: 0
+        typeCode:
+          type: array
+          items:
+            $ref: "#/components/schemas/CodeType"
+          minItems: 0
+        commonName:
+          type: array
+          items:
+            $ref: "#/components/schemas/TextType"
+          minItems: 0
+        scientificName:
+          type: array
+          items:
+            $ref: "#/components/schemas/TextType"
+          minItems: 0
+    SupplyChainTradeLineItemType:
+      type: object
+      properties:
+        typeCode:
+          $ref: "#/components/schemas/GoodsTypeCodeType"
+        typeExtensionCode:
+          $ref: "#/components/schemas/GoodsTypeExtensionCodeType"
+        specifiedTradeProduct:
+          $ref: "#/components/schemas/TradeProductType"
+    CrossBorderRegulatoryProcedureType:
+      type: object
+      properties:
+        categoryCode:
+          type: array
+          items:
+            $ref: "#/components/schemas/CodeType"
+          minItems: 0
+        usedToDateQuotaQuantity:
+          $ref: "#/components/schemas/QuantityType"
+        annualQuotaQuantity:
+          $ref: "#/components/schemas/QuantityType"
+        acquisitionDateTime:
+          type: string
+          format: date-time
+        previousReferencedDocument:
+          type: array
+          items:
+            $ref: "#/components/schemas/ReferencedDocumentType"
+          minItems: 0
+    SupplyChainConsignmentItemType:
+      type: object
+      properties:
+        id:
+          type: array
+          items:
+            $ref: "#/components/schemas/IDType"
+          minItems: 0
+        physicalLogisticsShippingMarks:
+          type: array
+          items:
+            $ref: "#/components/schemas/LogisticsShippingMarksType"
+          minItems: 0
+        originTradeCountry:
+          $ref: "#/components/schemas/TradeCountryType"
+        exportTradeCountry:
+          $ref: "#/components/schemas/TradeCountryType"
+        associatedReferencedDocument:
+          type: array
+          items:
+            $ref: "#/components/schemas/ReferencedDocumentType"
+          minItems: 0
+        transportLogisticsPackage:
+          type: array
+          items:
+            $ref: "#/components/schemas/LogisticsPackageType"
+          minItems: 0
+        includedSupplyChainTradeLineItem:
+          type: array
+          items:
+            $ref: "#/components/schemas/SupplyChainTradeLineItemType"
+          minItems: 0
+        examinationTransportEvent:
+          type: array
+          items:
+            $ref: "#/components/schemas/TransportEventType"
+          minItems: 0
+        applicableCrossBorderRegulatoryProcedure:
+          type: array
+          items:
+            $ref: "#/components/schemas/CrossBorderRegulatoryProcedureType"
+          minItems: 0
+    SupplyChainConsignmentType:
+      type: object
+      properties:
+        consignorTradeParty:
+          $ref: "#/components/schemas/TradePartyType"
+        consigneeTradeParty:
+          $ref: "#/components/schemas/TradePartyType"
+        transportContractReferencedDocument:
+          $ref: "#/components/schemas/ReferencedDocumentType"
+        examinationTransportEvent:
+          type: array
+          items:
+            $ref: "#/components/schemas/TransportEventType"
+          minItems: 0
+        includedSupplyChainConsignmentItem:
+          type: array
+          items:
+            $ref: "#/components/schemas/SupplyChainConsignmentItemType"
+          minItems: 0
+    CITESEPermitType:
+      type: object
+      required:
+        - specifiedExchangedDocumentContext
+        - headerExchangedDocument
+        - specifiedSupplyChainConsignment
+      properties:
+        specifiedExchangedDocumentContext:
+          $ref: "#/components/schemas/ExchangedDocumentContextType"
+        headerExchangedDocument:
+          $ref: "#/components/schemas/ExchangedDocumentType"
+        specifiedSupplyChainConsignment:
+          $ref: "#/components/schemas/SupplyChainConsignmentType"

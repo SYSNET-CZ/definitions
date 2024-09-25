@@ -1,0 +1,464 @@
+{
+    "$schema": "https://json-schema.org/draft-04/schema#",
+    "id": "urn:un:unece:uncefact:data:draft:ReusableAggregateBusinessInformationEntity:1#",
+    "definitions": {
+        "IDType": {
+            "type": "object",
+            "properties": {
+                "value": {"type": "string"},
+                "schemeID": {"type": "string"},
+                "schemeAgencyID": {"type": "string"}
+            }
+        },
+        "TextType": {
+            "type": "object",
+            "properties": {
+                "value": {"type": "string"},
+                "languageID": {"type": "string"}
+            }
+        },
+        "DocumentVersionType": {
+            "type": "object",
+            "properties": {
+                "id": {"$ref": "#/definitions/IDType"},
+                "issueDateTime": {
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
+        "DocumentContextParameterType": {
+            "type": "object",
+            "properties": {
+                "id": {"$ref": "#/definitions/IDType"},
+                "value": {"$ref": "#/definitions/TextType"},
+                "specifiedDocumentVersion": {"$ref": "#/definitions/DocumentVersionType"}
+            }
+        },
+        "ExchangedDocumentContextType": {
+            "type": "object",
+            "properties": {
+                "businessProcessSpecifiedDocumentContextParameter": {
+                    "type": "array",
+                    "items": {"$ref": "#/definitions/DocumentContextParameterType"},
+                    "minItems": 0
+                },
+                "bimSpecifiedDocumentContextParameter": {
+                    "type": "array",
+                    "items": {"$ref": "#/definitions/DocumentContextParameterType"},
+                    "minItems": 0
+                }
+            }
+        },
+        "DocumentCodeType": {
+            "type": "object",
+            "properties": {
+                "value": {"type": "string"},
+                "listID": {"type": "string"},
+                "listAgencyID": {"type": "string"}
+            }
+        },
+        "MessageFunctionCodeType": {
+            "type": "object",
+            "properties": {
+                "value": {"type": "string"}
+            }
+        },
+        "SpecifiedPeriodType": {
+            "type": "object",
+            "properties": {
+                "startDateTime": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "endDateTime": {
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
+        "ReferencedDocumentType": {
+            "type": "object",
+            "properties": {
+                "issueDateTime": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "typeCode": {"$ref": "#/definitions/DocumentCodeType"},
+                "id": {
+                    "type": "array",
+                    "items": {"$ref": "#/definitions/IDType"},
+                    "minItems": 0
+                },
+                "name": {
+                    "type": "array",
+                    "items": {"$ref": "#/definitions/TextType"},
+                    "minItems": 0
+                },
+                "effectiveSpecifiedPeriod": {"$ref": "#/definitions/SpecifiedPeriodType"}
+            }
+        },
+        "LogisticsLocationType": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "array",
+                    "items": {"$ref": "#/definitions/IDType"},
+                    "minItems": 0
+                },
+                "name": {
+                    "type": "array",
+                    "items": {"$ref": "#/definitions/TextType"},
+                    "minItems": 0
+                }
+            }
+        },
+        "GovernmentActionCodeType": {
+            "type": "object",
+            "properties": {
+                "value": {"type": "string"}
+            }
+        },
+        "CodeType": {
+            "type": "object",
+            "properties": {
+                "value": {"type": "string"},
+                "listID": {"type": "string"},
+                "listAgencyID": {"type": "string"}
+            }
+        },
+        "CountryIDType": {
+            "type": "object",
+            "properties": {
+                "value": {"type": "string"},
+                "schemeID": {"type": "string"},
+                "schemeAgencyID": {"type": "string"}
+            }
+        },
+        "TradeAddressType": {
+            "type": "object",
+            "properties": {
+                "postcodeCode": {
+                    "type": "array",
+                    "items": {"$ref": "#/definitions/CodeType"},
+                    "minItems": 0
+                },
+                "postOfficeBox": {"$ref": "#/definitions/TextType"},
+                "streetName": {
+                    "type": "array",
+                    "items": {"$ref": "#/definitions/TextType"},
+                    "minItems": 0
+                },
+                "cityName": {"$ref": "#/definitions/TextType"},
+                "countryID": {"$ref": "#/definitions/CountryIDType"},
+                "countryName": {
+                    "type": "array",
+                    "items": {"$ref": "#/definitions/TextType"},
+                    "minItems": 0
+                },
+                "countrySubDivisionName": {
+                    "type": "array",
+                    "items": {"$ref": "#/definitions/TextType"},
+                    "minItems": 0
+                }
+            }
+        },
+        "RepresentativePersonType": {
+            "type": "object",
+            "properties": {
+                "name": {"$ref": "#/definitions/TextType"}
+            }
+        },
+        "AuthoritativeSignatoryPersonType": {
+            "type": "object",
+            "properties": {
+                "name": {"$ref": "#/definitions/TextType"}
+            }
+        },
+        "TradePartyType": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "array",
+                    "items": {"$ref": "#/definitions/IDType"},
+                    "minItems": 0
+                },
+                "name": {"$ref": "#/definitions/TextType"},
+                "postalTradeAddress": {"$ref": "#/definitions/TradeAddressType"},
+                "specifiedRepresentativePerson": {"$ref": "#/definitions/RepresentativePersonType"},
+                "specifiedAuthoritativeSignatoryPerson": {
+                    "type": "array",
+                    "items": {"$ref": "#/definitions/AuthoritativeSignatoryPersonType"},
+                    "minItems": 0
+                }
+            }
+        },
+        "DocumentAuthenticationType": {
+            "type": "object",
+            "properties": {
+                "typeCode": {"$ref": "#/definitions/GovernmentActionCodeType"},
+                "actualDateTime": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "id": {
+                    "type": "array",
+                    "items": {"$ref": "#/definitions/IDType"},
+                    "minItems": 0
+                },
+                "statement": {"$ref": "#/definitions/TextType"},
+                "providerTradeParty": {"$ref": "#/definitions/TradePartyType"},
+                "issueLogisticsLocation": {"$ref": "#/definitions/LogisticsLocationType"}
+            }
+        },
+        "ExchangedDocumentType": {
+            "type": "object",
+            "properties": {
+                "id": {"$ref": "#/definitions/IDType"},
+                "name": {
+                    "type": "array",
+                    "items": {"$ref": "#/definitions/TextType"},
+                    "minItems": 0
+                },
+                "typeCode": {"$ref": "#/definitions/DocumentCodeType"},
+                "issueDateTime": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "copyIndicator": {"type": "boolean"},
+                "purpose": {"$ref": "#/definitions/TextType"},
+                "purposeCode": {
+                    "type": "array",
+                    "items": {"$ref": "#/definitions/MessageFunctionCodeType"},
+                    "minItems": 0
+                },
+                "information": {
+                    "type": "array",
+                    "items": {"$ref": "#/definitions/TextType"},
+                    "minItems": 0
+                },
+                "referenceReferencedDocument": {
+                    "type": "array",
+                    "items": {"$ref": "#/definitions/ReferencedDocumentType"},
+                    "minItems": 0
+                },
+                "effectiveSpecifiedPeriod": {"$ref": "#/definitions/SpecifiedPeriodType"},
+                "issueLogisticsLocation": {"$ref": "#/definitions/LogisticsLocationType"},
+                "firstSignatoryDocumentAuthentication": {"$ref": "#/definitions/DocumentAuthenticationType"},
+                "secondSignatoryDocumentAuthentication": {"$ref": "#/definitions/DocumentAuthenticationType"},
+                "thirdSignatoryDocumentAuthentication": {"$ref": "#/definitions/DocumentAuthenticationType"},
+                "fourthSignatoryDocumentAuthentication": {"$ref": "#/definitions/DocumentAuthenticationType"},
+                "authorizedStorage": {"$ref": "#/definitions/LogisticsLocationType"},
+                "documentationSurrenderedTo": {"$ref": "#/definitions/IDType"},
+                "documentationSurrenderedToComment": {"$ref": "#/definitions/TextType"}
+            }
+        },
+        "QuantityType": {
+            "type": "object",
+            "properties": {
+                "value": {"type": "number"},
+                "unitCode": {"type": "string"}
+            }
+        },
+        "TransportEventType": {
+            "type": "object",
+            "properties": {
+                "actualOccurrenceDateTime": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "unitQuantity": {"$ref": "#/definitions/QuantityType"},
+                "occurrenceLogisticsLocation": {"$ref": "#/definitions/LogisticsLocationType"},
+                "certifyingTradeParty": {
+                    "type": "array",
+                    "items": {"$ref": "#/definitions/TradePartyType"},
+                    "minItems": 0
+                }
+            }
+        },
+        "LogisticsShippingMarksType": {
+            "type": "object",
+            "properties": {
+                "marking": {
+                    "type": "array",
+                    "items": {"$ref": "#/definitions/TextType"},
+                    "minItems": 0
+                }
+            }
+        },
+        "TradeCountryType": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "array",
+                    "items": {"$ref": "#/definitions/CountryIDType"},
+                    "minItems": 0
+                },
+                "name": {
+                    "type": "array",
+                    "items": {"$ref": "#/definitions/TextType"},
+                    "minItems": 0
+                }
+            }
+        },
+        "LogisticsPackageType": {
+            "type": "object",
+            "properties": {
+                "itemQuantity": {"$ref": "#/definitions/QuantityType"}
+            }
+        },
+        "GoodsTypeCodeType": {
+            "type": "object",
+            "properties": {
+                "value": {"type": "string"}
+            }
+        },
+        "GoodsTypeExtensionCodeType": {
+            "type": "object",
+            "properties": {
+                "value": {"type": "string"}
+            }
+        },
+        "TradeProductType": {
+            "type": "object",
+            "properties": {
+                "sellerAssignedID": {"$ref": "#/definitions/IDType"},
+                "manufacturerAssignedID": {
+                    "type": "array",
+                    "items": {"$ref": "#/definitions/IDType"},
+                    "minItems": 0
+                },
+                "description": {
+                    "type": "array",
+                    "items": {"$ref": "#/definitions/TextType"},
+                    "minItems": 0
+                },
+                "typeCode": {
+                    "type": "array",
+                    "items": {"$ref": "#/definitions/CodeType"},
+                    "minItems": 0
+                },
+                "commonName": {
+                    "type": "array",
+                    "items": {"$ref": "#/definitions/TextType"},
+                    "minItems": 0
+                },
+                "scientificName": {
+                    "type": "array",
+                    "items": {"$ref": "#/definitions/TextType"},
+                    "minItems": 0
+                }
+            }
+        },
+        "SupplyChainTradeLineItemType": {
+            "type": "object",
+            "properties": {
+                "typeCode": {"$ref": "#/definitions/GoodsTypeCodeType"},
+                "typeExtensionCode": {"$ref": "#/definitions/GoodsTypeExtensionCodeType"},
+                "specifiedTradeProduct": {"$ref": "#/definitions/TradeProductType"},
+                "euAnnex": {"type": "string"},
+                "purpose": {"$ref": "#/definitions/TextType"},
+                "netMass": {"$ref": "#/definitions/QuantityType"}
+            }
+        },
+        "CrossBorderRegulatoryProcedureType": {
+            "type": "object",
+            "properties": {
+                "categoryCode": {
+                    "type": "array",
+                    "items": {"$ref": "#/definitions/CodeType"},
+                    "minItems": 0
+                },
+                "usedToDateQuotaQuantity": {"$ref": "#/definitions/QuantityType"},
+                "annualQuotaQuantity": {"$ref": "#/definitions/QuantityType"},
+                "acquisitionDateTime": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "previousReferencedDocument": {
+                    "type": "array",
+                    "items": {"$ref": "#/definitions/ReferencedDocumentType"},
+                    "minItems": 0
+                }
+            }
+        },
+        "SupplyChainConsignmentItemType": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "array",
+                    "items": {"$ref": "#/definitions/IDType"},
+                    "minItems": 0
+                },
+                "physicalLogisticsShippingMarks": {
+                    "type": "array",
+                    "items": {"$ref": "#/definitions/LogisticsShippingMarksType"},
+                    "minItems": 0
+                },
+                "originTradeCountry": {"$ref": "#/definitions/TradeCountryType"},
+                "exportTradeCountry": {"$ref": "#/definitions/TradeCountryType"},
+                "associatedReferencedDocument": {
+                    "type": "array",
+                    "items": {"$ref": "#/definitions/ReferencedDocumentType"},
+                    "minItems": 0
+                },
+                "transportLogisticsPackage": {
+                    "type": "array",
+                    "items": {"$ref": "#/definitions/LogisticsPackageType"},
+                    "minItems": 0
+                },
+                "includedSupplyChainTradeLineItem": {
+                    "type": "array",
+                    "items": {"$ref": "#/definitions/SupplyChainTradeLineItemType"},
+                    "minItems": 0
+                },
+                "examinationTransportEvent": {
+                    "type": "array",
+                    "items": {"$ref": "#/definitions/TransportEventType"},
+                    "minItems": 0
+                },
+                "applicableCrossBorderRegulatoryProcedure": {
+                    "type": "array",
+                    "items": {"$ref": "#/definitions/CrossBorderRegulatoryProcedureType"},
+                    "minItems": 0
+                }
+            }
+        },
+        "SupplyChainConsignmentType": {
+            "type": "object",
+            "properties": {
+                "consignorTradeParty": {"$ref": "#/definitions/TradePartyType"},
+                "consigneeTradeParty": {"$ref": "#/definitions/TradePartyType"},
+                "transportContractReferencedDocument": {"$ref": "#/definitions/ReferencedDocumentType"},
+                "examinationTransportEvent": {
+                    "type": "array",
+                    "items": {"$ref": "#/definitions/TransportEventType"},
+                    "minItems": 0
+                },
+                "includedSupplyChainConsignmentItem": {
+                    "type": "array",
+                    "items": {"$ref": "#/definitions/SupplyChainConsignmentItemType"},
+                    "minItems": 0
+                },
+                "countryOfExport": {"$ref": "#/definitions/TradeCountryType"},
+                "countryOfImport": {"$ref": "#/definitions/TradeCountryType"}
+            }
+        },
+        "CITESEPermitType": {
+            "type": "object",
+            "required": [
+                "specifiedExchangedDocumentContext",
+                "headerExchangedDocument",
+                "specifiedSupplyChainConsignment"
+            ],
+            "properties": {
+                "specifiedExchangedDocumentContext": {"$ref": "#/definitions/ExchangedDocumentContextType"},
+                "headerExchangedDocument": {"$ref": "#/definitions/ExchangedDocumentType"},
+                "specifiedSupplyChainConsignment": {"$ref": "#/definitions/SupplyChainConsignmentType"}
+            }
+        }
+    },
+    "properties": {
+        "CITESEPermit": {"$ref": "#/definitions/CITESEPermitType"}
+    }
+}

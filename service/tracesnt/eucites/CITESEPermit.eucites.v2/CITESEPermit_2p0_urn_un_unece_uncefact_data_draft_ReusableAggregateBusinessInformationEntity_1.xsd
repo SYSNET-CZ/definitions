@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:ram="urn:un:unece:uncefact:data:draft:ReusableAggregateBusinessInformationEntity:1"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:qdt="urn:un:unece:uncefact:data:standard:QualifiedDataType:2"
+    xmlns:udt="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:13"
+    targetNamespace="urn:un:unece:uncefact:data:draft:ReusableAggregateBusinessInformationEntity:1"
+    elementFormDefault="qualified"
+    version="1.0">
+  <xs:import namespace="urn:un:unece:uncefact:data:standard:QualifiedDataType:2" schemaLocation="CITESEPermit_2p0_urn_un_unece_uncefact_data_standard_QualifiedDataType_2.xsd"/>
+  <xs:import namespace="urn:un:unece:uncefact:data:standard:UnqualifiedDataType:13" schemaLocation="CITESEPermit_2p0_urn_un_unece_uncefact_data_standard_UnqualifiedDataType_13.xsd"/>
+  <xs:complexType name="AuthoritativeSignatoryPersonType">
+    <xs:sequence>
+      <xs:element name="Name" type="udt:TextType" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CrossBorderRegulatoryProcedureType">
+    <xs:sequence>
+      <xs:element name="CategoryCode" type="udt:CodeType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="UsedToDateQuotaQuantity" type="udt:QuantityType" minOccurs="0"/>
+      <xs:element name="AnnualQuotaQuantity" type="udt:QuantityType" minOccurs="0"/>
+      <xs:element name="AcquisitionDateTime" type="udt:DateTimeType" minOccurs="0"/>
+      <xs:element name="PreviousReferencedDocument" type="ram:ReferencedDocumentType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DocumentAuthenticationType">
+    <xs:sequence>
+      <xs:element name="TypeCode" type="qdt:GovernmentActionCodeType" minOccurs="0"/>
+      <xs:element name="ActualDateTime" type="udt:DateTimeType" minOccurs="0"/>
+      <xs:element name="ID" type="udt:IDType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="Statement" type="udt:TextType" minOccurs="0"/>
+      <xs:element name="ProviderTradeParty" type="ram:TradePartyType" minOccurs="0"/>
+      <xs:element name="IssueLogisticsLocation" type="ram:LogisticsLocationType" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DocumentContextParameterType">
+    <xs:sequence>
+      <xs:element name="ID" type="udt:IDType" minOccurs="0"/>
+      <xs:element name="Value" type="udt:TextType" minOccurs="0"/>
+      <xs:element name="SpecifiedDocumentVersion" type="ram:DocumentVersionType" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DocumentVersionType">
+    <xs:sequence>
+      <xs:element name="ID" type="udt:IDType" minOccurs="0"/>
+      <xs:element name="IssueDateTime" type="udt:DateTimeType" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ExchangedDocumentContextType">
+    <xs:sequence>
+      <xs:element name="BusinessProcessSpecifiedDocumentContextParameter" type="ram:DocumentContextParameterType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="BIMSpecifiedDocumentContextParameter" type="ram:DocumentContextParameterType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ExchangedDocumentType">
+    <xs:sequence>
+      <xs:element name="ID" type="udt:IDType" minOccurs="0"/>
+      <xs:element name="Name" type="udt:TextType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="TypeCode" type="qdt:DocumentCodeType" minOccurs="0"/>
+      <xs:element name="IssueDateTime" type="udt:DateTimeType" minOccurs="0"/>
+      <xs:element name="CopyIndicator" type="udt:IndicatorType" minOccurs="0"/>
+      <xs:element name="Purpose" type="udt:TextType" minOccurs="0"/>
+      <xs:element name="PurposeCode" type="qdt:MessageFunctionCodeType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="Information" type="udt:TextType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="ReferenceReferencedDocument" type="ram:ReferencedDocumentType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="EffectiveSpecifiedPeriod" type="ram:SpecifiedPeriodType" minOccurs="0"/>
+      <xs:element name="IssueLogisticsLocation" type="ram:LogisticsLocationType" minOccurs="0"/>
+      <xs:element name="FirstSignatoryDocumentAuthentication" type="ram:DocumentAuthenticationType" minOccurs="0"/>
+      <xs:element name="SecondSignatoryDocumentAuthentication" type="ram:DocumentAuthenticationType" minOccurs="0"/>
+      <xs:element name="ThirdSignatoryDocumentAuthentication" type="ram:DocumentAuthenticationType" minOccurs="0"/>
+      <xs:element name="FourthSignatoryDocumentAuthentication" type="ram:DocumentAuthenticationType" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LogisticsLocationType">
+    <xs:sequence>
+      <xs:element name="ID" type="udt:IDType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="Name" type="udt:TextType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LogisticsPackageType">
+    <xs:sequence>
+      <xs:element name="ItemQuantity" type="udt:QuantityType" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LogisticsShippingMarksType">
+    <xs:sequence>
+      <xs:element name="Marking" type="udt:TextType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ReferencedDocumentType">
+    <xs:sequence>
+      <xs:element name="IssueDateTime" type="qdt:FormattedDateTimeType" minOccurs="0"/>
+      <xs:element name="TypeCode" type="qdt:DocumentCodeType" minOccurs="0"/>
+      <xs:element name="ID" type="udt:IDType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="Name" type="udt:TextType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="EffectiveSpecifiedPeriod" type="ram:SpecifiedPeriodType" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RepresentativePersonType">
+    <xs:sequence>
+      <xs:element name="Name" type="udt:TextType" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SpecifiedPeriodType">
+    <xs:sequence>
+      <xs:element name="StartDateTime" type="udt:DateTimeType" minOccurs="0"/>
+      <xs:element name="EndDateTime" type="udt:DateTimeType" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SupplyChainConsignmentItemType">
+    <xs:sequence>
+      <xs:element name="ID" type="udt:IDType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="PhysicalLogisticsShippingMarks" type="ram:LogisticsShippingMarksType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="OriginTradeCountry" type="ram:TradeCountryType" minOccurs="0"/>
+      <xs:element name="ExportTradeCountry" type="ram:TradeCountryType" minOccurs="0"/>
+      <xs:element name="AssociatedReferencedDocument" type="ram:ReferencedDocumentType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="TransportLogisticsPackage" type="ram:LogisticsPackageType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="IncludedSupplyChainTradeLineItem" type="ram:SupplyChainTradeLineItemType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="ExaminationTransportEvent" type="ram:TransportEventType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="ApplicableCrossBorderRegulatoryProcedure" type="ram:CrossBorderRegulatoryProcedureType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SupplyChainConsignmentType">
+    <xs:sequence>
+      <xs:element name="ConsignorTradeParty" type="ram:TradePartyType" minOccurs="0"/>
+      <xs:element name="ConsigneeTradeParty" type="ram:TradePartyType" minOccurs="0"/>
+      <xs:element name="TransportContractReferencedDocument" type="ram:ReferencedDocumentType" minOccurs="0"/>
+      <xs:element name="ExaminationTransportEvent" type="ram:TransportEventType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="IncludedSupplyChainConsignmentItem" type="ram:SupplyChainConsignmentItemType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SupplyChainTradeLineItemType">
+    <xs:sequence>
+      <xs:element name="TypeCode" type="qdt:GoodsTypeCodeType" minOccurs="0"/>
+      <xs:element name="TypeExtensionCode" type="qdt:GoodsTypeExtensionCodeType" minOccurs="0"/>
+      <xs:element name="SpecifiedTradeProduct" type="ram:TradeProductType" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TradeAddressType">
+    <xs:sequence>
+      <xs:element name="PostcodeCode" type="udt:CodeType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="PostOfficeBox" type="udt:TextType" minOccurs="0"/>
+      <xs:element name="StreetName" type="udt:TextType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="CityName" type="udt:TextType" minOccurs="0"/>
+      <xs:element name="CountryID" type="qdt:CountryIDType" minOccurs="0"/>
+      <xs:element name="CountryName" type="udt:TextType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="CountrySubDivisionName" type="udt:TextType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TradeCountryType">
+    <xs:sequence>
+      <xs:element name="ID" type="qdt:CountryIDType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="Name" type="udt:TextType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TradePartyType">
+    <xs:sequence>
+      <xs:element name="ID" type="udt:IDType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="Name" type="udt:TextType" minOccurs="0"/>
+      <xs:element name="PostalTradeAddress" type="ram:TradeAddressType" minOccurs="0"/>
+      <xs:element name="SpecifiedRepresentativePerson" type="ram:RepresentativePersonType" minOccurs="0"/>
+      <xs:element name="SpecifiedAuthoritativeSignatoryPerson" type="ram:AuthoritativeSignatoryPersonType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TradeProductType">
+    <xs:sequence>
+      <xs:element name="SellerAssignedID" type="udt:IDType" minOccurs="0"/>
+      <xs:element name="ManufacturerAssignedID" type="udt:IDType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="Description" type="udt:TextType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="TypeCode" type="udt:CodeType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="CommonName" type="udt:TextType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="ScientificName" type="udt:TextType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TransportEventType">
+    <xs:sequence>
+      <xs:element name="ActualOccurrenceDateTime" type="udt:DateTimeType" minOccurs="0"/>
+      <xs:element name="UnitQuantity" type="udt:QuantityType" minOccurs="0"/>
+      <xs:element name="OccurrenceLogisticsLocation" type="ram:LogisticsLocationType" minOccurs="0"/>
+      <xs:element name="CertifyingTradeParty" type="ram:TradePartyType" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
