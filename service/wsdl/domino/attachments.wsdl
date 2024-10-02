@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2021 (x64) (http://www.altova.com) by Radim Jäger (SYSNET s.r.o.) -->
+<wsdl:definitions
+        xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+        xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+        xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+        xmlns:xs="http://www.w3.org/2001/XMLSchema"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:tns="https://schemes.sysnet.cz/attachments"
+        targetNamespace="https://schemes.sysnet.cz/attachments">
+	<wsdl:types>
+		<xsi:schema xmlns:xsi="http://www.w3.org/2001/XMLSchema" targetNamespace="https://schemes.sysnet.cz/attachments" elementFormDefault="qualified">
+			<xsi:complexType name="FaultType">
+				<xsi:sequence>
+					<xsi:element name="statusCode" type="xs:string"/>
+					<xsi:element name="errorMessage" type="xs:string" minOccurs="0"/>
+				</xsi:sequence>
+			</xsi:complexType>
+			<xsi:complexType name="AttachmentMetadataType">
+				<xsi:sequence>
+					<xsi:element name="unid" type="xsi:string"/>
+					<xsi:element name="storage" type="xsi:string" default="C12588A00034993F" minOccurs="0"/>
+					<xsi:element name="itemName" type="xsi:string" default="attachment" minOccurs="0"/>
+					<xsi:element name="fileName" type="xsi:string" minOccurs="0"/>
+					<xsi:element name="parent" type="xsi:string" minOccurs="0"/>
+					<xsi:element name="form" type="xsi:string" minOccurs="0"/>
+					<xsi:element name="dateCreated" type="xsi:dateTime" minOccurs="0"/>
+					<xsi:element name="dateModified" type="xsi:dateTime" minOccurs="0"/>
+					<xsi:element name="response" type="xsi:boolean" minOccurs="0"/>
+					<xsi:element name="size" type="xsi:long" minOccurs="0"/>
+				</xsi:sequence>
+			</xsi:complexType>
+			<xsi:complexType name="AttachmentType">
+				<xsi:complexContent>
+					<xsi:extension base="tns:AttachmentMetadataType">
+						<xsi:sequence>
+							<xsi:element name="data" type="xsi:base64Binary"/>
+						</xsi:sequence>
+					</xsi:extension>
+				</xsi:complexContent>
+			</xsi:complexType>
+			<xsi:complexType name="AttachmentsArrayType">
+				<xsi:sequence>
+					<xsi:element name="attachment" type="tns:AttachmentMetadataType" minOccurs="0" maxOccurs="unbounded"/>
+				</xsi:sequence>
+			</xsi:complexType>
+			<xsi:complexType name="DocumentAttachmentsArray">
+				<xsi:sequence>
+					<xsi:element name="unid" type="xsi:string"/>
+					<xsi:element name="storage" type="xsi:string"/>
+					<xsi:element name="attachment" type="tns:AttachmentType" minOccurs="0" maxOccurs="unbounded"/>
+				</xsi:sequence>
+			</xsi:complexType>
+			<xsi:complexType name="FilterType">
+				<xsi:sequence>
+					<xsi:element name="unid" type="xsi:string" minOccurs="0"/>
+					<xsi:element name="storage" type="xsi:string" minOccurs="0"/>
+					<xsi:element name="fileName" type="xsi:string" minOccurs="0"/>
+					<xsi:element name="form" type="xsi:string" minOccurs="0"/>
+					<xsi:element name="dateFrom" type="xsi:dateTime" minOccurs="0"/>
+					<xsi:element name="dateTo" type="xsi:dateTime" minOccurs="0"/>
+				</xsi:sequence>
+			</xsi:complexType>
+		</xsi:schema>
+	</wsdl:types>
+	<wsdl:message name="AttachmentsFault">
+		<wsdl:part name="fault" type="tns:FaultType"/>
+	</wsdl:message>
+	<wsdl:message name="GetInfoResponse">
+		<wsdl:part name="parameter" type="xs:string"/>
+	</wsdl:message>
+	<wsdl:message name="GetAttachmentRequest">
+		<wsdl:part name="unid" type="xs:string"/>
+		<wsdl:part name="storage" type="xs:string"/>
+		<wsdl:part name="fileName" type="xs:string"/>
+	</wsdl:message>
+	<wsdl:message name="GetAttachmentResponse">
+		<wsdl:part name="attachment" type="tns:AttachmentType"/>
+	</wsdl:message>
+	<wsdl:message name="GetAttachmentsFilteredRequest">
+		<wsdl:part name="parameter" type="tns:FilterType"/>
+	</wsdl:message>
+	<wsdl:message name="GetAttachmentsFilteredResponse">
+		<wsdl:part name="attachments" type="tns:AttachmentsArrayType"/>
+	</wsdl:message>
+	<wsdl:message name="GetDocumentAttachmentsRequest">
+		<wsdl:part name="unid" type="xs:string"/>
+		<wsdl:part name="storage" type="xs:string"/>
+	</wsdl:message>
+	<wsdl:message name="GetNamesResponse">
+		<wsdl:part name="attachments" type="tns:DocumentAttachmentsArray"/>
+	</wsdl:message>
+	<wsdl:message name="GetInfoRequest"/>
+	<wsdl:portType name="attachments">
+		<wsdl:documentation>WS attachments</wsdl:documentation>
+		<wsdl:operation name="getInfo">
+			<wsdl:input message="tns:GetInfoRequest"/>
+			<wsdl:output message="tns:GetInfoResponse"/>
+            <wsdl:fault name="AttachmentsFault" message="tns:AttachmentsFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="getAttachment">
+			<wsdl:input message="tns:GetAttachmentRequest"/>
+			<wsdl:output message="tns:GetAttachmentResponse"/>
+			<wsdl:fault name="AttachmentsFault" message="tns:AttachmentsFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="getAttachmentsFiltered">
+			<wsdl:input message="tns:GetAttachmentsFilteredRequest"/>
+			<wsdl:output message="tns:GetAttachmentsFilteredResponse"/>
+			<wsdl:fault name="AttachmentsFault" message="tns:AttachmentsFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="getDocumentAttachments">
+			<wsdl:input message="tns:GetDocumentAttachmentsRequest"/>
+			<wsdl:output message="tns:GetNamesResponse"/>
+			<wsdl:fault name="AttachmentsFault" message="tns:AttachmentsFault"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="attachmentsSoap" type="tns:attachments">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="getInfo">
+			<soap:operation soapAction="https://schemes.sysnet.cz/attachments"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="AttachmentsFault">
+				<soap:fault name="AttachmentsFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="getAttachment">
+			<soap:operation soapAction="https://schemes.sysnet.cz/attachments"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="AttachmentsFault">
+				<soap:fault name="AttachmentsFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="getAttachmentsFiltered">
+			<soap:operation soapAction="https://schemes.sysnet.cz/attachments"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="AttachmentsFault">
+				<soap:fault name="AttachmentsFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="getDocumentAttachments">
+			<soap:operation soapAction="https://schemes.sysnet.cz/attachments"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="AttachmentsFault">
+				<soap:fault name="AttachmentsFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="attachmentsService">
+		<wsdl:port name="attachmentsSoap" binding="tns:attachmentsSoap">
+			<soap:address location="No target address"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>
