@@ -1,8 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- edited with XMLSpy v2021 (x64) (http://www.altova.com) by Radim Jäger (SYSNET s.r.o.) -->
-<wsdl:definitions xmlns:sna="urn:cz:sysnet:attachment:data:standard:AttachmentModel:2" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tns="https://schemes.sysnet.cz/attachments" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" targetNamespace="https://schemes.sysnet.cz/attachments">
+<wsdl:definitions
+        xmlns:sna="urn:cz:sysnet:attachment:data:standard:AttachmentModel:2"
+        xmlns:xs="http://www.w3.org/2001/XMLSchema"
+        xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+        xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+        xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:tns="https://schemes.sysnet.cz/attachments"
+        targetNamespace="https://schemes.sysnet.cz/attachments">
 	<wsdl:types>
-		<xsi:schema xmlns:xsi="http://www.w3.org/2001/XMLSchema" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" targetNamespace="https://schemes.sysnet.cz/attachments" elementFormDefault="qualified">
+		<xsi:schema
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema"
+                targetNamespace="https://schemes.sysnet.cz/attachments"
+                elementFormDefault="qualified">
 			<xsi:import namespace="urn:cz:sysnet:attachment:data:standard:AttachmentModel:2" schemaLocation="attachments2.xsd"/>
 			<xsi:complexType name="FaultType">
 				<xsi:sequence>
@@ -155,7 +165,7 @@
 			</wsdl:fault>
 		</wsdl:operation>
 		<wsdl:operation name="getDocumentByPid">
-			<soap:operation soapAction="urn:#NewOperation"/>
+			<soap:operation soapAction="https://schemes.sysnet.cz/attachments"/>
 			<wsdl:input>
 				<soap:body use="literal"/>
 			</wsdl:input>

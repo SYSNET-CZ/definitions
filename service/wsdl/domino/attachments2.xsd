@@ -3,8 +3,7 @@
 	xmlns:sna="urn:cz:sysnet:attachment:data:standard:AttachmentModel:2"
 	xmlns:xs="http://www.w3.org/2001/XMLSchema" 
 	targetNamespace="urn:cz:sysnet:attachment:data:standard:AttachmentModel:2"
-	elementFormDefault="qualified" 
-	attributeFormDefault="unqualified">
+	elementFormDefault="qualified">
 	<xs:element name="Attachment" type="sna:AttachmentType"/>
 	<xs:element name="AttachmentMetadata" type="sna:AttachmentMetadataType"/>
 	<xs:element name="AttachmentArray" type="sna:AttachmentsArrayType"/>
