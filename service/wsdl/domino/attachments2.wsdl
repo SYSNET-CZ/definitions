@@ -1,63 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<wsdl:definitions
-		xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
-		xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
-		xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
-		xmlns:xs="http://www.w3.org/2001/XMLSchema"
-		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		xmlns:tns="https://schemes.sysnet.cz/attachments"
-		targetNamespace="https://schemes.sysnet.cz/attachments">
+<!-- edited with XMLSpy v2021 (x64) (http://www.altova.com) by Radim Jäger (SYSNET s.r.o.) -->
+<wsdl:definitions xmlns:sna="urn:cz:sysnet:attachment:data:standard:AttachmentModel:2" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tns="https://schemes.sysnet.cz/attachments" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" targetNamespace="https://schemes.sysnet.cz/attachments">
 	<wsdl:types>
-		<xsi:schema
-				xmlns:xsi="http://www.w3.org/2001/XMLSchema"
-				targetNamespace="https://schemes.sysnet.cz/attachments"
-				elementFormDefault="qualified">
+		<xsi:schema xmlns:xsi="http://www.w3.org/2001/XMLSchema" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" targetNamespace="https://schemes.sysnet.cz/attachments" elementFormDefault="qualified">
+			<xsi:import namespace="urn:cz:sysnet:attachment:data:standard:AttachmentModel:2" schemaLocation="attachments2.xsd"/>
 			<xsi:complexType name="FaultType">
 				<xsi:sequence>
 					<xsi:element name="statusCode" type="xs:string"/>
 					<xsi:element name="errorMessage" type="xs:string" minOccurs="0"/>
 				</xsi:sequence>
 			</xsi:complexType>
-			<xsi:complexType name="AttachmentMetadataType">
-				<xsi:sequence>
-					<xsi:element name="storage" type="xsi:string" default="C12588A00034993F" minOccurs="0"/>
-					<xsi:element name="unid" type="xsi:string"/>
-					<xsi:element name="itemName" type="xsi:string" default="attachment" minOccurs="0"/>
-					<xsi:element name="fileName" type="xsi:string" minOccurs="0"/>
-					<xsi:element name="parent" type="xsi:string" minOccurs="0"/>
-					<xsi:element name="form" type="xsi:string" minOccurs="0"/>
-					<xsi:element name="dateCreated" type="xsi:dateTime" minOccurs="0"/>
-					<xsi:element name="dateModified" type="xsi:dateTime" minOccurs="0"/>
-					<xsi:element name="response" type="xsi:boolean" minOccurs="0"/>
-					<xsi:element name="size" type="xsi:long" minOccurs="0"/>
-					<xsi:element name="title" type="xsi:string" minOccurs="0"/>
-					<xsi:element name="creator" type="xsi:string" minOccurs="0"/>
-				</xsi:sequence>
-			</xsi:complexType>
-			<xsi:complexType name="AttachmentType">
-				<xsi:complexContent>
-					<xsi:extension base="tns:AttachmentMetadataType">
-						<xsi:sequence>
-							<xsi:element name="data" type="xsi:base64Binary"/>
-						</xsi:sequence>
-					</xsi:extension>
-				</xsi:complexContent>
-			</xsi:complexType>
-			<xsi:complexType name="AttachmentsArrayType">
-				<xsi:sequence>
-					<xsi:element name="attachment" type="tns:AttachmentMetadataType" minOccurs="0" maxOccurs="unbounded"/>
-				</xsi:sequence>
-			</xsi:complexType>
-			<xsi:complexType name="DocumentAttachmentsArray">
-				<xsi:sequence>
-					<xsi:element name="storage" type="xsi:string"/>
-					<xsi:element name="unid" type="xsi:string"/>
-					<xsi:element name="attachment" type="tns:AttachmentType" minOccurs="0" maxOccurs="unbounded"/>
-				</xsi:sequence>
-			</xsi:complexType>
 			<xsi:complexType name="FilterType">
 				<xsi:sequence>
-					<xsi:element name="storage" type="xsi:string" />
+					<xsi:element name="storage" type="xsi:string"/>
 					<xsi:element name="unid" type="xsi:string" minOccurs="0"/>
 					<xsi:element name="fileName" type="xsi:string" minOccurs="0"/>
 					<xsi:element name="form" type="xsi:string" minOccurs="0"/>
@@ -71,6 +26,12 @@
 					<xsi:element name="unid" type="xsi:string"/>
 				</xsi:sequence>
 			</xsi:complexType>
+			<xsi:complexType name="PidRequestType">
+				<xsi:sequence>
+					<xsi:element name="storage" type="xsi:string"/>
+					<xsi:element name="pid" type="xsi:string"/>
+				</xsi:sequence>
+			</xsi:complexType>
 			<xsi:complexType name="AttachmentRequestType">
 				<xsi:complexContent>
 					<xsi:extension base="tns:DocumentRequestType">
@@ -81,6 +42,7 @@
 				</xsi:complexContent>
 			</xsi:complexType>
 		</xsi:schema>
+		<xs:schema elementFormDefault="qualified" targetNamespace="https://schemes.sysnet.cz/attachments"/>
 	</wsdl:types>
 	<wsdl:message name="AttachmentsFault">
 		<wsdl:part name="fault" type="tns:FaultType"/>
@@ -92,13 +54,13 @@
 		<wsdl:part name="attachment" type="tns:AttachmentRequestType"/>
 	</wsdl:message>
 	<wsdl:message name="GetAttachmentResponse">
-		<wsdl:part name="attachment" type="tns:AttachmentType"/>
+		<wsdl:part name="attachment" type="sna:AttachmentType"/>
 	</wsdl:message>
 	<wsdl:message name="GetAttachmentsFilteredRequest">
 		<wsdl:part name="filter" type="tns:FilterType"/>
 	</wsdl:message>
 	<wsdl:message name="GetAttachmentsFilteredResponse">
-		<wsdl:part name="attachments" type="tns:AttachmentsArrayType"/>
+		<wsdl:part name="attachments" type="sna:AttachmentsArrayType"/>
 	</wsdl:message>
 	<wsdl:message name="GetInfoRequest"/>
 	<wsdl:message name="NewMessage"/>
@@ -106,7 +68,13 @@
 		<wsdl:part name="document" type="tns:DocumentRequestType"/>
 	</wsdl:message>
 	<wsdl:message name="GetDocumentResponse">
-		<wsdl:part name="attachments" type="tns:DocumentAttachmentsArray"/>
+		<wsdl:part name="attachments" type="sna:DocumentAttachmentsArrayType"/>
+	</wsdl:message>
+	<wsdl:message name="GetDocumentByPidRequest">
+		<wsdl:part name="document" type="tns:PidRequestType"/>
+	</wsdl:message>
+	<wsdl:message name="GetDocumentByPidResponse">
+		<wsdl:part name="attachments" type="sna:DocumentAttachmentsArrayType"/>
 	</wsdl:message>
 	<wsdl:portType name="attachments">
 		<wsdl:documentation>WS attachments</wsdl:documentation>
@@ -128,6 +96,11 @@
 		<wsdl:operation name="getDocument">
 			<wsdl:input name="GetDocumentRequest" message="tns:GetDocumentRequest"/>
 			<wsdl:output name="GetDocumentResponse" message="tns:GetDocumentResponse"/>
+			<wsdl:fault name="AttachmentsFault" message="tns:AttachmentsFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="getDocumentByPid">
+			<wsdl:input name="getDocumentByPidRequest" message="tns:GetDocumentByPidRequest"/>
+			<wsdl:output name="getDocumentByPidResponse" message="tns:GetDocumentByPidResponse"/>
 			<wsdl:fault name="AttachmentsFault" message="tns:AttachmentsFault"/>
 		</wsdl:operation>
 	</wsdl:portType>
@@ -175,6 +148,18 @@
 				<soap:body use="literal"/>
 			</wsdl:input>
 			<wsdl:output name="GetDocumentResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="AttachmentsFault">
+				<soap:fault name="AttachmentsFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="getDocumentByPid">
+			<soap:operation soapAction="urn:#NewOperation"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
 				<soap:body use="literal"/>
 			</wsdl:output>
 			<wsdl:fault name="AttachmentsFault">

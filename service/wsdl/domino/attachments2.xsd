@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+	xmlns:sna="urn:cz:sysnet:attachment:data:standard:AttachmentModel:2"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	targetNamespace="urn:cz:sysnet:attachment:data:standard:AttachmentModel:2"
+	elementFormDefault="qualified" 
+	attributeFormDefault="unqualified">
+	<xs:element name="Attachment" type="sna:AttachmentType"/>
+	<xs:element name="AttachmentMetadata" type="sna:AttachmentMetadataType"/>
+	<xs:element name="AttachmentArray" type="sna:AttachmentsArrayType"/>
+	<xs:element name="AttachmentDocumentArray" type="sna:DocumentAttachmentsArrayType"/>
+	<xs:complexType name="AttachmentMetadataType">
+		<xs:sequence>
+			<xs:element name="storage" type="xs:string" default="C12588A00034993F" minOccurs="0"/>
+			<xs:element name="unid" type="xs:string"/>
+			<xs:element name="itemName" type="xs:string" default="attachment" minOccurs="0"/>
+			<xs:element name="fileName" type="xs:string" minOccurs="0"/>
+			<xs:element name="parent" type="xs:string" minOccurs="0"/>
+			<xs:element name="parentPid" type="xs:string" minOccurs="0"/>
+			<xs:element name="uploadToken" type="xs:string" minOccurs="0"/>
+			<xs:element name="form" type="xs:string" minOccurs="0"/>
+			<xs:element name="dateCreated" type="xs:dateTime" minOccurs="0"/>
+			<xs:element name="dateModified" type="xs:dateTime" minOccurs="0"/>
+			<xs:element name="response" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="size" type="xs:long" minOccurs="0"/>
+			<xs:element name="title" type="xs:string" minOccurs="0"/>
+			<xs:element name="creator" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AttachmentType">
+		<xs:complexContent>
+			<xs:extension base="sna:AttachmentMetadataType">
+				<xs:sequence>
+					<xs:element name="data" type="xs:base64Binary"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="AttachmentsArrayType">
+		<xs:sequence>
+			<xs:element name="attachment" type="sna:AttachmentMetadataType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DocumentAttachmentsArrayType">
+		<xs:sequence>
+			<xs:element name="storage" type="xs:string"/>
+			<xs:element name="unid" type="xs:string"/>
+			<xs:element name="pid" type="xs:string"/>
+			<xs:element name="attachment" type="sna:AttachmentType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>
