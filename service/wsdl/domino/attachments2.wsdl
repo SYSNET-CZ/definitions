@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <wsdl:definitions
-        xmlns:sna="urn:cz:sysnet:attachment:data:standard:AttachmentModel:2"
+        xmlns:sna="https://schemes.sysnet.cz/models/attachments"
         xmlns:xs="http://www.w3.org/2001/XMLSchema"
         xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
         xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
         xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xmlns:tns="https://schemes.sysnet.cz/attachments"
-        targetNamespace="https://schemes.sysnet.cz/attachments">
+        xmlns:tns="https://schemes.sysnet.cz/services/attachments"
+        targetNamespace="https://schemes.sysnet.cz/services/attachments">
 	<wsdl:types>
 		<xsi:schema
                 xmlns:xsi="http://www.w3.org/2001/XMLSchema"
-                targetNamespace="https://schemes.sysnet.cz/attachments"
+                targetNamespace="https://schemes.sysnet.cz/services/attachments"
                 elementFormDefault="qualified">
-			<xsi:import namespace="urn:cz:sysnet:attachment:data:standard:AttachmentModel:2" schemaLocation="attachments2.xsd"/>
+			<xsi:import namespace="https://schemes.sysnet.cz/models/attachments" schemaLocation="attachments2.xsd"/>
 			<xsi:complexType name="FaultType">
 				<xsi:sequence>
 					<xsi:element name="statusCode" type="xs:string"/>

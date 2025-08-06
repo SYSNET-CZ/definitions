@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema 
-	xmlns:sna="urn:cz:sysnet:attachment:data:standard:AttachmentModel:2"
+	xmlns:sna="https://schemes.sysnet.cz/models/attachments"
 	xmlns:xs="http://www.w3.org/2001/XMLSchema" 
-	targetNamespace="urn:cz:sysnet:attachment:data:standard:AttachmentModel:2"
+	targetNamespace="https://schemes.sysnet.cz/models/attachments"
 	elementFormDefault="qualified">
 	<xs:element name="Attachment" type="sna:AttachmentType"/>
 	<xs:element name="AttachmentMetadata" type="sna:AttachmentMetadataType"/>
@@ -12,6 +12,8 @@
 		<xs:sequence>
 			<xs:element name="storage" type="xs:string" default="C12588A00034993F" minOccurs="0"/>
 			<xs:element name="unid" type="xs:string"/>
+            <xs:element name="pid" type="xs:string"/>
+            <xs:element name="uuid" type="xs:string"/>
 			<xs:element name="itemName" type="xs:string" default="attachment" minOccurs="0"/>
 			<xs:element name="fileName" type="xs:string" minOccurs="0"/>
 			<xs:element name="parent" type="xs:string" minOccurs="0"/>
