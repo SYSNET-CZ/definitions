@@ -9,10 +9,7 @@
         xmlns:tns="https://schemes.sysnet.cz/services/attachments"
         targetNamespace="https://schemes.sysnet.cz/services/attachments">
 	<wsdl:types>
-		<xsi:schema
-                xmlns:xsi="http://www.w3.org/2001/XMLSchema"
-                targetNamespace="https://schemes.sysnet.cz/services/attachments"
-                elementFormDefault="qualified">
+		<xsi:schema xmlns:xsi="http://www.w3.org/2001/XMLSchema" targetNamespace="https://schemes.sysnet.cz/services/attachments" elementFormDefault="qualified">
 			<xsi:import namespace="https://schemes.sysnet.cz/models/attachments" schemaLocation="attachments2.xsd"/>
 			<xsi:complexType name="FaultType">
 				<xsi:sequence>
@@ -30,7 +27,7 @@
 					<xsi:element name="dateTo" type="xsi:dateTime" minOccurs="0"/>
 				</xsi:sequence>
 			</xsi:complexType>
-			<xsi:complexType name="DocumentRequestType">
+			<xsi:complexType name="UnidRequestType">
 				<xsi:sequence>
 					<xsi:element name="storage" type="xsi:string"/>
 					<xsi:element name="unid" type="xsi:string"/>
@@ -44,7 +41,7 @@
 			</xsi:complexType>
 			<xsi:complexType name="AttachmentRequestType">
 				<xsi:complexContent>
-					<xsi:extension base="tns:DocumentRequestType">
+					<xsi:extension base="tns:UnidRequestType">
 						<xsi:sequence>
 							<xsi:element name="fileName" type="xsi:string"/>
 						</xsi:sequence>
@@ -60,10 +57,10 @@
 	<wsdl:message name="GetInfoResponse">
 		<wsdl:part name="info" type="xs:string"/>
 	</wsdl:message>
-	<wsdl:message name="GetDocumentAttachmentsResponse">
+	<wsdl:message name="GetSingleAttachmentRequest">
 		<wsdl:part name="attachment" type="tns:AttachmentRequestType"/>
 	</wsdl:message>
-	<wsdl:message name="GetAttachmentResponse">
+	<wsdl:message name="GetSingleAttachmentResponse">
 		<wsdl:part name="attachment" type="sna:AttachmentType"/>
 	</wsdl:message>
 	<wsdl:message name="GetAttachmentsFilteredRequest">
@@ -73,18 +70,41 @@
 		<wsdl:part name="attachments" type="sna:AttachmentsArrayType"/>
 	</wsdl:message>
 	<wsdl:message name="GetInfoRequest"/>
-	<wsdl:message name="NewMessage"/>
-	<wsdl:message name="GetDocumentRequest">
-		<wsdl:part name="document" type="tns:DocumentRequestType"/>
+	<wsdl:message name="GetAttachmentsByDocumentUnidtRequest">
+		<wsdl:part name="document" type="tns:UnidRequestType"/>
 	</wsdl:message>
-	<wsdl:message name="GetDocumentResponse">
+	<wsdl:message name="GetAttachmentsByDocumentUnidResponse">
 		<wsdl:part name="attachments" type="sna:DocumentAttachmentsArrayType"/>
 	</wsdl:message>
-	<wsdl:message name="GetDocumentByPidRequest">
+	<wsdl:message name="GetAttachmentsByDocumentPidRequest">
 		<wsdl:part name="document" type="tns:PidRequestType"/>
 	</wsdl:message>
-	<wsdl:message name="GetDocumentByPidResponse">
+	<wsdl:message name="GetAttachmentsByDocumentPidResponse">
 		<wsdl:part name="attachments" type="sna:DocumentAttachmentsArrayType"/>
+	</wsdl:message>
+	<wsdl:message name="GetSingleMetadataRequest">
+		<wsdl:part name="attachment" type="tns:AttachmentRequestType"/>
+	</wsdl:message>
+	<wsdl:message name="GetSingleMetadataResponse">
+		<wsdl:part name="attachment" type="sna:AttachmentMetadataType"/>
+	</wsdl:message>
+	<wsdl:message name="GetMetadataFilteredRequest">
+		<wsdl:part name="filter" type="tns:FilterType"/>
+	</wsdl:message>
+	<wsdl:message name="GetMetadataFilteredResponse">
+		<wsdl:part name="attachments" type="sna:AttachmentsMetadataArrayType"/>
+	</wsdl:message>
+	<wsdl:message name="GetMetadataByDocumentUnidRequest">
+		<wsdl:part name="document" type="tns:UnidRequestType"/>
+	</wsdl:message>
+	<wsdl:message name="GetMetadataByDocumentUnidResponse">
+		<wsdl:part name="attachments" type="sna:DocumentAttachmentsMetadataArrayType"/>
+	</wsdl:message>
+	<wsdl:message name="GetMetadataByDocumentPidRequest">
+		<wsdl:part name="document" type="tns:PidRequestType"/>
+	</wsdl:message>
+	<wsdl:message name="GetMetadataByDocumentPidResponse">
+		<wsdl:part name="attachments" type="sna:DocumentAttachmentsMetadataArrayType"/>
 	</wsdl:message>
 	<wsdl:portType name="attachments">
 		<wsdl:documentation>WS attachments</wsdl:documentation>
@@ -93,9 +113,9 @@
 			<wsdl:output name="GetInfoResponse" message="tns:GetInfoResponse"/>
 			<wsdl:fault name="AttachmentsFault" message="tns:AttachmentsFault"/>
 		</wsdl:operation>
-		<wsdl:operation name="getAttachment">
-			<wsdl:input name="GetAttachmentRequest" message="tns:GetDocumentAttachmentsResponse"/>
-			<wsdl:output name="GetAttachmentResponse" message="tns:GetAttachmentResponse"/>
+		<wsdl:operation name="getSingleAttachment">
+			<wsdl:input name="GetSingleAttachmentRequest" message="tns:GetSingleAttachmentRequest"/>
+			<wsdl:output name="GetSingleAttachmentResponse" message="tns:GetSingleAttachmentResponse"/>
 			<wsdl:fault name="AttachmentsFault" message="tns:AttachmentsFault"/>
 		</wsdl:operation>
 		<wsdl:operation name="getAttachmentsFiltered">
@@ -103,14 +123,34 @@
 			<wsdl:output name="GetAttachmentsFilteredResponse" message="tns:GetAttachmentsFilteredResponse"/>
 			<wsdl:fault name="AttachmentsFault" message="tns:AttachmentsFault"/>
 		</wsdl:operation>
-		<wsdl:operation name="getDocument">
-			<wsdl:input name="GetDocumentRequest" message="tns:GetDocumentRequest"/>
-			<wsdl:output name="GetDocumentResponse" message="tns:GetDocumentResponse"/>
+		<wsdl:operation name="getAttachmentsByDocumentUnid">
+			<wsdl:input name="GetAttachmentsByDocumentUnidRequest" message="tns:GetAttachmentsByDocumentUnidtRequest"/>
+			<wsdl:output name="GetAttachmentsByDocumentUnidtResponse" message="tns:GetAttachmentsByDocumentUnidResponse"/>
 			<wsdl:fault name="AttachmentsFault" message="tns:AttachmentsFault"/>
 		</wsdl:operation>
-		<wsdl:operation name="getDocumentByPid">
-			<wsdl:input name="getDocumentByPidRequest" message="tns:GetDocumentByPidRequest"/>
-			<wsdl:output name="getDocumentByPidResponse" message="tns:GetDocumentByPidResponse"/>
+		<wsdl:operation name="getAttachmentsByDocumentPid">
+			<wsdl:input name="GetAttachmentsByDocumentPidRequest" message="tns:GetAttachmentsByDocumentPidRequest"/>
+			<wsdl:output name="GetAttachmentsByDocumentPidResponse" message="tns:GetAttachmentsByDocumentPidResponse"/>
+			<wsdl:fault name="AttachmentsFault" message="tns:AttachmentsFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="getSingleMetadata">
+			<wsdl:input name="GetSingleMetadataRequest" message="tns:GetSingleMetadataRequest"/>
+			<wsdl:output name="GetSingleMetadataResponse" message="tns:GetSingleMetadataResponse"/>
+			<wsdl:fault name="AttachmentsFault" message="tns:AttachmentsFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="getMetadataFiltered">
+			<wsdl:input name="GetMetadataFilteredRequest" message="tns:GetMetadataFilteredRequest"/>
+			<wsdl:output name="GetMetadataFilteredResponse" message="tns:GetMetadataFilteredResponse"/>
+			<wsdl:fault name="AttachmentsFault" message="tns:AttachmentsFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="getMetadataByDocumentUnid">
+			<wsdl:input name="GetMetadataByDocumentUnidRequest" message="tns:GetMetadataByDocumentUnidRequest"/>
+			<wsdl:output name="GetMetadataByDocumentUnidResponse" message="tns:GetMetadataByDocumentUnidResponse"/>
+			<wsdl:fault name="AttachmentsFault" message="tns:AttachmentsFault"/>
+		</wsdl:operation>
+		<wsdl:operation name="getMetadataByDocumentPid">
+			<wsdl:input name="GetMetadataByDocumentPidRequest" message="tns:GetMetadataByDocumentPidRequest"/>
+			<wsdl:output name="GetMetadataByDocumentPidResponse" message="tns:GetMetadataByDocumentPidResponse"/>
 			<wsdl:fault name="AttachmentsFault" message="tns:AttachmentsFault"/>
 		</wsdl:operation>
 	</wsdl:portType>
@@ -128,12 +168,12 @@
 				<soap:fault name="AttachmentsFault" use="literal"/>
 			</wsdl:fault>
 		</wsdl:operation>
-		<wsdl:operation name="getAttachment">
+		<wsdl:operation name="getSingleAttachment">
 			<soap:operation soapAction="https://schemes.sysnet.cz/attachments"/>
-			<wsdl:input name="GetAttachmentRequest">
+			<wsdl:input name="GetSingleAttachmentRequest">
 				<soap:body use="literal"/>
 			</wsdl:input>
-			<wsdl:output name="GetAttachmentResponse">
+			<wsdl:output name="GetSingleAttachmentResponse">
 				<soap:body use="literal"/>
 			</wsdl:output>
 			<wsdl:fault name="AttachmentsFault">
@@ -152,20 +192,68 @@
 				<soap:fault name="AttachmentsFault" use="literal"/>
 			</wsdl:fault>
 		</wsdl:operation>
-		<wsdl:operation name="getDocument">
+		<wsdl:operation name="getAttachmentsByDocumentUnid">
 			<soap:operation soapAction="https://schemes.sysnet.cz/attachments"/>
-			<wsdl:input name="GetDocumentRequest">
+			<wsdl:input name="GetAttachmentsByDocumentUnidRequest">
 				<soap:body use="literal"/>
 			</wsdl:input>
-			<wsdl:output name="GetDocumentResponse">
+			<wsdl:output name="GetAttachmentsByDocumentUnidtResponse">
 				<soap:body use="literal"/>
 			</wsdl:output>
 			<wsdl:fault name="AttachmentsFault">
 				<soap:fault name="AttachmentsFault" use="literal"/>
 			</wsdl:fault>
 		</wsdl:operation>
-		<wsdl:operation name="getDocumentByPid">
+		<wsdl:operation name="getAttachmentsByDocumentPid">
 			<soap:operation soapAction="https://schemes.sysnet.cz/attachments"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="AttachmentsFault">
+				<soap:fault name="AttachmentsFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="getSingleMetadata">
+			<soap:operation soapAction="https://schemes.sysnet.cz/services/attachments"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="AttachmentsFault">
+				<soap:fault name="AttachmentsFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="getMetadataFiltered">
+			<soap:operation soapAction="https://schemes.sysnet.cz/services/attachments"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="AttachmentsFault">
+				<soap:fault name="AttachmentsFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="getMetadataByDocumentUnid">
+			<soap:operation soapAction="https://schemes.sysnet.cz/services/attachments"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="AttachmentsFault">
+				<soap:fault name="AttachmentsFault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="getMetadataByDocumentPid">
+			<soap:operation soapAction="https://schemes.sysnet.cz/services/attachments"/>
 			<wsdl:input>
 				<soap:body use="literal"/>
 			</wsdl:input>

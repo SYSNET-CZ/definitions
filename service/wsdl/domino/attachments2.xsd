@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema 
-	xmlns:sna="https://schemes.sysnet.cz/models/attachments"
-	xmlns:xs="http://www.w3.org/2001/XMLSchema" 
-	targetNamespace="https://schemes.sysnet.cz/models/attachments"
-	elementFormDefault="qualified">
+<xs:schema
+        xmlns:sna="https://schemes.sysnet.cz/models/attachments"
+        xmlns:xs="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="https://schemes.sysnet.cz/models/attachments"
+        elementFormDefault="qualified">
 	<xs:element name="Attachment" type="sna:AttachmentType"/>
 	<xs:element name="AttachmentMetadata" type="sna:AttachmentMetadataType"/>
+	<xs:element name="AttachmentMetadataArray" type="sna:AttachmentsMetadataArrayType"/>
 	<xs:element name="AttachmentArray" type="sna:AttachmentsArrayType"/>
+	<xs:element name="AttachmentMetadataDocumentArray" type="sna:DocumentAttachmentsMetadataArrayType"/>
 	<xs:element name="AttachmentDocumentArray" type="sna:DocumentAttachmentsArrayType"/>
 	<xs:complexType name="AttachmentMetadataType">
 		<xs:sequence>
 			<xs:element name="storage" type="xs:string" default="C12588A00034993F" minOccurs="0"/>
 			<xs:element name="unid" type="xs:string"/>
-            <xs:element name="pid" type="xs:string"/>
-            <xs:element name="uuid" type="xs:string"/>
+			<xs:element name="pid" type="xs:string"/>
+			<xs:element name="uuid" type="xs:string"/>
 			<xs:element name="itemName" type="xs:string" default="attachment" minOccurs="0"/>
 			<xs:element name="fileName" type="xs:string" minOccurs="0"/>
 			<xs:element name="parent" type="xs:string" minOccurs="0"/>
@@ -37,12 +39,25 @@
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-	<xs:complexType name="AttachmentsArrayType">
+	<xs:complexType name="AttachmentsMetadataArrayType">
 		<xs:sequence>
 			<xs:element name="attachment" type="sna:AttachmentMetadataType" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="DocumentAttachmentsArrayType">
+	<xs:complexType name="AttachmentsArrayType">
+		<xs:sequence>
+			<xs:element name="attachment" type="sna:AttachmentType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DocumentAttachmentsMetadataArrayType">
+		<xs:sequence>
+			<xs:element name="storage" type="xs:string"/>
+			<xs:element name="unid" type="xs:string"/>
+			<xs:element name="pid" type="xs:string"/>
+			<xs:element name="metadata" type="sna:AttachmentMetadataType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+		<xs:complexType name="DocumentAttachmentsArrayType">
 		<xs:sequence>
 			<xs:element name="storage" type="xs:string"/>
 			<xs:element name="unid" type="xs:string"/>
