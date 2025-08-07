@@ -161,7 +161,7 @@
 	<wsdl:binding name="attachmentsSoap" type="tns:attachments">
 		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
 		<wsdl:operation name="getInfo">
-			<soap:operation soapAction="https://schemes.sysnet.cz/services/attachments"/>
+			<soap:operation soapAction="getInfo"/>
 			<wsdl:input name="GetInfoRequest">
 				<soap:body use="literal"/>
 			</wsdl:input>
@@ -173,7 +173,7 @@
 			</wsdl:fault>
 		</wsdl:operation>
 		<wsdl:operation name="getSingleAttachment">
-			<soap:operation soapAction="https://schemes.sysnet.cz/services/attachments"/>
+			<soap:operation soapAction="getSingleAttachment"/>
 			<wsdl:input name="GetSingleAttachmentRequest">
 				<soap:body use="literal"/>
 			</wsdl:input>
@@ -185,7 +185,7 @@
 			</wsdl:fault>
 		</wsdl:operation>
 		<wsdl:operation name="getAttachmentsFiltered">
-			<soap:operation soapAction="https://schemes.sysnet.cz/services/attachments"/>
+			<soap:operation soapAction="getAttachmentsFiltered"/>
 			<wsdl:input name="GetAttachmentsFilteredRequest">
 				<soap:body use="literal"/>
 			</wsdl:input>
@@ -197,7 +197,7 @@
 			</wsdl:fault>
 		</wsdl:operation>
 		<wsdl:operation name="getAttachmentsByDocumentUnid">
-			<soap:operation soapAction="https://schemes.sysnet.cz/services/attachments"/>
+			<soap:operation soapAction="getAttachmentsByDocumentUnid"/>
 			<wsdl:input name="GetAttachmentsByDocumentUnidRequest">
 				<soap:body use="literal"/>
 			</wsdl:input>
@@ -209,7 +209,7 @@
 			</wsdl:fault>
 		</wsdl:operation>
 		<wsdl:operation name="getAttachmentsByDocumentPid">
-			<soap:operation soapAction="https://schemes.sysnet.cz/services/attachments"/>
+			<soap:operation soapAction="getAttachmentsByDocumentPid"/>
 			<wsdl:input>
 				<soap:body use="literal"/>
 			</wsdl:input>
@@ -221,7 +221,7 @@
 			</wsdl:fault>
 		</wsdl:operation>
 		<wsdl:operation name="getSingleMetadata">
-			<soap:operation soapAction="https://schemes.sysnet.cz/services/attachments"/>
+			<soap:operation soapAction="getSingleMetadata"/>
 			<wsdl:input>
 				<soap:body use="literal"/>
 			</wsdl:input>
@@ -233,7 +233,7 @@
 			</wsdl:fault>
 		</wsdl:operation>
 		<wsdl:operation name="getMetadataFiltered">
-			<soap:operation soapAction="https://schemes.sysnet.cz/services/attachments"/>
+			<soap:operation soapAction="getMetadataFiltered"/>
 			<wsdl:input>
 				<soap:body use="literal"/>
 			</wsdl:input>
@@ -245,7 +245,7 @@
 			</wsdl:fault>
 		</wsdl:operation>
 		<wsdl:operation name="getMetadataByDocumentUnid">
-			<soap:operation soapAction="https://schemes.sysnet.cz/services/attachments"/>
+			<soap:operation soapAction="getMetadataByDocumentUnid"/>
 			<wsdl:input>
 				<soap:body use="literal"/>
 			</wsdl:input>
@@ -257,7 +257,7 @@
 			</wsdl:fault>
 		</wsdl:operation>
 		<wsdl:operation name="getMetadataByDocumentPid">
-			<soap:operation soapAction="https://schemes.sysnet.cz/services/attachments"/>
+			<soap:operation soapAction="getMetadataByDocumentPid"/>
 			<wsdl:input>
 				<soap:body use="literal"/>
 			</wsdl:input>
